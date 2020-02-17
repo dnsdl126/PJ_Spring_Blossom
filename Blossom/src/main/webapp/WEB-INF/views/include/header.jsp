@@ -95,6 +95,7 @@
       }  
       .header_content_dropdown_wrap:hover .header_dropdown {
          display: block;
+         z-index: 2;
       }   
       .header_content_dropdown_group > a{
          display: inline-block;
