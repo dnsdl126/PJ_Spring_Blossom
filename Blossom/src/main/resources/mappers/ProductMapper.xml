@@ -13,7 +13,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	           WHERE avail_cnt > 0
 	           ORDER BY sale_cnt DESC) --판매 수량이 높은 것부터 출력 
 	           best)
-	   WHERE rnum between 1 and 5
+	   WHERE rnum between 1 and 4
+ </select>
+ 
+ <select id="newPdtList" resultType="ProductDTO">
+      SELECT *
+	   FROM (SELECT rownum rnum, new.* 
+	    FROM ( SELECT * FROM tbl_pdt
+	           WHERE avail_cnt > 0
+	           ORDER BY regdate DESC) -- 날짜가 최신인 순 으로  
+	           new
+	          )
+	   WHERE rnum between 1 and 4
+ 
  </select>
 
 </mapper>

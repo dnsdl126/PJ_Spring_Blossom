@@ -14,4 +14,5 @@ public interface ProductDAO {
 	
 	public List<ProductDTO> bestPdtList();
 	
+	public List<ProductDTO> newPdtList();
 }

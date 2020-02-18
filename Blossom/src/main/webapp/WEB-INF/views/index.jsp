@@ -20,6 +20,7 @@
 /* Hide the images by default */
 .mySlides {
  	 display: none;
+ 	 padding: 0 10;
 }
 
 /* Next & previous buttons */
@@ -110,7 +111,7 @@
     margin: 30px 0 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     box-sizing: border-box;
 
 }
@@ -152,13 +153,12 @@
 }
 
 .row {
-	margin-right: 10px;
-	margin-left: 10px;
+	
 }
 .shortcut__list__item {
-	display: inline-block;
-	flex: 0 0 7%;
-	margin-left: 140px;
+    display: inline-block;
+    padding: 0 10px;
+    
 }
 .shortcut__list__item__link__image {
 	width: 100%
@@ -166,6 +166,8 @@
 .shortcut__list__item__link__image__img {
 	width: 100%;
     background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
 }
 .shortcut__list__item__link__title {
 	margin: 6px 0 7px;
@@ -179,13 +181,14 @@
 }
 /* 인기 상품 */
  .best_container {
- 	margin-right: auto;
-    margin-left: auto;
+ 	  
     box-sizing: border-box;
-    width: 1136px;
+    width: 1276px;
     max-width: 100%;
-    box-sizing: border-box;
-    min-height: 1px;
+    box-sizing: border-box;    
+    padding: 0 10px;
+    margin: auto;
+}
    
  }
  .best_container_name {
@@ -219,8 +222,13 @@
     border-radius: 4px;
     height: 240px;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 10px;
+    margin-left: 10px;
+   
+          
  }	
+
+ 
 .production-item__header__name {
 	display: block;
     color: #757575;
@@ -309,7 +317,7 @@
 				<a href="" class="shortcut__list__item__link">
 					<div class="shortcut__list__item__link__image event"> 
 
-						<img src="${path}/resources/img/new_icon.png" class="shortcut__list__item__link__image__img">
+						<img src="${path}/resources/img/newitem.png" class="shortcut__list__item__link__image__img">
 						
 					</div>
 					<div class="shortcut__list__item__link__title">신상</div>
@@ -318,7 +326,7 @@
 			<li class="shortcut__list__item">
 				<a href="" class="shortcut__list__item__link">
 					<div class="shortcut__list__item__link__image event"> 
-						<img src="${path}/resources/img/sale_icon.png" class="shortcut__list__item__link__image__img">
+						<img src="${path}/resources/img/sale.png" class="shortcut__list__item__link__image__img">
 					</div>
 					<div class="shortcut__list__item__link__title">세일제품</div>
 				</a>
@@ -326,7 +334,7 @@
 			<li class="shortcut__list__item">
 				<a href="" class="shortcut__list__item__link">
 					<div class="shortcut__list__item__link__image event"> 
-						<img src="${path}/resources/img/today_icon.png" class="shortcut__list__item__link__image__img">
+						<img src="${path}/resources/img/hotsale.png" class="shortcut__list__item__link__image__img">
 					</div>
 					<div class="shortcut__list__item__link__title">오늘의특가</div>
 				</a>
@@ -334,7 +342,7 @@
 			<li class="shortcut__list__item">
 				<a href="" class="shortcut__list__item__link">
 					<div class="shortcut__list__item__link__image event"> 
-						<img src="${path}/resources/img/best_item_icon.png" class="shortcut__list__item__link__image__img">
+						<img src="${path}/resources/img/bestitem.png" class="shortcut__list__item__link__image__img">
 					</div>
 					<div class="shortcut__list__item__link__title">베스트 아이템</div>
 				</a>
@@ -342,7 +350,7 @@
 			<li class="shortcut__list__item">
 				<a href="" class="shortcut__list__item__link">
 					<div class="shortcut__list__item__link__image event"> 
-						<img src="${path}/resources/img/even_icon.png" class="shortcut__list__item__link__image__img">
+						<img src="${path}/resources/img/event.png" class="shortcut__list__item__link__image__img">
 					</div>
 					<div class="shortcut__list__item__link__title">이벤트</div>
 				</a>
@@ -354,69 +362,66 @@
 	<section class="best_container ">
 		<header class="best_container_name">
 			<h2>베스트 상품</h2>
-		</header>
+		</header>		
 		<div class="text_img">
+	    <c:forEach items="${BestPdt}" var="pdt">
 		<div class="best_item">
 			<div class="best_itme_img">
-				<img src="${path}/resources/img/shampoo.jpg">				
+				<a href="">
+				<img style="background-image: url(${path}/resources/img/${pdt.p_img}); background-size: cover; width : 300px;
+	height : 300px; background-position: center center;"></a>				
 			</div>
 			<div class="content_memo">
 				<h1 class="production-item__header">
 					<span class="production-item__header__name">
-						Shampoo
+						${pdt.ptype}
 					</span>
 					<span class="production-item__header__name_memo">
-						동백향과 허브로 만든 천연샴푸
+						${pdt.pmemo}
 					</span>
-					<span class="production-item__header__name_price">
-						14,500
-					</span>
-				</h1>
-			</div>
-			
-		</div>
-		<div class="best_item">
-			<div class="best_itme_img">
-				<img src="${path}/resources/img/shampoo.jpg">				
-			</div>
-			<div class="content_memo">
-				<h1 class="production-item__header">
-					<span class="production-item__header__name">
-						Shampoo
-					</span>
-					<span class="production-item__header__name_memo">
-						동백향과 허브로 만든 천연샴푸
-					</span>
-					<span class="production-item__header__name_price">
-						14,500
+					<span class="production-item__header__name_price" >
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${pdt.price}"/>
+						원
 					</span>
 				</h1>
-			</div>
-			
+			</div>			
 		</div>
-		<div class="best_item">
-			<div class="best_itme_img">
-				<img src="${path}/resources/img/shampoo.jpg">				
-			</div>
-			<div class="content_memo">
-				<h1 class="production-item__header">
-					<span class="production-item__header__name">
-						Shampoo
-					</span>
-					<span class="production-item__header__name_memo">
-						동백향과 허브로 만든 천연샴푸
-					</span>
-					<span class="production-item__header__name_price">
-						14,500
-					</span>
-				</h1>
-			</div>
-			
-		</div>
-</div>
+			</c:forEach>				
+       </div>
+
 
 	</section>
+	<section class="best_container ">
+		<header class="best_container_name">
+			<h2>새로운 상품</h2>
+		</header>		
+		<div class="text_img">
+	    <c:forEach items="${NewPdt}" var="pdt">
+		<div class="best_item">
+			<div class="best_itme_img">
+				<a href=""><img style="background-image: url(${path}/resources/img/${pdt.p_img}); background-size: cover; width : 300px;
+	height : 300px; background-position: center center; "></a>				
+			</div>
+			<div class="content_memo">
+				<h1 class="production-item__header">
+					<span class="production-item__header__name">
+						${pdt.ptype}
+					</span>
+					<span class="production-item__header__name_memo">
+						${pdt.pmemo}
+					</span>
+					<span class="production-item__header__name_price" >
+					<fmt:formatNumber type="number" maxFractionDigits="3" value="${pdt.price}"/>원
+					</span>
+				</h1>
+			</div>			
+		</div>
+			</c:forEach>				
+       </div>
 
+
+	</section>
+		
 </body>
 </html>
 

@@ -50,5 +50,21 @@ public class IndexServiceImpl implements IndexService{
 		
 	}
 
+	@Override
+	public List<ProductDTO> newPdtList() {
+		// TODO Auto-generated method stub
+		
+		//3. 비즈니스 로직을 처리 !
+		// : 신상품 5건을 출력 --> DB작업
+		// : DB작업은 Model단 시킴
+		
+		// DB작업을 위해 Model단으로 이동
+		// Model(ProductDAO+Mapper) 인터페이스의 newPdtList() 메서드를
+		// 실행하고 return 받음!
+ 	   return pDao.newPdtList(); // 5건의 신상 데이터가 담음 
+ 		
+ 	 
+	}
+
 	
 }

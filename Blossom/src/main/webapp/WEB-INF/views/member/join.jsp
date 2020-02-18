@@ -1,0 +1,662 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file = "../include/include.jsp"%>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>join</title>
+<link rel="icon" type="image/x-icon" href="../img/naver/naversm.png">
+<link rel="stylesheet" type="text/css" href="{path}/resources/css/common.css">
+<script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
+<style type="text/css">
+ 	* {
+   		font-family: Dotum, '돋움' ,Helverica, sans-serif;
+   		box-sizing: border-box;
+   	}
+   	body, h1, h2, h3, h4, h5, h6, ul, p{
+   		margin: 0;
+   		padding: 0;
+   	}
+   	body { 
+   		background-color: white;
+   	       font-size: 12px;}
+   	ul { list-style: none; }
+   	a { text-decoration: none; color: inherit;}
+   	
+   	.user_sign_up {
+   		padding-top: 192px; 
+   	}
+   	.container {
+   		margin-right: auto;
+   		margin-left: auto;
+   		width: 464px;
+   		box-sizing: border-box;
+   		min-height: 1px;
+   		
+   	}
+   	.user_sign_up_form_wrap {
+   		width: 459px;
+   		margin: 0 auto;
+   		
+   		border color: 
+   	}
+   	.user_sign_up_title {
+   		font-size: 20px;
+   		font-weight: 700;
+   	}
+   	.hearder_content_logo_img {
+			display: block;
+			width: 183px;
+			height: 78px;			
+			margin-left:auto;
+			margin-right: auto;
+		}
+	.user_sign_up_form_group {
+		margin: 0 0 30px;
+		
+	}
+	.user_sign_up_form_group_label {
+		display: block;
+		margin: 0 0 12px;
+		font-size: 15px;
+		font-weight: 700;
+		color: #292929;
+		line-height: 21px;
+		word-break: keep-all;
+		
+	}
+	.user_sign_up_form_group_input {
+		margin: 10px 0 0;
+		border: 1px
+
+	}
+	.email_input {
+		display: flex;
+	}
+	.input_group {
+		flex: 1 0 auto;
+	}
+	.email_input_local, .email_input_domain {
+		position: relative;
+		flex: 1 1 0px;
+	}
+	.email_input .errored .form_control {
+		border-color: #f77;
+	}
+	.email_input .errored .form_control:focus {
+		outline: none;
+		box-shadow: 0 0 2px rgba(255, 119, 119, .5);
+	}
+	.form_control  {
+		outline: none;
+		border-radius: 2px;
+	}
+	.focus_visible {
+
+		font-size: 15px;
+		border-radius: 4px;
+		line-height: 29px;
+
+	}
+	.email_input_domain > .form_control 
+	.email_input_local > .form_control {
+		width: 100%;
+	}
+	.email_input_domain> .form_control>option,
+	.email_input_local> .form_control>option {
+		color: #424242;
+	}
+	.user_sign_up_form_group_input
+	.form_control {
+		font-size: 15px;
+		border-radius: 4px;
+	}
+	.input_group  {
+
+	}
+	.form_control {
+		transition: .2s border-color, .2s box-shadow, .2s background-color;
+		display: block;
+		box-sizing: border-box;
+		height: 40px;
+		width: 100%;
+		padding: 0 15px;
+		line-height: 40px;
+		border: solid 1px #dbdbdb;
+		background-color: #ffffff;
+		color: #424242;
+		font-size: 12px;
+	}
+	.email_input_separator {
+		flex: 0 0 20px;
+		text-align: center;
+		line-height: 40px;
+		color: #dbdbdb;
+	}
+	.email_input_domain_expand {
+		    position: absolute;
+		    top: 10px;
+		    right: 10px;
+		    padding: 5px;
+		    background: none;
+		    border: none;
+		    font-size: 0;
+		    cursor: default;
+		    color: rgba(0,0,0,.3);
+	}
+   .join_err_msg {
+   	margin: 10px 0;
+   	font-size: 13px;
+   	line-height: 21px;
+   	color: #f77;
+	visibility: hidden;	
+   }
+	   
+	.user_sign_up_form_group_description {
+		margin: 0;
+		font-size: 13px;
+		color: #757575;
+		line-height: 1.4;
+	}   
+	.int {
+   		display: block;
+   		position: relative;
+   		width: 100%;
+   		height: 29px;
+   		padding-right: 25px;
+   		line-height: 29px;
+   		border: none;
+   		background: #fff;
+   		font-size: 15px;
+   		z-index: 10;}
+
+   	.birthday_yy, .birthday_mm	{
+   		position: relative;
+		flex: 1 1 0px;
+   	}
+
+   	.birthday_yy > .form_control 
+	.birthday_mm > .form_control {
+		width: 100%;
+	}
+
+	.form_day {
+		display: block;
+		box-sizing: border-box;
+		height: 40px;
+		width: 100%;
+		padding: 0 15px;
+		line-height: 40px;
+		border: solid 1px #dbdbdb;
+		background-color: #ffffff;
+		color: #424242;
+		font-size: 12px;
+		border-radius: 4px;
+	}
+	.year_input_local, .month_input_domain, .day_input_local {
+		position: relative;
+		flex: 1 1 0px;
+
+	}
+	.day_iput {
+		display: flex;
+		justify-content: center;
+	}
+	.year_input_local,  .month_input_domain {
+		padding-right: 10px;
+	}
+
+	.btn_double_area {
+   		margin: 30px 0 9px;
+   	}
+
+   		.btn_type {
+   		display: block;
+   		width: 100%;
+   		padding: 21px 0 17px;
+   		font-size: 20px;
+   		font-weight: 700;
+   		text-align: center;
+   		cursor: pointer;
+   	}
+   	.btn_agree {
+   		color: white;
+   		background-color:  #40BF75;
+   	}
+   	.address_control{
+   		display: block;
+		box-sizing: border-box;
+		height: 40px;
+		width: 100%;
+		padding: 0 15px;
+		line-height: 40px;
+		border: solid 1px #dbdbdb;
+		background-color: #ffffff;
+		color: #424242;
+		font-size: 12px;
+   	}
+   	.address_flex {
+   		display: flex;
+
+   	}
+   	.address {
+   		margin-bottom: 10px;
+   	}
+	 	#footer {
+			padding: 15px 0;
+		}
+		#footer > ul {
+			margin: 0 auto 9px; /*상 좌우 하 */
+			text-align: center;			
+		}
+		#footer * {
+			font-size: 11px;
+			line-height: normal;
+			list-style: none;
+			color: #333;
+		}
+		#footer> ul > li {
+			display: inline;
+			padding: 0 5px 0 7px;
+			border-left: 1px solid #dadada;
+		}
+		#footer > ul > li > li:hover {
+			color: #1fbc02;
+			text-decoration: underline;
+		}
+		#footer ul li:first-child { /*모든 li 이 중에 첫번재만 */
+			border-left: 0px!important; /*!important - 제일 높은 레벨 , 자주쓰지는 말아야 한다 */
+		}
+
+		#footer ul li:first-child {
+			border-left: 0px;important;
+		}
+
+		#addr_logo {
+			width: 63px;
+			height: 11px;
+		}
+		#address {
+			margin: 0 auto;
+			text-align: center;			
+		}
+		#address * {
+			font : 9px verdana;
+		}
+		#address a {
+			font-weight: bold;			
+		}
+		#address a:hover {
+			color: #1fbc02;
+		}
+   </style>
+   
+</head>
+<body>
+<section class="container user_sign_up">
+		<div class="user_sign_up_form_wrap">
+			
+			<div class=" sign_up_logo">
+				 <img class="hearder_content_logo_img" src="../../img/linkedin_banner_image_1.png" alt="로고이미지">
+			</div>
+			<form class="user_sign_up_form">
+				<div class="user_sign_up_form_group">
+					<div  class="user_sign_up_form_group_label">
+						이메일
+					</div>
+					<div class="user_sign_up_form_group_input">
+						<div class="user_sign_up_form_group">
+						<div class="input_group email_input errored">
+							<span class="email_input_local">
+								<input class="form_control focus_visible" value placeholder="이메일" name="uid" id="uid">
+							</span>
+							<span class="email_input_separator">@</span>
+							<span class="email_input_domain">
+								<select class="form_control empty">
+									<option selected value disabled>선택해 주세요</option>
+								<option value="directVal">직접입력</option>	
+								<option value="naver.com">naver.com(네이버)</option>
+								<option value="daum.net">daum.net(다음 카카오)</option>
+								<option value="gmail.com">gmail.com(구글)</option>
+								<option value="nate.com">nate.com(네이트)</option>
+														
+								</select>
+								
+							</span>
+						</div>
+						<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+
+						</div>
+					</div>
+						
+						
+					<div class="user_sign_up_form_group_input error ">
+						<h3  class="user_sign_up_form_group_label" >
+						비밀번호
+	                         
+						</h3>
+						<div class="user_sign_up_form_group_description">
+							8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요
+						</div>
+						<div class="user_sign_up_form_group_input ">
+							<input class="form_control focus_visible" type="text" id="upw" name="upw" placeholder="비밀번호 입력" >
+						</div>
+
+						
+						<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+
+						
+					</div>
+					<div class="user_sign_up_form_group error ">
+						<div  class="user_sign_up_form_group_label" >
+						비밀번호 재확인
+	                         
+						</div>
+						
+						<div class="user_sign_up_form_group_input">
+							<input class="form_control focus_visible" type="text" id="urpw" name="urpw" placeholder="비밀번호 재입력">
+						</div>
+
+						
+						<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+
+						
+					</div>
+
+					<div class="user_sign_up_form_group error">
+						<div  class="user_sign_up_form_group_label" >
+						이름
+	                         
+						</div>
+						
+						<div class="user_sign_up_form_group_input">
+							<input type="text"  name="uname" id="uname" value class="form_control error">
+						</div>
+
+						
+						<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+
+						
+					</div>
+					<div class="user_sign_up_form_group error">
+						<div  class="user_sign_up_form_group_label">
+						주소
+						</div>
+						<div class="user_sign_up_form_group_input">
+						<div class="address_flex">
+						<input class="addr_only address_control error" type="text" id="sample6_postcode" placeholder="우편번호" value="10">
+					    <span> <input class="address_control address_control error" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></span><br></div>	
+						<input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소"><br>
+						<div class="address">
+						<input class="form_control error" type="text" id="sample6_detailAddress" placeholder="상세주소">
+						</div>
+						<input  class="form_control error" type="text" id="sample6_extraAddress" placeholder="참고항목">
+					</div>	
+
+					<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+				</div>
+
+
+					</div>
+					
+						<div class="user_sign_up_form_group error">
+						<div  class="user_sign_up_form_group_label" >
+							연락처
+	                         
+						</div>
+						
+						<div class="user_sign_up_form_group_input">
+							<input type="tel" name="uphone" id="uphone" class="form_control error" placeholder="-없이 입력 예)0101234567">
+						</div>
+
+						
+						<div class="join_err_msg">
+						필수 입력 항목 입니다.
+					    </div>
+
+						
+					</div>
+					</div>
+
+					<div class="btn_double_area">
+							<span><button id='btn_join' class="btn_type btn_agree">가입하기</button></span>
+						</div>
+
+					</div>
+
+					
+
+				</div>
+
+				
+			</form>
+		</div>
+
+	</section>	
+	<footer>
+			<div id="footer">
+				<ul>
+					<li><a  hrdf='#'>이용약관"</a></li>
+					<li><strong><a href="#">개인정보처리방침</a></strong></li>
+					<li><a href="#">책임의 한계와 법적고지</a></li>
+					<li><a href="#">회원정보 고객센터</a></li>
+				</ul>
+
+				<div id="address">
+					<span>
+						<a href="https://www.naver.com">
+							<img id="addr_logo" src="../img/naver/naver_logo.png">
+						</a>
+					</span>
+					<span>copyright</span>
+					<span>@</span>
+					<span><strong><a href="#">NAVER Corp</a></strong></span>
+					<span>ALL Rights Reserved.</span>
+			</div>
+			<div id="footer"></div>
+		</footer>
+</body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="../../js/daum_post.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../../js/validation.js"></script>
+<script type="text/javascript">
+	
+
+	$(document).ready(function(){
+		$('#selmail').change(function(){
+		var url = $(this).val();
+
+		if(url != 'directVal') {
+
+			$('#email_url').val(url).prop('readonly', true);
+
+		} else {
+			$('#email_url').val('').removeAttr('readonly').focus();
+		}
+		});
+	});
+
+$(function(){
+
+	// 비밀번호가 유효한 값인지 체크해주는 flag 값
+	 var pwFlag = false;
+
+	 // 유효성체크 여부를 알려주는 배열
+	 var checkArr = new Array(7).fill(false);
+	 // printCheckArr(checkArr);
+	 
+	 // 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
+	var checkAll = false;
+
+	
+		// 아이디 유효성 체크 
+			$('#uid').keyup(function () {
+				// 사용자가 입력한 값의 좌우여백을 제거하고 id에 입력
+				var id = $(this).val().trim(); // 사용자가 입력한 값
+				//validate.js의 checkId로 유효성 체크fmf 실행 후
+				// 결과를 result에 담음(code, desc)
+
+
+				var result = joinvalidate.checkid(id);
+				console.log(result.code+","+result.desc);
+
+				// 유효성 체크 결과로 테두리 색과 err메세지를 출력하는 
+				// 함수 실행 
+				
+				ckDesign(result.code, result.desc,0, 0);
+
+
+
+
+			 });
+
+			//비밀번호 유효성 체크 
+
+			$('#upw').keyup(function() {
+				
+				//1. 사용자가 입력한 값 받기
+				//.trim()의 또다른 사용 방법
+				var pw = $.trim($(this).val());
+			    var rpw = $('#urpw').val().trim();
+			    
+			    //2. 유효성 체크하기
+			    var result = joinvalidate.checkpw(pw, rpw);
+			    // console.log(result.code="," + result.desc);
+
+			    if (result.code == 0 || result.code == 10 || result.code == 6) {
+
+			    	pwFlag = true;
+			    } else {
+			    	pwFlag = false;
+			    } if(result.code == 10){
+				
+				$('.user_sign_up_form_group_input:eq(2)').css('border','1px solid #3885ca');
+			    
+			    }
+
+			    
+			    
+			    
+
+			    ckDesign(result.code, result.desc, 1, 1);
+
+
+			});
+
+			// 비밀번호 재확인 유효성 체크 
+
+			$('#urpw').keyup(function(){
+ 
+            var pw = $.trim($('#upw').val());
+			var rpw = $.trim($('#urpw').val());
+			
+			var result = joinvalidate.checkRpw(pw, rpw, pwFlag);
+			console.log(result.code+","+result.desc);
+
+			if(result.code == 10){
+				$('.user_sign_up_form_group_input:eq(3)').css('border','1px solid #3885ca');
+			} else if(result.code == 6){
+				$('.user_sign_up_form_group_input:eq(3)').css('border','1px solid #3885ca');
+			}
+
+			ckDesign(result.code, result.desc, 2, 2);
+
+			});
+
+			// 이름 유효성체크
+		$('#uname').keyup(function(){
+			var name = $(this).val().trim();
+			console.log(name); // 꼭 확인하고 넘어가기
+
+			var result = joinvalidate.checkName(name);
+
+			ckDesign(result.code, result.desc, 4,3);
+		});
+
+		// 전화번호 유효성체크
+		$('#uphone').keyup(function(){
+			var phone = $(this).val().trim();
+			console.log(phone); 
+
+			var result = joinvalidate.checkPhone(phone);
+
+			ckDesign(result.code, result.desc, 8, 5);
+		});
+
+		
+		
+		// 주소 이벤트
+		// 사용자가 주소를 직접 적는 걸 막고 우편번호찾기 버튼으로 주소찾게 하기위해서
+		$('.addr_only').click(function(){
+			// 사용자가 우편번호 또는 주소 input을 클릭했을때!
+			$('#btn_post').click();
+		});
+		// 주소를 적지않고 상세주소를 적으러 왔을때 먼저 주소를 적게 하기위해 우편번호찾기 버튼을 누르게함
+		$('#sample6_detailAddress').focus(function(){
+			var addrPost = $('#sample6_postcode').val();
+			if(addrPost == '' || addrPost == 0){
+				// $('#btn_post').click();
+			}
+		});
+		// 주소 유효성체크
+		$('#sample6_detailAddress').keyup(function(){ //keyup : 키보드로 입력할때 마다 
+			var addrDetail = $.trim($(this).val());
+			var addrPost = $('#sample6_postcode').val();
+			console.log(addrDetail+','+addrPost); // 확인
+
+			var result = joinvalidate.checkAddr(addrDetail, addrPost); // 유효성 체크 
+			if(result.code == 3){ // 우편번호&주소x
+				ckDesign(result.code, result.desc, 5,4);
+			} else if(result.code == 0){ // 성공
+				ckDesign(result.code, result.desc, 4,4);
+				ckDesign(result.code, result.desc, 5,4);
+				ckDesign(result.code, result.desc, 6,4);
+			} else { // 상세주소 통과x한 모든경우
+				ckDesign(result.code, result.desc, 6,4);
+			}
+		});
+
+	});
+
+
+
+
+// 개발시 사용 : 유효성 체크 전체 여부를  출력해주는 함수 (true, false)
+ function printCheckArr(checkArr) {
+ 	for(var i=0; i < checkArr.length; i++) {
+	 	consonl.log(i+'번지: ' + checkArr[i]); 
+	 }
+ }	
+ function ckDesign(code, desc, line, msg){
+		if(code == 0 || code == 10){ //통과o
+			$('.email_input_local:eq('+line+')').css('border','1px solid #3885ca');
+			$('.join_err_msg:eq('+msg+')').css('visibility','visible')
+								   .text(desc)
+								   .css('color','#3885ca');
+			return true;
+		} else { // 통과x
+			$('.email_input_local:eq('+line+')').css('border','1px solid #f24443');
+			// 테두리 색생변경
+			$('.join_err_msg:eq('+msg+')').css('visibility','visible')
+								   .text(desc)
+								   .css('color','#f24443');
+			// 에러메세지 출력
+			return false;
+		}
+}
+
+	 
+</script>
+</html>

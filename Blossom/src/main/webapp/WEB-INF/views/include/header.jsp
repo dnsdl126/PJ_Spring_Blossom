@@ -22,6 +22,8 @@
          box-shadow: 0 0 1px 1px rgba(20, 23, 28, .1), 0 3px 1px 0 rgba(20, 23, 28, .1);
          z-index: 999; /* z-index: 숫자가 클수록 가장 앞에 나와라 */
          /*요소배치 flex box : */
+         position: fixed;
+         top: 0;
 
 		}
       div.header_content{

@@ -28,14 +28,19 @@ public class IndexController {
 	@GetMapping("/index")
 	public String indexView(Model model) {
 		log.info(">>>>>> INDEX PAGE 출력");
-		//1. View 단에 출력할 데이터 
-	
+								
+		//1. View 단에 출력할 베스트 상품 5건		
 		model.addAttribute("BestPdt", iService.bestPdtList());
+				
+		//2.View단에 출력할 신상품 5건
+		// 신상품 5건을  출력하는 비즈니스 로직을 처리하는 서비스 단으로 이동 
+		// 서비스 단으로 이동
+		model.addAttribute("NewPdt",iService.newPdtList());
+		
 		
 		//2. 출력할 화면을 결정  
 		return "index";
-		
-		// 1.2번 가지고 viewreserve로 이동
+      // 1.2번 가지고 viewreserve로 이동
 	}
 
 }
