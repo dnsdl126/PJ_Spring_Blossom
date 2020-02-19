@@ -28,18 +28,18 @@
    		padding-top: 192px; 
    	}
    	.container {
-   		margin-right: auto;
-   		margin-left: auto;
+   		margin: auto ;
    		width: 464px;
    		box-sizing: border-box;
    		min-height: 1px;
    		
    	}
    	.user_sign_up_form_wrap {
-   		width: 459px;
+   		width: 524px;
    		margin: 0 auto;
+   		border: 1px solid #e5e5e5;
+        padding: 58px 69px 58px;
    		
-   		border color: 
    	}
    	.user_sign_up_title {
    		font-size: 20px;
@@ -76,6 +76,10 @@
 	}
 	.input_group {
 		flex: 1 0 auto;
+	}
+	/*유저이름*/
+	.name_count {
+	
 	}
 	.email_input_local, .email_input_domain {
 		position: relative;
@@ -241,7 +245,7 @@
 
    	}
    	.address {
-   		margin-bottom: 10px;
+   		
    	}
 	 	#footer {
 			padding: 15px 0;
@@ -298,7 +302,7 @@
 		<div class="user_sign_up_form_wrap">
 			
 			<div class=" sign_up_logo">
-				 <img class="hearder_content_logo_img" src="../../img/linkedin_banner_image_1.png" alt="로고이미지">
+				 <img class="hearder_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지">
 			</div>
 			<form class="user_sign_up_form">
 				<div class="user_sign_up_form_group">
@@ -375,6 +379,10 @@
 						이름
 	                         
 						</div>
+						 <div class="name_count">
+						  <span class="cnt">0</span>/20
+						  
+						 </div>
 						
 						<div class="user_sign_up_form_group_input">
 							<input type="text"  name="uname" id="uname" value class="form_control error">
@@ -395,7 +403,7 @@
 						<div class="address_flex">
 						<input class="addr_only address_control error" type="text" id="sample6_postcode" placeholder="우편번호" value="10">
 					    <span> <input class="address_control address_control error" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></span><br></div>	
-						<input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소"><br>
+						<input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소">
 						<div class="address">
 						<input class="form_control error" type="text" id="sample6_detailAddress" placeholder="상세주소">
 						</div>
@@ -468,9 +476,9 @@
 		</footer>
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="../../js/daum_post.js"></script>
+<script src="${path}/resources/js/daum_post.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="../../js/validation.js"></script>
+<script src="${path}/resources/js/validation.js"></script>
 <script type="text/javascript">
 	
 

@@ -296,7 +296,7 @@
    
 </head>
 <body>
-  <div class="modal_wrap" style="display: flex;">
+  <div class="modal_wrap" style="">
 		<div class="modal_content">
 			<div class="login_close">
 			<button><i class="fas fa-times"></i></button>
@@ -452,7 +452,7 @@
 
 
 	//Login 버튼 클릭시 Modal 창 Open
-   $(document).on('click', '.login_open', function() {
+   $(document).on('click', '.btn_agree', function() {
    $('.modal_wrap').css('display','flex');
    $('#login_id').focus();
    });
@@ -462,6 +462,17 @@
 
    //MODAL 창의 X버튼을 클릭하면 MODAL창 close
    $(document).on('click', '.login_close', function() {
+       $('.modal_wrap').css('display','none'); 
+       $('.frm_login')[0].reset();
+        $('.pw_eye').prev().attr('type','password');
+
+         $('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
+                        .css('color','#AAA');
+       //$('.login_input').val('');
+    });
+   
+   
+   $(document).on('click', '.btn_default', function() {
        $('.modal_wrap').css('display','none'); 
        $('.frm_login')[0].reset();
         $('.pw_eye').prev().attr('type','password');

@@ -530,7 +530,7 @@
                   </div>
 
    					<div><button type ="button" class="btn btn-basic login_open">로그인</button></div>
-                  <div><button type ="button" class="btn btn-primary">회원가입</button></div>   					
+                  <div><button type ="button" id="header_btn_join" class="btn btn-primary">회원가입</button></div>   					
                </div>   
    		     </div>
    	</div>
@@ -624,6 +624,12 @@
                         .css('color','#AAA');
       }
      });
+    
+    /* Header 가입하기 이동시 가입페이지로 이등 */
+	$(document).on('click', '#header_btn_join' ,function() {
+
+		location.href="${path}/member/constract";
+	});
 
 </script>
 </html>
