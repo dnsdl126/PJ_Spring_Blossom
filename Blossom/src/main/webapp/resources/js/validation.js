@@ -136,24 +136,20 @@ var joinvalidate = {
 	   var regId = /[^a-z0-9-_.]+/g;
 
 			if(id == '' || id.length == 0) { // 1.값이 있는지 없는지 or 스페이스 값으로 으로 공백이 들어가있는지 
-			
            return this.resultCode.empty_val;
 		} else if (id.match(regEmpty)) { // 2. 값사이에  공백값
-				
 			return this.resultCode.space_length_val;
 		} else if(id.match(regEtc)) { // 3. 특수문자 
-			
 			return this.resultCode.specialStr_id;
         } else if(id.match(regId)) { // 4. 아이디 정규식 체크
-            
         	return this.resultCode.invalid_id;
 		} else if(id.charAt(0) == '_' || id.charAt(0) == '-') { // 5.첫글자 특수문자 사용 여부				
-
 			return this.resultCode.first_special_id;
 		} else if(id.length < 5 || id.length > 20) {  
-		
 			return this.resultCode.length_id;
-		}else {
+		} else if(idCheck(id)) {
+			return this.resultCode.overlap_id;
+		} else {
 			return this.resultCode.succes_id;
 		}
 
@@ -260,8 +256,29 @@ var joinvalidate = {
 		}
  
 	}
-
-
+	
+	
 }
+	function idCheck(id){
+		var return_val = true;
+		
+		$.ajax({
+			type: 'POST',
+			url: 'idoverlap?id='+id,
+			async: false,
+			success: function(data) {
+				console.log(data);
+				if(data>=1) {
+					return_val = true; 
+					} else {
+						return_val = false;
+					}
+				},
+				error: function() {
+					alert('System ERROR:(');
+				}
+			});
+		return return_val;
+	} 
 
 

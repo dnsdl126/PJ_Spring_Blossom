@@ -25,11 +25,11 @@
    	a { text-decoration: none; color: inherit;}
    	
    	.user_sign_up {
-   		padding-top: 192px; 
+   		padding-top: 58px; 
    	}
    	.container {
    		margin: auto ;
-   		width: 464px;
+   		width: 100%px;
    		box-sizing: border-box;
    		min-height: 1px;
    		
@@ -68,8 +68,14 @@
 	}
 	.user_sign_up_form_group_input {
 		margin: 10px 0 0;
-		border: 1px
+		border: 1px;
+		
 
+	}
+	.count {
+	   display: flex;
+   	    align-items: center;
+	
 	}
 	.email_input {
 		display: flex;
@@ -79,7 +85,9 @@
 	}
 	/*유저이름*/
 	.name_count {
-	
+	color: #7c7c7c;
+    font-size: 16px;
+    font-weight: bold;
 	}
 	.email_input_local, .email_input_domain {
 		position: relative;
@@ -217,12 +225,13 @@
 
    		.btn_type {
    		display: block;
-   		width: 100%;
+   		width: 27%;
    		padding: 21px 0 17px;
    		font-size: 20px;
    		font-weight: 700;
    		text-align: center;
    		cursor: pointer;
+   		margin: auto;
    	}
    	.btn_agree {
    		color: white;
@@ -309,11 +318,11 @@
 					<div  class="user_sign_up_form_group_label">
 						이메일
 					</div>
-					<div class="user_sign_up_form_group_input">
+					<div class="user_sign_up_form_group_input ">
 						<div class="user_sign_up_form_group">
 						<div class="input_group email_input errored">
 							<span class="email_input_local">
-								<input class="form_control focus_visible" value placeholder="이메일" name="uid" id="uid">
+								<input class="form_control focus_visible int" value placeholder="이메일" name="uid" id="uid">
 							</span>
 							<span class="email_input_separator">@</span>
 							<span class="email_input_domain">
@@ -346,7 +355,7 @@
 							8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요
 						</div>
 						<div class="user_sign_up_form_group_input ">
-							<input class="form_control focus_visible" type="text" id="upw" name="upw" placeholder="비밀번호 입력" >
+							<input class="form_control focus_visible int" type="text" id="upw" name="upw" placeholder="비밀번호 입력" >
 						</div>
 
 						
@@ -363,7 +372,7 @@
 						</div>
 						
 						<div class="user_sign_up_form_group_input">
-							<input class="form_control focus_visible" type="text" id="urpw" name="urpw" placeholder="비밀번호 재입력">
+							<input class="form_control focus_visible int" type="password" id="urpw" name="urpw" placeholder="비밀번호 재입력">
 						</div>
 
 						
@@ -374,23 +383,22 @@
 						
 					</div>
 
-					<div class="user_sign_up_form_group error">
+					<div class="user_sign_up_form_group error ">
 						<div  class="user_sign_up_form_group_label" >
-						이름
-	                         
-						</div>
-						 <div class="name_count">
-						  <span class="cnt">0</span>/20
-						  
-						 </div>
 						
-						<div class="user_sign_up_form_group_input">
+						
+						
+						
+							이름	                         
+						</div>						 						
+						<div class="user_sign_up_form_group_input count">
 							<input type="text"  name="uname" id="uname" value class="form_control error">
-						</div>
-
-						
+						    <div class="name_count">
+						  		<span class="cnt">0</span>/20						  
+						    </div>						
+						</div>						
 						<div class="join_err_msg">
-						필수 입력 항목 입니다.
+							필수 입력 항목 입니다.
 					    </div>
 
 						
@@ -400,17 +408,18 @@
 						주소
 						</div>
 						<div class="user_sign_up_form_group_input">
-						<div class="address_flex">
-						<input class="addr_only address_control error" type="text" id="sample6_postcode" placeholder="우편번호" value="10">
-					    <span> <input class="address_control address_control error" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></span><br></div>	
-						<input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소">
-						<div class="address">
-						<input class="form_control error" type="text" id="sample6_detailAddress" placeholder="상세주소">
-						</div>
-						<input  class="form_control error" type="text" id="sample6_extraAddress" placeholder="참고항목">
-					</div>	
+							<div class="address_flex">
+							  <input class="addr_only address_control error" type="text" id="sample6_postcode" placeholder="우편번호" value="10">
+						       <span><input class="address_control address_control error" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></span><br>
+						    </div>	
+							  <input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소">
+							<div class="address">
+							  <input class="form_control error int" type="text" id="sample6_detailAddress" placeholder="상세주소">
+							</div>
+						 
+					    </div>	
 
-					<div class="join_err_msg">
+					    <div class="join_err_msg">
 						필수 입력 항목 입니다.
 					    </div>
 				</div>
@@ -425,7 +434,7 @@
 						</div>
 						
 						<div class="user_sign_up_form_group_input">
-							<input type="tel" name="uphone" id="uphone" class="form_control error" placeholder="-없이 입력 예)0101234567">
+							<input type="tel" name="uphone" id="uphone" class="form_control error int" placeholder="-없이 입력 예)0101234567">
 						</div>
 
 						
@@ -662,8 +671,11 @@ $(function(){
 								   .css('color','#f24443');
 			// 에러메세지 출력
 			return false;
+			}
 		}
-}
+ 
+ 		//버튼 활성화 !
+ 		
 
 	 
 </script>
