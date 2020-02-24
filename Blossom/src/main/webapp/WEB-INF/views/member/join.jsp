@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <%@ include file = "../include/include.jsp"%>     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>join</title>
-<link rel="icon" type="image/x-icon" href="../img/naver/naversm.png">
-<link rel="stylesheet" type="text/css" href="{path}/resources/css/common.css">
+
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 <script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
 <style type="text/css">
  	* {
@@ -163,6 +164,7 @@
    	line-height: 21px;
    	color: #f77;
 	visibility: hidden;	
+	display: inline-block;
    }
 	   
 	.user_sign_up_form_group_description {
@@ -230,7 +232,7 @@
    		font-size: 20px;
    		font-weight: 700;
    		text-align: center;
-   		cursor: pointer;
+   		cursor: no-drop;
    		margin: auto;
    	}
    	.btn_agree {
@@ -308,180 +310,146 @@
 </head>
 <body>
 <section class="container user_sign_up">
-		<div class="user_sign_up_form_wrap">
-			
+	<!-- <form id="frm_member" action="${path}/member/join" method="post"> -->
+	<form:form id= "frm_member" modelAttribute="memberDTO" autocomplete="on">	
+		<div class="user_sign_up_form_wrap">			
 			<div class=" sign_up_logo">
-				 <img class="hearder_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지">
-			</div>
-			<form class="user_sign_up_form">
-				<div class="user_sign_up_form_group">
+						
+				<a href="${path}"><img class="hearder_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지"></a>
+			</div>			
+			<div class="user_sign_up_form_group">
 					<div  class="user_sign_up_form_group_label">
 						이메일
 					</div>
 					<div class="user_sign_up_form_group_input ">
 						<div class="user_sign_up_form_group">
-						<div class="input_group email_input errored">
-							<span class="email_input_local">
-								<input class="form_control focus_visible int" value placeholder="이메일" name="uid" id="uid">
-							</span>
-							<span class="email_input_separator">@</span>
-							<span class="email_input_domain">
-								<select class="form_control empty">
-									<option selected value disabled>선택해 주세요</option>
-								<option value="directVal">직접입력</option>	
-								<option value="naver.com">naver.com(네이버)</option>
-								<option value="daum.net">daum.net(다음 카카오)</option>
-								<option value="gmail.com">gmail.com(구글)</option>
-								<option value="nate.com">nate.com(네이트)</option>
-														
-								</select>
-								
-							</span>
+							<div class="input_group email_input errored">
+								<span class="email_input_local">
+									<input class="form_control focus_visible int_log" value placeholder="이메일" name="id" id="uid">
+								</span>
+								<span class="email_input_separator">@</span>
+								<span class="email_input_domain">
+									<select class="form_control empty">
+										<option selected value disabled>선택해 주세요</option>
+									<option value="directVal">직접입력</option>	
+									<option value="naver.com">naver.com(네이버)</option>
+									<option value="daum.net">daum.net(다음 카카오)</option>
+									<option value="gmail.com">gmail.com(구글)</option>
+									<option value="nate.com">nate.com(네이트)</option>
+															
+									</select>
+									
+								</span>
+							</div>
+							<div class="join_err_msg">
+								필수 입력 항목 입니다.
+						    </div>
 						</div>
-						<div class="join_err_msg">
-						필수 입력 항목 입니다.
-					    </div>
-
-						</div>
-					</div>
-						
-						
+					</div>												
 					<div class="user_sign_up_form_group_input error ">
 						<h3  class="user_sign_up_form_group_label" >
-						비밀번호
-	                         
+							비밀번호	                         
 						</h3>
 						<div class="user_sign_up_form_group_description">
 							8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요
 						</div>
 						<div class="user_sign_up_form_group_input ">
-							<input class="form_control focus_visible int" type="text" id="upw" name="upw" placeholder="비밀번호 입력" >
-						</div>
-
-						
+							<input class="form_control focus_visible int_log" type="text" id="upw" name="pw" placeholder="비밀번호 입력" >
+						</div>						
 						<div class="join_err_msg">
-						필수 입력 항목 입니다.
-					    </div>
-
-						
+							필수 입력 항목 입니다.
+					    </div>						
 					</div>
 					<div class="user_sign_up_form_group error ">
 						<div  class="user_sign_up_form_group_label" >
-						비밀번호 재확인
-	                         
-						</div>
-						
+							비밀번호 재확인	                         
+						</div>						
 						<div class="user_sign_up_form_group_input">
-							<input class="form_control focus_visible int" type="password" id="urpw" name="urpw" placeholder="비밀번호 재입력">
-						</div>
-
-						
+							<input class="form_control focus_visible int_log" type="password" id="urpw" placeholder="비밀번호 재입력">
+						</div>						
 						<div class="join_err_msg">
-						필수 입력 항목 입니다.
-					    </div>
-
-						
+							필수 입력 항목 입니다.
+					    </div>						
 					</div>
-
 					<div class="user_sign_up_form_group error ">
-						<div  class="user_sign_up_form_group_label" >
-						
-						
-						
-						
+						<div  class="user_sign_up_form_group_label" >						
 							이름	                         
 						</div>						 						
 						<div class="user_sign_up_form_group_input count">
-							<input type="text"  name="uname" id="uname" value class="form_control error">
+							<input type="text"  name="name" id="uname" value class="form_control error int_log">
 						    <div class="name_count">
 						  		<span class="cnt">0</span>/20						  
 						    </div>						
 						</div>						
 						<div class="join_err_msg">
 							필수 입력 항목 입니다.
-					    </div>
-
-						
+					    </div>						
 					</div>
+					
+					
 					<div class="user_sign_up_form_group error">
 						<div  class="user_sign_up_form_group_label">
-						주소
+							주소
 						</div>
 						<div class="user_sign_up_form_group_input">
 							<div class="address_flex">
-							  <input class="addr_only address_control error" type="text" id="sample6_postcode" placeholder="우편번호" value="10">
-						       <span><input class="address_control address_control error" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></span><br>
+							   <input class="addr_only address_control error int_log" type="text" id="sample6_postcode" placeholder="우편번호" name="postcode">
+						       <span>
+						         <input class="address_control address_control error int_log" type="button" id="btn_post" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+						        </span><br>
 						    </div>	
-							  <input class="addr_only form_control error" type="text" id="sample6_address" placeholder="주소">
+							    <input class="addr_only form_control error int_log" type="text" id="sample6_address" placeholder="주소" name="addr1">
 							<div class="address">
-							  <input class="form_control error int" type="text" id="sample6_detailAddress" placeholder="상세주소">
-							</div>
-						 
+							 	<input class="form_control error int_log" type="text" id="sample6_detailAddress" placeholder="상세주소" name="addr2">
+								<input type="hidden" id="sample6_extraAddress" placeholder="참고항목">
+							</div>						 
 					    </div>	
-
 					    <div class="join_err_msg">
-						필수 입력 항목 입니다.
+							필수 입력 항목 입니다.
 					    </div>
-				</div>
-
-
-					</div>
+				    </div>
+		     </div>
 					
-						<div class="user_sign_up_form_group error">
-						<div  class="user_sign_up_form_group_label" >
-							연락처
-	                         
-						</div>
-						
-						<div class="user_sign_up_form_group_input">
-							<input type="tel" name="uphone" id="uphone" class="form_control error int" placeholder="-없이 입력 예)0101234567">
-						</div>
-
-						
-						<div class="join_err_msg">
+				<div class="user_sign_up_form_group error">
+					<div  class="user_sign_up_form_group_label" >
+						연락처                         
+					</div>						
+					<div class="user_sign_up_form_group_input">
+						<input type="tel" name="phone" id="uphone" class="form_control error int_log" placeholder="-없이 입력 예)0101234567">
+					</div>						
+					<div class="join_err_msg">
 						필수 입력 항목 입니다.
-					    </div>
-
-						
-					</div>
-					</div>
-
-					<div class="btn_double_area">
-							<span><button id='btn_join' class="btn_type btn_agree">가입하기</button></span>
-						</div>
-
-					</div>
-
-					
-
+					</div>						
 				</div>
-
-				
-			</form>
 		</div>
-
+					
+				<div class="btn_double_area">
+						<span><button type="button" id='btn_join' class="btn_type btn_agree">가입하기</button></span>
+				</div>
+		</form:form>	
+		<!--</form>-->
 	</section>	
 	<footer>
 			<div id="footer">
 				<ul>
-					<li><a  hrdf='#'>이용약관"</a></li>
+					<li><a hrdf='#'>이용약관"</a></li>
 					<li><strong><a href="#">개인정보처리방침</a></strong></li>
 					<li><a href="#">책임의 한계와 법적고지</a></li>
 					<li><a href="#">회원정보 고객센터</a></li>
 				</ul>
-
-				<div id="address">
-					<span>
-						<a href="https://www.naver.com">
-							<img id="addr_logo" src="../img/naver/naver_logo.png">
-						</a>
-					</span>
-					<span>copyright</span>
-					<span>@</span>
-					<span><strong><a href="#">NAVER Corp</a></strong></span>
-					<span>ALL Rights Reserved.</span>
 			</div>
-			<div id="footer"></div>
+			<div id="address">
+				<span>
+					 <a href="https://www.naver.com">
+						<img id="addr_logo" src="../img/naver/naver_logo.png">
+					</a>
+				</span>
+				<span>copyright</span>
+				<span>@</span>
+				<span><strong><a href="#">NAVER Corp</a></strong></span>
+				<span>ALL Rights Reserved.</span>
+			</div>
+			
 		</footer>
 </body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -491,46 +459,56 @@
 <script type="text/javascript">
 	
 
-	$(document).ready(function(){
-		$('#selmail').change(function(){
-		var url = $(this).val();
 
-		if(url != 'directVal') {
-
-			$('#email_url').val(url).prop('readonly', true);
-
-		} else {
-			$('#email_url').val('').removeAttr('readonly').focus();
+	$(function(){
+		 // 비정상적인 접근인지 판단한느  flag
+		var flag = '${flag}';
+		if(flag == 0) {
+			location.href="${path}/member/constract";
 		}
+		
+		
+		$('#selmail').change(function(){
+			var url = $(this).val();
+			if(url != 'directVal') {
+				$('#email_url').val(url).prop('readonly', true);
+			} else {
+				$('#email_url').val('').removeAttr('readonly').focus();
+			}
 		});
-	});
 
-$(function(){
+		// 비밀번호가 유효한 값인지 체크해주는 flag 값
+	 	var pwFlag = false;
 
-	// 비밀번호가 유효한 값인지 체크해주는 flag 값
-	 var pwFlag = false;
-
-	 // 유효성체크 여부를 알려주는 배열
-	 var checkArr = new Array(7).fill(false);
-	 // printCheckArr(checkArr);
+	 	// 유효성체크 여부를 알려주는 배열
+	 	var checkArr = new Array(5).fill(false);
+	 	// printCheckArr(checkArr);
 	 
-	 // 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
-	var checkAll = false;
+	 	// 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
+		var checkAll = false;
 
 	
 		// 아이디 유효성 체크 
-			$('#uid').keyup(function () {
+		$('#uid').keyup(function () {
 				// 사용자가 입력한 값의 좌우여백을 제거하고 id에 입력
 				var id = $(this).val().trim(); // 사용자가 입력한 값
 				//validate.js의 checkId로 유효성 체크fmf 실행 후
 				// 결과를 result에 담음(code, desc)
 
-
 				var result = joinvalidate.checkid(id);
 				console.log(result.code+","+result.desc);
-
 				// 유효성 체크 결과로 테두리 색과 err메세지를 출력하는 
 				// 함수 실행 
+
+				if(result.code == 0){
+					checkArr[0] = true;
+				} else {
+					checkArr[0] = false;
+				}
+				// printCheckArr(checkArr); 확인용도
+
+				// 유효성체크 결과로 테두리색과 err 메세지를 출력하는 함수 실행
+				
 				
 				ckDesign(result.code, result.desc,0, 0);
 
@@ -558,17 +536,13 @@ $(function(){
 			    } else {
 			    	pwFlag = false;
 			    } if(result.code == 10){
-				
-				$('.user_sign_up_form_group_input:eq(2)').css('border','1px solid #3885ca');
-			    
-			    }
-
-			    
-			    
-			    
-
-			    ckDesign(result.code, result.desc, 1, 1);
-
+			    	checkArr[1] = true;		
+				   $('.user_sign_up_form_group_input:eq(2)').css('border','1px solid #3885ca');
+		    
+			    } else {
+			    	checkArr[1] = false;
+			      }
+			    ckDesign(result.code, result.desc, 2, 1);
 
 			});
 
@@ -583,12 +557,14 @@ $(function(){
 			console.log(result.code+","+result.desc);
 
 			if(result.code == 10){
+				checkArr[1] = true;
 				$('.user_sign_up_form_group_input:eq(3)').css('border','1px solid #3885ca');
 			} else if(result.code == 6){
-				$('.user_sign_up_form_group_input:eq(3)').css('border','1px solid #3885ca');
+				checkArr[1] = false;
+				$('.user_sign_up_form_group_input:eq(3)').css('border','1px solid red');
 			}
 
-			ckDesign(result.code, result.desc, 2, 2);
+			ckDesign(result.code, result.desc, 3, 2);
 
 			});
 
@@ -596,11 +572,23 @@ $(function(){
 		$('#uname').keyup(function(){
 			var name = $(this).val().trim();
 			console.log(name); // 꼭 확인하고 넘어가기
-
+			
+			$('.cnt').text(name.length);
+			
 			var result = joinvalidate.checkName(name);
+			 console.log("이름코드" + result.code);
+			if(result.code == 0){
+				checkArr[2] = true;
+			} else {
+				checkArr[2] = false;
+			}
+			printCheckArr(checkArr);
 
 			ckDesign(result.code, result.desc, 4,3);
 		});
+			
+		// 이름 카운트
+		
 
 		// 전화번호 유효성체크
 		$('#uphone').keyup(function(){
@@ -608,7 +596,12 @@ $(function(){
 			console.log(phone); 
 
 			var result = joinvalidate.checkPhone(phone);
-
+			if(result.code == 0){
+				checkArr[4] = true;
+			} else {
+				checkArr[4] = false;
+			}
+			printCheckArr(checkArr);
 			ckDesign(result.code, result.desc, 8, 5);
 		});
 
@@ -635,27 +628,66 @@ $(function(){
 
 			var result = joinvalidate.checkAddr(addrDetail, addrPost); // 유효성 체크 
 			if(result.code == 3){ // 우편번호&주소x
+				checkArr[3] = false;
 				ckDesign(result.code, result.desc, 5,4);
 			} else if(result.code == 0){ // 성공
+				checkArr[3] = true;
 				ckDesign(result.code, result.desc, 4,4);
 				ckDesign(result.code, result.desc, 5,4);
 				ckDesign(result.code, result.desc, 6,4);
 			} else { // 상세주소 통과x한 모든경우
+				checkArr[3] = false;
 				ckDesign(result.code, result.desc, 6,4);
 			}
+			printCheckArr(checkArr);
 		});
 
+	
+
+//버튼 활성화!
+	$('.int_log').keyup(function(){
+		var checkAll = true;
+		for(var i = 0; i < checkArr.length; i++){
+			if(!checkArr[i]){
+				checkAll = false;
+			}
+		}
+		printCheckArr(checkArr);
+		if(checkAll){
+			$('.btn_type').addClass('btn_agree');
+			$('.btn_type').css('cursor','pointer');
+		} else{
+			$('.btn_type').removeClass('btn_agree');
+			$('.btn_type').css('cursor','no-drop');
+		}
+	});
+		
+//회원가입 버튼 클릭!
+	$('#btn_join').click(function(){
+		var invalidAll = true;
+		for(var i=0; i < checkArr.length; i++){
+			if(!checkArr[i]){
+				invalidAll = false;
+				$('.join_err_msg:eq('+i+')').css('visibility','visible')
+							   .css('color','#f24443');
+			} 
+		}
+		printCheckArr(checkArr);
+		if(invalidAll){
+			console.log(invalidAll);
+
+			alert('회원가입성공');
+			$('#frm_member').submit();
+		} else{
+			console.log(invalidAll);
+			alert('값을 모두 입력해주세요.');
+			
+		}
 	});
 
-
-
-
-// 개발시 사용 : 유효성 체크 전체 여부를  출력해주는 함수 (true, false)
- function printCheckArr(checkArr) {
- 	for(var i=0; i < checkArr.length; i++) {
-	 	consonl.log(i+'번지: ' + checkArr[i]); 
-	 }
- }	
+});
+  
+ 
  function ckDesign(code, desc, line, msg){
 		if(code == 0 || code == 10){ //통과o
 			$('.email_input_local:eq('+line+')').css('border','1px solid #3885ca');
@@ -674,8 +706,13 @@ $(function(){
 			}
 		}
  
- 		//버튼 활성화 !
  		
+// 개발시 사용 : 유효성 체크 전체 여부를  출력해주는 함수 (true, false)
+ function printCheckArr(checkArr) {
+ 	for(var i=0; i < checkArr.length; i++) {
+	 	console.log(i+'번지: ' + checkArr[i]); 
+	 }
+ }	 		
 
 	 
 </script>

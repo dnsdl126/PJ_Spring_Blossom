@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.Blossom.persistence.MemberDAO">
-	<select id="idOverLap" resultType="int">
-		SELECT COUNT(*) FORM tbl_member
+	<select id="idOverlap" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
 		WHERE id = #{id}
 	</select>
+	
+	<insert id="memInsert">
+	   INSERT INTO tbl_member(id, pw, name, phone, postcode, addr1, addr2, useon, primaryon)
+        VALUES(#{id}, #{pw}, #{name}, #{phone}, #{postcode}, #{addr1}, #{addr2}, #{useon}, #{primaryon})
+	</insert>
+
 </mapper>	

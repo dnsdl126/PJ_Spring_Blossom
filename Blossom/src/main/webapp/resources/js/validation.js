@@ -17,9 +17,10 @@ var joinvalidate = {
 	code: 0,
 	desc : '멋진 아이디네요:)'
    },
+   
    specialStr_id : {
-   		code: 3,
-   		dsec : '아이디는 영문 소문자, 숫자, 특수기호 일부만 사용할 수 있습니다.'
+   	code: 3,
+   	desc : '아이디는 영문 소문자, 숫자, 특수기호 일부만 사용할 수 있습니다.'
    },
 	invalid_id : {
 	code: 4,
@@ -135,7 +136,7 @@ var joinvalidate = {
 	   var regEtc = /[~'!@#$%^&*()+=\|\\\{\}\[\]:";'<>.?//]/g; // 특수문자 
 	   var regId = /[^a-z0-9-_.]+/g;
 
-			if(id == '' || id.length == 0) { // 1.값이 있는지 없는지 or 스페이스 값으로 으로 공백이 들어가있는지 
+		if(id == '' || id.length == 0) { // 1.값이 있는지 없는지 or 스페이스 값으로 으로 공백이 들어가있는지 
            return this.resultCode.empty_val;
 		} else if (id.match(regEmpty)) { // 2. 값사이에  공백값
 			return this.resultCode.space_length_val;
@@ -264,18 +265,18 @@ var joinvalidate = {
 		
 		$.ajax({
 			type: 'POST',
-			url: 'idoverlap?id='+id,
+			url: 'idoverlap_id='+id,
 			async: false,
 			success: function(data) {
 				console.log(data);
-				if(data>=1) {
+				if(data=="1") {
 					return_val = true; 
 					} else {
 						return_val = false;
 					}
 				},
 				error: function() {
-					alert('System ERROR:(');
+					
 				}
 			});
 		return return_val;

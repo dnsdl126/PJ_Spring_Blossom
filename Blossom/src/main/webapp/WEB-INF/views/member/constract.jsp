@@ -520,9 +520,10 @@
 			}
 			/*유효성 체크 통과시 회원가입 페이지 이동*/
 			location.href="${path}/member/join?useon="+agree_one
-													  +"&primaryon"+agree_two
+													  +"&primaryon="+agree_two
 													  +"&locon="+agree_three
-													  +"&eventon="+agree_four;
+													  +"&eventon="+agree_four
+													  +"&flag=1";
 				
 		});
 		
@@ -530,10 +531,8 @@
 		
 		$('#cons_btn_cancle').on('click', function(){
 			
-			location.href='${path}/';
-			
-		});
-		
+			location.href='${path}/';			
+		});		
 	});
 
 	
