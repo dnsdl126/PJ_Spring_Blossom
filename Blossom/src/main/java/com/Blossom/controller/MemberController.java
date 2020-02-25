@@ -1,6 +1,9 @@
 package com.Blossom.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Blossom.domain.MemberDTO;
+import com.Blossom.service.mail.MailService;
 import com.Blossom.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +49,13 @@ import lombok.extern.slf4j.Slf4j;
 //빈즈등록
 @SessionAttributes({"memberDTO"})
 public class MemberController {
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MailService mailService;
+	
 	@Autowired
 	MemberService mService;
 	/*
@@ -97,12 +109,19 @@ public class MemberController {
 	
 	
 	@PostMapping("/join")
-	 public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus) {
+	 public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus, HttpServletRequest request) {
 		log.info(">>MEMBER/JOIN POST DB에 회원정보 저장");
 		log.info(mDto.toString());
 		 //SessionAttributes를 사용 할때 insert, update가 완료되고
 		//view로 보내기전 반드시 setComplet()를 실행하여
 		//session에 담긴 값을 clear해줘야 한다 
+		
+		log.info("Password: " + mDto.getPw());
+		//1. 사용자 암호 hash  변환
+		String encPw = passwordEncoder.encode(mDto.getPw());
+		mDto.setPw(encPw);
+		log.info("Password(+Hash):" + mDto.getPw());
+		
 		
 		//2.DB에 회원 등록
 		 int result = mService.memInsert(mDto);
@@ -111,10 +130,26 @@ public class MemberController {
 		 if(result > 0) {
 			 log.info(">>>>>>>>" + mDto.getId()+ "님 회원가입되셨습니다");
 		 }
+		 //4.회원가입 인증 메일 보내기
+		 mailService.mailSendUser(mDto.getEmail(), mDto.getId(), request);
 		
 		
 		sessionStatus.setComplete();
-		return "";
+		return "redirect:/";
+		
+		//redirect:// mapping을 새로 타라 
+	}
+	
+	//회원가입후 email 인증
+	@GetMapping("/keyauth")
+	 public String keyAuth(String id, String key, RedirectAttributes rttr) {
+		mailService.keyAuth(id, key);
+		
+		//인증후 메시지 출력을 위한 값 전달
+		rttr.addFlashAttribute("id", id);
+		rttr.addFlashAttribute("key", key );
+		
+		return "redirect:/";
 	}
 	
 	/*

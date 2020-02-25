@@ -22,6 +22,7 @@ public class MemberDTO {
 		private String pw;
 		private String name;
 		private String phone;
+		private String email;
 		private String postcode;
 		private String addr1;
 		private String addr2;

@@ -53,10 +53,7 @@
 			margin-left:auto;
 			margin-right: auto;
 		}
-	.user_sign_up_form_group {
-		margin: 0 0 30px;
-		
-	}
+	
 	.user_sign_up_form_group_label {
 		display: block;
 		margin: 0 0 12px;
@@ -84,11 +81,15 @@
 	.input_group {
 		flex: 1 0 auto;
 	}
+	.name_class {
+	display : flex;
+	}
 	/*유저이름*/
 	.name_count {
 	color: #7c7c7c;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
+    margin-left: 10px;
 	}
 	.email_input_local, .email_input_domain {
 		position: relative;
@@ -225,19 +226,33 @@
    		margin: 30px 0 9px;
    	}
 
-   		.btn_type {
-   		display: block;
-   		width: 27%;
-   		padding: 21px 0 17px;
-   		font-size: 20px;
-   		font-weight: 700;
-   		text-align: center;
-   		cursor: no-drop;
-   		margin: auto;
+   	.btn_type {
+   	color: white;
+    background-color: #40BF75;
+    border-radius: 10px;
+    border: none;
+    display: block;
+   	width: 27%;
+   	padding: 21px 0 17px;
+   	font-size: 20px;
+   	font-weight: 700;
+   	text-align: center;
+   	cursor: no-drop;
+   	margin: auto;
    	}
    	.btn_agree {
-   		color: white;
-   		background-color:  #40BF75;
+    color: white;
+    background-color: #1F8AD8;
+    border-radius: 10px;
+    border: none;
+    display: block;
+   	width: 27%;
+   	padding: 21px 0 17px;
+   	font-size: 20px;
+   	font-weight: 700;
+   	text-align: center;
+   	cursor: no-drop;
+   	margin: auto;
    	}
    	.address_control{
    		display: block;
@@ -305,10 +320,12 @@
 		#address a:hover {
 			color: #1fbc02;
 		}
+	
    </style>
    
 </head>
 <body>
+	   
 <section class="container user_sign_up">
 	<!-- <form id="frm_member" action="${path}/member/join" method="post"> -->
 	<form:form id= "frm_member" modelAttribute="memberDTO" autocomplete="on">	
@@ -329,15 +346,16 @@
 								</span>
 								<span class="email_input_separator">@</span>
 								<span class="email_input_domain">
-									<select class="form_control empty">
+									<select class="form_control empty" id="umail">
 										<option selected value disabled>선택해 주세요</option>
 									<option value="directVal">직접입력</option>	
-									<option value="naver.com">naver.com(네이버)</option>
-									<option value="daum.net">daum.net(다음 카카오)</option>
-									<option value="gmail.com">gmail.com(구글)</option>
-									<option value="nate.com">nate.com(네이트)</option>
+									<option value="naver.com">naver.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="nate.com">nate.com</option>
 															
 									</select>
+									<input type="hidden" name="email" id="emailAll">
 									
 								</span>
 							</div>
@@ -372,14 +390,15 @@
 					    </div>						
 					</div>
 					<div class="user_sign_up_form_group error ">
-						<div  class="user_sign_up_form_group_label" >						
-							이름	                         
+						<div  class="user_sign_up_form_group_label name_class" >						
+							이름
+							<div class="name_count">
+						  		<span class="cnt">0</span>/20						  
+						    </div>		                         
 						</div>						 						
 						<div class="user_sign_up_form_group_input count">
 							<input type="text"  name="name" id="uname" value class="form_control error int_log">
-						    <div class="name_count">
-						  		<span class="cnt">0</span>/20						  
-						    </div>						
+						    					
 						</div>						
 						<div class="join_err_msg">
 							필수 입력 항목 입니다.
@@ -530,19 +549,25 @@
 			    var result = joinvalidate.checkpw(pw, rpw);
 			    // console.log(result.code="," + result.desc);
 
-			    if (result.code == 0 || result.code == 10 || result.code == 6) {
+			    if (result.code == 0 || result.code == 10) {
 
 			    	pwFlag = true;
+			    	ckDesign(result.code, result.desc, 2, 1);
+			    } else if(result.code == 6){
+			    	pwFlag = true;
+			    	ckDesign(result.code, result.desc, 2, 2);
 			    } else {
 			    	pwFlag = false;
-			    } if(result.code == 10){
+			    	ckDesign(result.code, result.desc, 2, 1);
+			    } 
+			    if(result.code == 10){
 			    	checkArr[1] = true;		
 				   $('.user_sign_up_form_group_input:eq(2)').css('border','1px solid #3885ca');
 		    
 			    } else {
 			    	checkArr[1] = false;
 			      }
-			    ckDesign(result.code, result.desc, 2, 1);
+			    
 
 			});
 
@@ -661,7 +686,6 @@
 			$('.btn_type').css('cursor','no-drop');
 		}
 	});
-		
 //회원가입 버튼 클릭!
 	$('#btn_join').click(function(){
 		var invalidAll = true;
@@ -675,7 +699,12 @@
 		printCheckArr(checkArr);
 		if(invalidAll){
 			console.log(invalidAll);
-
+			var id = $('#uid').val();
+			var url = $('#umail').val();
+	
+			$('#emailAll').val(id+"@"+url);
+			console.log($('#emailAll').val(id+"@"+url));
+			
 			alert('회원가입성공');
 			$('#frm_member').submit();
 		} else{
@@ -705,8 +734,16 @@
 			return false;
 			}
 		}
- 
- 		
+		//Login 버튼 클릭시 Modal 창 Open
+		 $(document).on('click', '.btn_agree', function() {
+		 $('.modal_wrap').css('display','flex');
+		 
+		 });
+		
+		
+		
+		
+		 		
 // 개발시 사용 : 유효성 체크 전체 여부를  출력해주는 함수 (true, false)
  function printCheckArr(checkArr) {
  	for(var i=0; i < checkArr.length; i++) {

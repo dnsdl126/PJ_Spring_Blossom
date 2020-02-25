@@ -9,8 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="memInsert">
-	   INSERT INTO tbl_member(id, pw, name, phone, postcode, addr1, addr2, useon, primaryon)
-        VALUES(#{id}, #{pw}, #{name}, #{phone}, #{postcode}, #{addr1}, #{addr2}, #{useon}, #{primaryon})
+	   INSERT INTO tbl_member(id, pw, name, phone, email, postcode, addr1, addr2, useon, primaryon)
+        VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{postcode}, #{addr1}, #{addr2}, #{useon}, #{primaryon})
 	</insert>
+	
+	<update id="getKey">
+	   UPDATE tbl_member
+	   SET useyn = #{param2}
+	   WHERE id = #{param1} 
+	</update>
+	<update id="alterKey">
+	   UPDATE tbl_member
+	   SET useyn = 'y'
+	   WHERE id = #{param1} AND useyn = #{param2}
+	</update>
 
 </mapper>	

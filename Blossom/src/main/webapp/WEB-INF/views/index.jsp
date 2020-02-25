@@ -7,8 +7,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
+<script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
 <style type="text/css">
 		* {box-sizing:border-box}
+
+
+/*top버튼*/
+.top_btn{
+	bottom: 115px;
+	background-color: #40BF75;
+	display: none;
+}
+.fix_btn {
+    position: fixed;
+    right: 50px;
+    color: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.2);
+}
 
 /* Slideshow container */
 .slideshow-container {
@@ -127,8 +150,8 @@
 .event:before {
 	width: 95%;
     height: 95%;
-    border-top: 1px solid #40BF75;
-    border-bottom: 1px solid #40BF75;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     width: 0;
 }
 
@@ -137,8 +160,8 @@
 .event:after {
 	width: 95%;
     height: 95%;
-    border-left: 1px solid #40BF75;
-    border-right: 1px solid #40BF75;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
     height: 0;
 }
 
@@ -311,6 +334,8 @@
 </div>
 
 
+<div class="top_btn fix_btn"><i class="fas fa-arrow-up"></i></div>	
+
 <nav class="container shortcut">
 		<ul class="row shortcut__list">
 			<li class="shortcut__list__item">
@@ -456,6 +481,26 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 
+$(document).ready(function() {
+	$('.bar_wrap').find('.bar_fill').each(function() {
+		var widthVal = $(this).text();
+		 $(this).animate({width:widthVal}, 1000);
+	 });
+
+	// Scroll top 버튼 생성 및 Top 으로 이동 
+	$(window).scroll(function(){ // 스크롤이 움직이면 
+		
+		if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+			$('.top_btn').fadeIn().css("display","flex");
+		
+	} else {
+		$('.top_btn').fadeOut();
+	}
+	});
+	$('.top_btn').click(function(){
+		$('html, body').animate({scrollTop : 0}, 800);
+	});
+});
 
 
 </script>

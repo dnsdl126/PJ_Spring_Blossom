@@ -265,7 +265,7 @@ var joinvalidate = {
 		
 		$.ajax({
 			type: 'POST',
-			url: 'idoverlap_id='+id,
+			url: 'idoverlap?id='+id,
 			async: false,
 			success: function(data) {
 				console.log(data);
