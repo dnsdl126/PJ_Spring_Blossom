@@ -11,7 +11,7 @@
 <script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
 <style type="text/css">
 	     /*모달창*/
-    modal_wrap {
+    .modal_wrap {
 	    position: fixed;
 	    z-index: 1000;
 	    background-color: rgba(0,0,0,0.4);
@@ -20,22 +20,22 @@
 	    height: 100%;
 	    justify-content: center;
 	    align-items: center;
-	    display: flex;
+	    display: none;
     }
     .modal_logo {
     	width: 50%;
-       	height: 120px;
-       	background-image: url('${path}/resources/img/mainbaner_01.png');
+       	height: 120px;       	
+       	
        	background-repeat: no-repeat;
        	background-size: 150px 110px;
        	background-position: center;
- 		margin: 10px auto 0;
+ 		margin: 3px auto 0;
 
     }
     .modal_content {
     	position: relative;
     	width: 372px;
-    	height: 254px;
+    	height: 291px;
     	background-color: white;
   		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
     	border-radius: 2px;
@@ -56,7 +56,12 @@
     	font-size: 18px;
         text-align: center;   		
     	margin-top: 10px;
+    	font-weight: 800;
 
+    }
+    .modal_text_1 {
+		text-align: center;
+		margin-top: 5px;  
     }
 
     .modal_check {
@@ -123,13 +128,16 @@
 				<div class="modal_close">
 				  <button><i class="fas fa-times" ></i></button>
 			    </div>
-				<div class="modal_logo"></div>
-				<div class = "modal_text">
-					이메일 인증후 가입 완료됩니다.
-				</div>			
+				<div class = modal_logo style="background-image: url('${path}/resources/img/clean_logo.png');"></div>
+				<div class = "modal_msg_main_txt modal_text">
+					
+				</div>
+				<div class = "modal_text_1 modal_msg_sub_txt"></div>
+				
+				<div></div>			
 				<div class="modal_check">
-		   			 <span><a href="#" class="btn_type modal_cancle">취소</a></span>
-		   			<span><a href="#" class="btn_type moadl_agree">확인</a></span>	   			  	  	
+		   			 <span><a href="#" class="btn_type modal_cancle" id="modal_msg_close">취소</a></span>
+		   			<span><a href="#" class="btn_type moadl_agree" id="modal_msg_yes">확인</a></span>	   			  	  	
 		   		</div>						
 			</div>
 		</div>
@@ -139,9 +147,37 @@
 <script type="text/javascript">
 	$(document).on('click', '.modal_close', function() {
        $('.modal_wrap').css('display','none'); 
-     
-       
+          
     });
+	$(function(){
+		var id = '${id}';
+		var email = '${email}';
+		var key = '${key}';
+		
+		var join_main_txt = id + '님 회원가입을 축하드립니다.';
+		var join_sub_txt = email + '으로 인증메일을 보냈습니다. 인증하셔야만 사이트 활동이 가능합니다.';
+		var auth_mian_txt = id + '님 이메일 인증되셨습니다.';
+		var auth_sub_txt = '지금부터 사이트 활동이 가능합니다. 감사합니다';
+		
+		if(key == 'join') {
+			$('.modal_msg_main_txt').text(join_main_txt);  // 메인 텍스트
+			$('.modal_msg_sub_txt').text(join_sub_txt);    // 서브 텍스트
+			$('#modal_msg_cancle').css('display','none');  // 취소버튼 제거
+			$('.modal_wrap').css('display','flex');   // 모달창 출력
+		} else if (key == 'auth') {
+			$('.modal_msg_main_txt').text(auth_mian_txt);  
+			$('.modal_msg_sub_txt').text(auth_sub_txt);   
+			$('#modal_msg_cancle').css('display','none'); 
+			$('.modal_wrap').css('display','flex');  
+		}
+		$('#modal_msg_yes').on('click',function(){
+			$('.modal_wrap').css('display', 'none');			
+		});
+		$('#modal_msg_close').on('click',function(){
+			$('.modal_wrap').css('display','none');			
+		});
+		
+	}); 
 
 </script>
 </body>

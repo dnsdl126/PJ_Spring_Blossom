@@ -273,6 +273,30 @@
    	.address {
    		
    	}
+   	#back {
+   	 position: fixed;
+   	 z-index : 1200;
+   	 background-color : rgba(0,0,0,0.4);
+   	 overflow: auto;
+   	 width: 100%;
+   	 height: 100%;
+   	 top:0;
+   	 left:0;
+   	 display: none;
+   	 align-items: center;
+   	 justify-content: center;
+   	 
+   	}
+   	.loading_img{
+   		animation: ani_loading 1.5s infinite linear;
+   		font-size:70px;
+   		color: #EBA444;  	
+   	}
+   	
+   	@keyframes ani_loading {
+   	 from {-webkit-transform: rotate(0deg);}
+   	 to {-webkit-transform: rotate(359deg);}
+   	}
 	 	#footer {
 			padding: 15px 0;
 		}
@@ -480,6 +504,7 @@
 
 
 	$(function(){
+		FunLoadingBarStart();
 		 // 비정상적인 접근인지 판단한느  flag
 		var flag = '${flag}';
 		if(flag == 0) {
@@ -698,6 +723,9 @@
 		}
 		printCheckArr(checkArr);
 		if(invalidAll){
+			
+			FunLoadingBarStart(); //로딩바 생성
+			
 			console.log(invalidAll);
 			var id = $('#uid').val();
 			var url = $('#umail').val();
@@ -750,7 +778,16 @@
 	 	console.log(i+'번지: ' + checkArr[i]); 
 	 }
  }	 		
-
-	 
+// 로딩바 출력
+function FunLoadingBarStart() {
+	var loadingBarImage = ''; // 가운데 띄워 줄 이미지
+	loadingBarImage += "<div id='back'>";
+	loadingBarImage += "<div id='loadingBar'>";
+	loadingBarImage += "<i class='fas fa-spinner loading_img'></i>";
+	loadingBarImage += "</div></div>";
+	$('body').append(loadingBarImage);
+	$('#back').css('display', 'flex');
+	$('#loadingImg').show();
+}
 </script>
 </html>

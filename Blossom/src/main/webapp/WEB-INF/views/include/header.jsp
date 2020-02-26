@@ -176,7 +176,7 @@
       }
      
       /* 모달 로그인 창 */
-      .modal_wrap {
+      .modal_login_wrap {
          position: fixed;
          z-index: 1000;
          background-color: rgba(0,0,0,0.4);
@@ -188,7 +188,7 @@
          align-items: center;
 
       }
-      .modal_content {
+      .modal_box {
          position: relative;
          width: 372px;
          height: 600px;
@@ -375,8 +375,8 @@
 	</style>
 </head>
 <body>
-   <div class="modal_wrap">
-     <div class="modal_content">
+   <div class="modal_login_wrap">
+     <div class="modal_box">
        <div class="login_close">
           <button><i class="fas fa-times"></i></button>
        </div>
@@ -575,13 +575,13 @@
 
    //Login 버튼 클릭시 Modal 창 Open
    $(document).on('click', '.login_open', function() {
-   $('.modal_wrap').css('display','flex');
+   $('.modal_login_wrap').css('display','flex');
    $('#login_id').focus();
    });
 
    //MODAL 창의 X버튼을 클릭하면 MODAL창 close
    $(document).on('click', '.login_close', function() {
-       $('.modal_wrap').css('display','none'); 
+       $('.modal_login_wrap').css('display','none'); 
        $('.frm_login')[0].reset();
         $('.pw_eye').prev().attr('type','password');
 

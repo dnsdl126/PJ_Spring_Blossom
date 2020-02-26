@@ -295,7 +295,7 @@
 	</style>
 </head>
 <body>
-
+<%@ include file = "include/Modal.jsp"%>
 <!-- Slideshow container -->
 <div class="slideshow-container">
 

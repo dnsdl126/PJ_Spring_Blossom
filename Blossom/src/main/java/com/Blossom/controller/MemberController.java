@@ -56,6 +56,8 @@ public class MemberController {
 	@Autowired
 	private MailService mailService;
 	
+	// 권한 부여 (IOC : 개발자의 객체생성권한을 Spring 한테 넘김, @Service, @contorller, )
+	//오버라이드는 DI 패턴만 가능 객체에대한 권한을 Spring이 가지고 있을때만 가능하다.	
 	@Autowired
 	MemberService mService;
 	/*
@@ -109,45 +111,73 @@ public class MemberController {
 	
 	
 	@PostMapping("/join")
-	 public String join(@ModelAttribute("memberDTO") MemberDTO mDto, SessionStatus sessionStatus, HttpServletRequest request) {
-		log.info(">>MEMBER/JOIN POST DB에 회원정보 저장");
-		log.info(mDto.toString());
-		 //SessionAttributes를 사용 할때 insert, update가 완료되고
-		//view로 보내기전 반드시 setComplet()를 실행하여
-		//session에 담긴 값을 clear해줘야 한다 
+	 public String join(@ModelAttribute("memberDTO") MemberDTO mDto, 
+			                            SessionStatus sessionStatus, 
+			                            HttpServletRequest request,
+			                            RedirectAttributes rttr)
+	                   
+	     //View 단에서  Controller 단으로 이동
+	   { log.info(">>MEMBER/JOIN PAGE Post 출력");
+		 
+	    // View 단에서 전송된 데이터가 잘 전달 되었는지 확인 
+	   log.info(mDto.toString());
+	   
 		
-		log.info("Password: " + mDto.getPw());
+		
+		log.info("Password: " + mDto.getPw()); // 사용자 입력 값 pw 값
 		//1. 사용자 암호 hash  변환
 		String encPw = passwordEncoder.encode(mDto.getPw());
+	      // encPw = 암호화 된 비밀번호 
+		
 		mDto.setPw(encPw);
+		  // 기존에 암호화 안된 비밀번호 말고  encPw 암호화된 비밀번호 담아라 
 		log.info("Password(+Hash):" + mDto.getPw());
+		             
 		
 		
 		//2.DB에 회원 등록
 		 int result = mService.memInsert(mDto);
-		 
+		        //mService (MemberService 의 객체)위에 Autowired로 의존성 주입을 해둔상태
+		 		// 별도 객체생성을 할필요 없다.
+		        // MemberService 의 memInsert에가서 mDto 전달  
+		        
 		//3.회원 등록 결과
 		 if(result > 0) {
 			 log.info(">>>>>>>>" + mDto.getId()+ "님 회원가입되셨습니다");
 		 }
 		 //4.회원가입 인증 메일 보내기
 		 mailService.mailSendUser(mDto.getEmail(), mDto.getId(), request);
-		
+		 //SessionAttributes를 사용 할때 insert, update가 완료되고
+		 //view로 보내기전 반드시 setComplet()를 실행하여
+		 //session에 담긴 값을 clear해줘야 한다 
 		
 		sessionStatus.setComplete();
+		
+		//회원가입 후 메시지 출력을 위한 값 
+		rttr.addFlashAttribute("id", mDto.getId()); // ~님
+		rttr.addFlashAttribute("email", mDto.getEmail()); // ~메일로 
+		rttr.addFlashAttribute("key", "join");
+		
 		return "redirect:/";
 		
-		//redirect:// mapping을 새로 타라 
+		//redirect:/ mapping을 새로 타라 -> index 페이지를 새로 띄움
+		// 서버단에서 view 단으로 갈때 포워드 방식와 샌드리다이렉트 2가지 방식이 있다 
+		// 포워드는 페이지 이동을하지 않고 기존 페이지에 내용만 덮어준다
+		// 포워드는 DB에 변환작업이 들어가는 경우 사용하면 안된다
+		// 포워드가 디폴트 여서 리다이렉트 사용시 선언해줘야 한다 
+		// 샌드리다이렉트는 페이지를 새로만들면서 주소가 변경된다 
+		// 리다이렉트는 값이 바뀌는 경우 사용 
 	}
 	
 	//회원가입후 email 인증
 	@GetMapping("/keyauth")
 	 public String keyAuth(String id, String key, RedirectAttributes rttr) {
+		
 		mailService.keyAuth(id, key);
 		
 		//인증후 메시지 출력을 위한 값 전달
 		rttr.addFlashAttribute("id", id);
-		rttr.addFlashAttribute("key", key );
+		rttr.addFlashAttribute("key", "auth" );
 		
 		return "redirect:/";
 	}
