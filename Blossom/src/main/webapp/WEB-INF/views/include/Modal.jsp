@@ -34,7 +34,7 @@
     }
     .modal_content {
     	position: relative;
-    	width: 372px;
+    	width: 413px;
     	height: 291px;
     	background-color: white;
   		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);

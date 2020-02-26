@@ -504,7 +504,7 @@
 
 
 	$(function(){
-		FunLoadingBarStart();
+	
 		 // 비정상적인 접근인지 판단한느  flag
 		var flag = '${flag}';
 		if(flag == 0) {
