@@ -12,10 +12,15 @@
   
 
 	<style type="text/css">
-	    form{
-	    margin: 0px;
-	    
+	  form{
+	    margin: 0px;	    
 	    }
+	 .login_err_msg {
+    
+      font-size: 12px;     
+      color: red;
+      display:none;
+      }   
 		div.header_wrap {
 			width: 100%;
 			background: white;
@@ -205,8 +210,8 @@
          width: 285px;
       }
       div#header_div{
-         width: 107px;
-         margin: 47px auto;
+         width: 169px;
+   		 margin: 31px auto 15px;
 
       }
        div.div_input {
@@ -247,7 +252,7 @@
       }
        #btn_login:hover {
           
-         background-color: #00cec9;
+         background-color: #1F8AD8;
       }
       .sign_box_enter {
          display: inline-block;;
@@ -301,9 +306,9 @@
     
         }
         .sign_guest {
-         margin: 30px 0 0;
-         padding: 30px 0 0;
-         border-top: 1px solid #dbdbdb;
+        margin: 30px 0 0;
+        padding: 10px 0 0;
+        border-top: 1px solid #dbdbdb;
         }
         .sing_guest_title {
              display: block;
@@ -352,7 +357,7 @@
          outline: none;
        }
        .login_close > button:hover {
-         color: #00cec9; 
+         color: #1F8AD8; 
        }
        .pw_eye {
          position: absolute;
@@ -383,32 +388,33 @@
     <div id= content_layout>
          <header>
             <div  id="header_div">
-               <a><img class="hearder_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지"></a>
-               
+               <img class="modal_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지" style = "width: 184px">               
             </div>
          </header>
-        <form class="frm_login">
+         <div class="login_err_msg">
+               <h1 style="font-size: 12px">로그인 중 문제가 발생하였습니다 <br>이메일이나 비밀번호를 다시 확인해주세요</h1>               
+          </div>
+          <form class="frm_login" onsubmit="return false;" >            
             <div class="div_input" id="naver_id">
              <span class="input_box">
-               <input type="email"  id="login_id" name = "id" placeholder="아이디"  class="input_login" id="inputid" required>
+               <input type="text"  id="login_id" name = "id" placeholder="아이디"  class="input_login" id="inputid" required>
              </span>
             </div>
-            <div class="div_input" id="naver_pw">
-               
-               <input type="password" id="login_pw" name = "pw" placeholder="비밀전호" class="input_login" id="inputpw" required minlength="6" maxlength="18">              
-                <span class="pw_eye">
-                   <i class="fas fa-eye-slash"></i>
-                </span>
-             </div>
-        
+            <div class="div_input" id="naver_pw">              
+               <input type="password" id="login_pw" name = "pw" placeholder="비밀번호" class="input_login" id="inputpw" required minlength="6" maxlength="18">              
+               <span class="pw_eye"><i class="fas fa-eye-slash"></i></span>
+             </div>        
              <div >
-                <button type = "submit" id="btn_login">Login</button>
+             	
+                <button type ="submit" id="btn_login">Login</button>
+                
              </div>
-
-        </form>
+          </form>
              <div class="sign_box">
-                <a class="sign_box_enter" href="#">아이디/비밀번호 찾기
-                <a class="sign_box_enter" href="#">회원가입</a>              
+               <!-- session 에서 userid 비어있으면 -->
+                <a class="sign_box_enter" href="#">아이디/비밀번호 찾기</a>
+                <a class="sign_box_enter" href="#">회원가입</a> 
+                              
             </div>
             <selection class="SNS">
                 <h2 class = "sign_in_text">SNS계정으로 간편 로그인/회원가입</h2>
@@ -458,7 +464,7 @@
                   <form name="frm_search" action="" method="GET">
                      <div class="header_content_search_group">
                         <input type="text" placeholder="상품을 검색해 보세요" name="keyword" class="hearder_content_search_input">
-                        <button type=" button" class="hearder_content_search_btn"><i class="fas fa-search"></i></button>
+                        <button type="button" class="hearder_content_search_btn"><i class="fas fa-search"></i></button>
                      </div>
 
                   
@@ -525,12 +531,21 @@
                   </div>
                   <div>
                      <div class="header_content_member_cart">
-                        <a href="#"><i class="fas fa-shopping-bag"></i></i></a>
+                        <a href="#"><i class="fas fa-shopping-bag"></i></a>
                      </div>
                   </div>
-
+				<div class = "login_content_box" style = "display: flex ">
+				 <c:choose>
+				   <c:when test = "${empty sessionScope.userid}">
    					<div><button type ="button" class="btn btn-basic login_open">로그인</button></div>
-                  <div><button type ="button" id="header_btn_join" class="btn btn-primary">회원가입</button></div>   					
+                    <div><button type ="button" id="header_btn_join" class="btn btn-primary">회원가입</button></div>
+                   </c:when>
+                   <c:otherwise>
+                     <div><button type ="button"  class="btn btn-primary">로그아웃</button></div>
+                   </c:otherwise>  
+                 </c:choose>
+                </div>	      
+                      					
                </div>   
    		     </div>
    	</div>
@@ -588,8 +603,11 @@
          $('.pw_eye').html('<i class="fas fa-eye-slash"></i>')
                         .css('color','#AAA');
        //$('.login_input').val('');
+       
+       $('.login_err_msg').css('display', 'none');
     });
-
+   
+  
    //LOGIN Modal창 암호 보이기 or 숨기기 
   
     //값을 가져오는 방법
@@ -624,6 +642,42 @@
                         .css('color','#AAA');
       }
      });
+    
+    // login 버튼 클릭시 AJAX 동작
+    $(document).on('click', '#btn_login', function(){
+ 	   var id = $('#login_id').val();
+ 	   var pw = $('#login_pw').val();
+ 	   
+ 	 // 유효성 체크 (id, pw) NULL 체크
+ 	   if(id != '' && pw !='' && id.length !=0 && pw.length !=0) {
+ 		  
+ 	     $.ajax({
+ 	    	 url: '${path}/login/in',
+ 	    	 type: 'POST',
+ 	    	 data: 'id='+id+'&pw='+pw,
+ 	     			
+ 	    	 
+ 	    	   // &pw 에 & 데이터가 혼합되지 않도록 나누는 역할 
+ 	    	   success: function(data){
+ 	    	 if(data == 0 || data == 3) {
+ 	    		 $('.login_err_msg').css('display', 'block').text('로그인중 문제가 발생했습니다. 아이디 및 비밀번호를 확인해주세요')
+ 	    	 } else if(data == 1) {
+ 	    		 console.log('로그인 성공');
+ 	    		 location.reload(); // 새로고침 
+ 	    	 } else if(data ==  2) {
+ 	    		 $('.login_err_msg').css('display', 'block').text('이메일 인증을 하셔야만 로그인이 가능합니다.')
+ 	    		 
+ 	    	 }
+ 	    	
+ 	    		   
+    	   },
+ 	    		 error : function(){
+ 	    		alert('System Error:/');
+ 	    	 }
+ 	     });
+ 	  }
+    });
+
     
     /* Header 가입하기 이동시 가입페이지로 이등 */
 	$(document).on('click', '#header_btn_join' ,function() {

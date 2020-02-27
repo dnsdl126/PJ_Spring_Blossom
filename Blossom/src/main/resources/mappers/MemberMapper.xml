@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="memInsert">
 	   INSERT INTO tbl_member(id, pw, name, phone, email, postcode, addr1, addr2, useon, primaryon)
-        VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{postcode}, #{addr1}, #{addr2}, #{useon}, #{primaryon})
+        VALUES(#{email}, #{pw}, #{name}, #{phone}, #{email}, #{postcode}, #{addr1}, #{addr2}, #{useon}, #{primaryon})
 	</insert>
 	
 	<update id="getKey">
