@@ -124,8 +124,7 @@
       .header_content_member_cart> a {
          display: inline-block;
          width: 45px;
-         height: 45px;
-         border-radius: 50%;
+         height: 45px;         
          color: #1F8AD8;
          border: 1px solid transparent;
          text-align: center;
@@ -536,12 +535,13 @@
                   </div>
 				<div class = "login_content_box" style = "display: flex ">
 				 <c:choose>
-				   <c:when test = "${empty sessionScope.userid}">
-   					<div><button type ="button" class="btn btn-basic login_open">로그인</button></div>
+				   <c:when test = "${empty userid}">
+   					<div><button type ="button" class="btn btn-basic login_open" style="margin-right: 5px">로그인</button></div>
                     <div><button type ="button" id="header_btn_join" class="btn btn-primary">회원가입</button></div>
                    </c:when>
                    <c:otherwise>
-                     <div><button type ="button"  class="btn btn-primary">로그아웃</button></div>
+                     <div><span>${name}</span>님</div>                                             
+                     <div><button type ="button" id="header_btn_logout" class="btn btn-primary" style="margin-left :5px">로그아웃</button></div>
                    </c:otherwise>  
                  </c:choose>
                 </div>	      
@@ -665,19 +665,32 @@
  	    		 console.log('로그인 성공');
  	    		 location.reload(); // 새로고침 
  	    	 } else if(data ==  2) {
- 	    		 $('.login_err_msg').css('display', 'block').text('이메일 인증을 하셔야만 로그인이 가능합니다.')
- 	    		 
+ 	    		 $('.login_err_msg').css('display', 'block').text('이메일 인증을 하셔야만 로그인이 가능합니다.') 	    		 
  	    	 }
- 	    	
- 	    		   
     	   },
- 	    		 error : function(){
+ 	    		error : function(){
  	    		alert('System Error:/');
  	    	 }
  	     });
  	  }
     });
-
+    
+    /*로그아웃 기능*/
+	$(document).on('click', '#header_btn_logout', function(){
+		$.ajax({
+			url: '${path}/login/out',
+			type: 'POST',
+			success: function(){
+				console.log('Logout Success:)');
+				location.reload();
+			},
+			error: function(){
+ 	    		alert('System Error:/');
+			}
+		});
+	});
+	
+    	
     
     /* Header 가입하기 이동시 가입페이지로 이등 */
 	$(document).on('click', '#header_btn_join' ,function() {

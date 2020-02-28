@@ -38,5 +38,14 @@ public class LoginController {
 		
 		
 	}
+	@ResponseBody
+	@PostMapping("/out")
+	public void logOut(HttpSession session) {
+		log.info(">>>> POST : LOGOUT/LOGOUT ACTION");
+		// 비즈니스 로직 : 로그아웃
+		
+		//세션을 초기화 
+		lService.logout(session);
+	}
 
 }
