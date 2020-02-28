@@ -1,6 +1,7 @@
 package com.Blossom.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -86,7 +87,13 @@ public class MemberController {
 		log.info(">>>> Member/JOIN PAGE GET 출력");
 		log.info(mDto.toString());
 		
-		model.addAttribute("flag", flag);
+		
+		//비정상 적인 접근일 경우 약관 동의 페이지로 이동
+		if(!flag.equals("1")) {
+			
+			return "member/constract"; 
+		}
+		
 		return "member/join";
 		        
 	}
@@ -214,8 +221,30 @@ public class MemberController {
 		return flag;
 	}
 	
-
-	
+	//회원 정보 수정
+	@GetMapping("/update")
+	public String memUpdate(HttpSession session, Model model) {
+		log.info(">>>>>> GET : Member Update Page ");
+		
+		//현재 로그인 상태를 확인
+		// session 에 담는 순간 자신의 타입을 읽어버리고 object 타입이 된다
+		// (String)으로 형변환 필요
+		String id = (String)session.getAttribute("userid");
+		
+		if(id == null) { // null : 로그인이 안됨
+			
+			return "redirect:/";
+		}
+		
+		// 로그인된 유저의 정보를 GET하여
+		// 회원정보 수정 페이지로 보내기 
+//		MemberDTO mDto = mService.userView(id);
+		model.addAttribute("user", mService.userView(id));
+		
+		return "member/join";
+		
+	}
+		
 	
 }
 	

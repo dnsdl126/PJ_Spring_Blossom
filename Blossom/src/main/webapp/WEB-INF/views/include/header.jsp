@@ -520,9 +520,12 @@
                         <div class = "header_dropdown">
                          <div class="arrow"></div>
                            <ul class="header_dropdown_menu">
-                              <li><a href="#" >회원정보수정</a></li>
                               <li><a href="#" >위시리스트 </a></li>
                               <li><a href="#" >주문확인</a></li>
+                            <c:if test="${not empty userid}"> 
+                              <li><a href="${path}/member/update">회원정보수정</a></li>
+                              <li><a href="${path}/member/pwupdate">비밀번호<br>재설정</a></li>
+                            </c:if>
                               <li><a href="#" >고객센터</a></li>
                            </ul>
                         </div>                        
@@ -540,7 +543,7 @@
                     <div><button type ="button" id="header_btn_join" class="btn btn-primary">회원가입</button></div>
                    </c:when>
                    <c:otherwise>
-                     <div><span>${name}</span>님</div>                                             
+                     <div style='margin-top: 12px'><span>${name}</span>님</div>                                             
                      <div><button type ="button" id="header_btn_logout" class="btn btn-primary" style="margin-left :5px">로그아웃</button></div>
                    </c:otherwise>  
                  </c:choose>

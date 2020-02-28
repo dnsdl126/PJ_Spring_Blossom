@@ -33,6 +33,12 @@ public class MemberServiceImpl implements MemberService{
 //		 리턴할때 호출문이 있으면 호출 먼저 진행
 //		 memInsert 진행하고 결과값  담아서 호출한 곳에  리턴  
 
+	}
+
+	@Override
+	public MemberDTO userView(String id) {
+		
+		return mDao.userView(id);
 	}	
 	
 }
