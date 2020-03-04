@@ -16,6 +16,7 @@
 	
 	
 	<dependencies>
+	   	  
 	  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -223,13 +224,7 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.10</version>
-		    <scope>provided</scope>
-		</dependency>   
+	
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<!-- jUnit을 4.12로 올려준다  -->
 		<dependency>
@@ -239,6 +234,8 @@
 		    <scope>provided</scope>
 		</dependency>
 		     
+	  
+		
 	</dependencies>
     <build>
         <plugins>

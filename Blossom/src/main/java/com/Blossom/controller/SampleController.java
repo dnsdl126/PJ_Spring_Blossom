@@ -32,19 +32,20 @@ import lombok.extern.slf4j.Slf4j;
 //Spring Context에 Beans로 등록되어있는 객체들만
 //의존성주입 가능 (DI패턴)
 
-@RequestMapping("/sample")
+@RequestMapping("/sample")   //http://localhost:8081/Blossom/sample
 @Controller
 public class SampleController {
 	   
 	//sample.jsp 출력
-	  @RequestMapping("/")
+	  @RequestMapping("/")  //http://localhost:8081/Blossom/sample/
 	   public String print() {
-		   return "sample";
+		   return "sample";  //http://localhost:8081/Blossom/sample/       이경로가 되면 리턴에 있는 파일을 열어라
+		                      // String + return "파일이름" -> 쌍따옴표 안에 있는 파일을 찾아가라 
 	  }
 	
 		
 	  //@RequestMapping(value="/sample/view", method=RequestMethod.POST)
-	  @GetMapping("/view")	  
+	  @GetMapping("/view")	  //http://localhost:8081/Blossom/view
 	   public String view(String user) {
 		  log.info("Get 방식 호출");
 		  log.info("user: " + user);
@@ -81,18 +82,23 @@ public class SampleController {
 	  
 	  
 	  @GetMapping("/sync")
-	  	public String sync(String name, Model model) {
+	  	public String sync(String name, Model model) { // 사용자에게  보여주기 위해서 model 사용 
+		                                               // 데이터 전송은 form, ajax, 쿼리스트링 
 		  
 		  log.info("동기방식: " + name);
-		  model.addAttribute("name", name);
+		  model.addAttribute("addr", name);
 		  
 		  return "sample";
+		  
+		  
 		  
 	  }
 	  
 	  //비동기방식
 	  @ResponseBody
 	   // String이 리턴되면 화면단으로 가기때문에  화면단을 인식하지 않도록 Responsebody 처리 
+	   // controller에서 return시 viewresolver가 url로 인시하지 않도록  Responsebodt 를 사용
+	   // 아래 name은 변수 이기 때문
 	  @PostMapping(value="/ajax", produces="application/text; charset=utf-8")
 	   public String async(String name) {
 		  

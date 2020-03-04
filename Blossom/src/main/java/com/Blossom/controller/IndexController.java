@@ -13,8 +13,8 @@ import com.Blossom.service.index.IndexService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
-@Slf4j
+@Controller  //의존성 주입 : 제어권을 넘긴다 -> IOC패턴 () --> DI패턴을 사용할수 있다. 
+@Slf4j // log 관련 기능 
 public class IndexController {
 	// @Inject, @Autowired, @Resource중 1개라도
 	// 붙어있으면 의존성 주입 
@@ -26,10 +26,10 @@ public class IndexController {
 	IndexService iService;
 	
 	
-	@RequestMapping("/")
+	@RequestMapping("/") // localhost:8081/프로젝트 이름 /(까지가 contextroot)-->  context루트 다음에 붙는 /를의미 
 	public String indexView(Model model) {
 		log.info(">>>>>> INDEX PAGE 출력");
-								
+		// 컨트롤러는 기능을 처리 하는 것이 아니라 어디로 가라고 지정만 해줌 				
 		//1. View 단에 출력할 베스트 상품 5건		
 		model.addAttribute("BestPdt", iService.bestPdtList());
 				

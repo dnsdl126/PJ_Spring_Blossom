@@ -77,12 +77,12 @@ public class MailServiceImpl implements MailService{
 	 @Override
 	  public void mailSendUser (String email, String id, HttpServletRequest request) {
 	     String key = getKey(false, 20); //길이 20의 난수 생성
-	    mDao.getKey(id, key);
+	    mDao.getKey(email, key);
 	    MimeMessage mail = mailSender.createMimeMessage(); // Mime타입 : 사진이나 동영상을 형변환 하는 타입
 	    String htmlTxt = "<h2> 안녕하세요 Blossom 입니다 :)</h2><br><br>"
 	    		       + "<h3>" + id + "님</h3>" + "<p>인증하기 버튼을 누르시면 Blossom 사이트 활동이 가능합니다"
 	    		       + "<a href='http://localhost:8081" + request.getContextPath() + "/member/keyauth?id="
-	    		       + id + "&key="+key+"'>인증하기</a></p>"
+	    		       + email + "&key="+key+"'>인증하기</a></p>"
 	    		       + "(Blossom에 가입한 적이 없다면 무시하셔도 됩니다:) )";//모델1방식 
 	     try {
 	    	 mail.setSubject("본인인증"); // 메일 제목 

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>치키니다아아아아 </h1>
+	<h1>저는 result.jsp 파일이에요 </h1>
 </body>
 </html>

@@ -696,9 +696,16 @@
     	
     
     /* Header 가입하기 이동시 가입페이지로 이등 */
-	$(document).on('click', '#header_btn_join' ,function() {
+	$(document).on('click', '#header_btn_join' ,function() { // id 가 header_btn_join 인  회원가입 버특을 클릭시 
 
-		location.href="${path}/member/constract";
+		location.href="${path}/member/constract"; // location : url 경로를
+		                                           //${path}/member/constract 여기로 해라
+		                                           // 경로가 노출 되지 않도록 location 으로 경로 설정
+		                                           // Dispatcher Servelet 요청을 받아서 핸들러 맵핑한테 @controller 가 붙은 아이 중 
+		                                           // /member 가 붙은 놈을 찾아라 --> memberconroller 
+		                                           // 핸들러 어뎁터한테 처리하라고 명령
+		
+
 	});
 
 </script>

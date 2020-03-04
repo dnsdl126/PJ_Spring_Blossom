@@ -8,10 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>-->
  <select id="bestPdtList" resultType="ProductDTO">
 	   SELECT *
-	   FROM (SELECT rownum rnum, best.*--best에 있는 모든 컬럼 
+	   FROM (SELECT rownum rnum, best.* 
 	    FROM ( SELECT * FROM tbl_pdt
 	           WHERE avail_cnt > 0
-	           ORDER BY sale_cnt DESC) --판매 수량이 높은 것부터 출력 
+	           ORDER BY sale_cnt DESC) 
 	           best)
 	   WHERE rnum between 1 and 4
  </select>
@@ -21,8 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   FROM (SELECT rownum rnum, new.* 
 	    FROM ( SELECT * FROM tbl_pdt
 	           WHERE avail_cnt > 0
-	           ORDER BY regdate DESC) -- 날짜가 최신인 순 으로  
-	           new
+	           ORDER BY regdate DESC) new
 	          )
 	   WHERE rnum between 1 and 4
  

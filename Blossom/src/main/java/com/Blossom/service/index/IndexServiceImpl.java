@@ -21,12 +21,12 @@ public class IndexServiceImpl implements IndexService{
 	// DAO + Mapper를 결합하여 사용하는 방식을 사용
 	
 	// sqlSession을 사용하기 위해 의존성 주입
-	// : root-context.xml에서 생성된 sqlSession 빈즈
+	// : root-context.xml에서 생성된 sqlSession 빈즈주입 받음
 	// 를 주입 준비 
 	@Autowired
 	private SqlSession sqlSession;
 	
-	ProductDAO pDao;// 전역변수 
+	ProductDAO pDao;// 전역변수  --> DB접근시 SQL문 실행 
 	@Autowired
 	public void newProductDAO () {
 		pDao = sqlSession.getMapper(ProductDAO.class);

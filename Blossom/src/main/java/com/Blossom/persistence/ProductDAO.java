@@ -12,7 +12,7 @@ public interface ProductDAO {
 //	public int getCount();	
 //	public int getCount2();
 	
-	public List<ProductDTO> bestPdtList();
+	public List<ProductDTO> bestPdtList(); // mapper 
 	
 	public List<ProductDTO> newPdtList();
 }

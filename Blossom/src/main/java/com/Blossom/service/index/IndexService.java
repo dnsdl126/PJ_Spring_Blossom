@@ -14,5 +14,7 @@ public interface IndexService {
 	// id가 newPdtList와 같은 SQL 문을 찾아
 	// Oracle DB로 가서 실행후
 	// 결과를 return 받음
-	public List<ProductDTO> newPdtList();
+	public List<ProductDTO> newPdtList(); // 추상메서드  (껍대기 : 구현부가 없고 자식이 대신 상속을 받아서 구현할수 있다. )
+	
+	 
 }

@@ -199,9 +199,10 @@ public class MemberController {
 	 * 
 	 */
 	@GetMapping("/constract")
-	public String viewConstract () {
+	public String viewConstract () { // 따로 GET, Post 설정이 안되어 있기 때문에 
+		                             // @controller 를 가진 /member 에서 GEt이 붙은 /constract를 찾음
 		log.info(">>>> MEMBER/CONSTRACT PAGE 출력");
-		 return "member/constract";
+		 return "member/constract"; // 환면단 결정 핸들러 어뎁터한테 전달 
 		        
 	}
 	
