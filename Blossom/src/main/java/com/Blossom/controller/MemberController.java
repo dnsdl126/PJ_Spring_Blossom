@@ -79,19 +79,23 @@ public class MemberController {
 
 	
 	
-	
-	@GetMapping("/join")
+
+	@GetMapping("/join") // view(cosntract.jsp) -> view(join.jsp) 이동시에도 Controller 단을 타야 한다 
 	public String join (@ModelAttribute("MemberDTO") MemberDTO mDto,
-			@RequestParam(value= "flag", defaultValue="0") String flag,
+			@RequestParam(value= "flag", defaultValue="0") String flag, 
 			 Model model) { //Constract 페이지를 통하면 flag = 1, 비정상 접근시 0
 		log.info(">>>> Member/JOIN PAGE GET 출력");
 		log.info(mDto.toString());
-		
-		
 		//비정상 적인 접근일 경우 약관 동의 페이지로 이동
 		if(!flag.equals("1")) {
 			
 			return "member/constract"; 
+			// Constrat에서 접근시 1의 값이 넘어오는데
+			// String flag = 0; 으로 선언하면
+		    // 값이 1이 들어와도 0으로 초기화 되버림
+		    // String flag;는 Default를 설정 불가 @Requestparam으로 선언하여 기본값 속성을 사용 
+		    // flag는 MemberDTO 값에 담겨있지 않아
+		    // String flag를 입력해야 함 
 		}
 		
 		return "member/join";
@@ -135,6 +139,7 @@ public class MemberController {
 		//1. 사용자 암호 hash  변환
 		String encPw = passwordEncoder.encode(mDto.getPw());
 	      // encPw = 암호화 된 비밀번호 
+		  // security에 담긴 기능 
 		
 		mDto.setPw(encPw);
 		  // 기존에 암호화 안된 비밀번호 말고  encPw 암호화된 비밀번호 담아라 
@@ -207,7 +212,7 @@ public class MemberController {
 	}
 	
 	// 회원가입 ID 중복체크
-	@ResponseBody
+	@ResponseBody // 화면단을 결정하는 것이 아니므로 ResponseBody를 붙인다 return 값을 화면단을 인식하지 않고 데이터로 인식 
 	@PostMapping("/idoverlap")
 	public String idOverlap(String id) {
 		log.info(">>>> ID OVERLAP CHECk");
@@ -215,7 +220,7 @@ public class MemberController {
 		
 		int cnt = mService.idOverlap(id);
 		log.info("cnt :" + cnt);
-		String flag = "1";
+		String flag = "1"; // ajax는 반한되서 받을 때 String만 받을수 있어서   ajax가 인식하도록  String flag 사용 
 		if(cnt == 0) {
 			flag = "0";
 		}

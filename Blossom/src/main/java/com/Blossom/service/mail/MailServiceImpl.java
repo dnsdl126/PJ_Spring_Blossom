@@ -33,7 +33,7 @@ public class MailServiceImpl implements MailService{
 	 }
 	 // 이메일 난수 생성 메서드
 	 private String init() {
-		 Random ran = new Random();
+		 Random ran = new Random(); // 자바가 랜덤 함수를 만들어주는 메서드 
 		 StringBuffer sb = new StringBuffer();
 		 
 		 //String만 써도 작업은 되지만 문자열 효율성때문에 StringBuffer을 사용
@@ -46,13 +46,14 @@ public class MailServiceImpl implements MailService{
 		  
 		 // do - while 문 : do실행후 while 실행 
 		 do {
-			 num = ran.nextInt(75) + 48; //num에 무작위 숫자가 들어온다 
+			 num = ran.nextInt(75) + 48; //75까지의 난수에 48을 더함 
 			 if((num >= 48 && num <=57) || (num >= 65 && num <=90) || (num >= 97 && num <=122)) {
 				  // ex) char=48 을 문자로 변환 
 				  // 숫자가 문자로 변환 된다 ex ac!welifl... 
-				 sb.append((char) num); //append 추가 하라 
+				 // ascii코드 값으로 변환 
+				 sb.append((char) num); // 문자형으로 숫자를 변환 
 		 		} else {
-			       continue;
+			       continue; 
 		 		}
 			 
 		 	} while (sb.length() < size); // 길이가 20까지 늘어날때 까지 반복 
@@ -61,6 +62,8 @@ public class MailServiceImpl implements MailService{
 		   }
 	     return sb.toString(); // init 에서 만들어진 난수를 리턴 
     }
+	 
+	 
 	 //난수를 이용한 키 생성
 	 private boolean lowerCheck;
 	 private int size;
@@ -77,7 +80,7 @@ public class MailServiceImpl implements MailService{
 	 @Override
 	  public void mailSendUser (String email, String id, HttpServletRequest request) {
 	     String key = getKey(false, 20); //길이 20의 난수 생성
-	    mDao.getKey(email, key);
+	    mDao.getKey(email, key); // email : param1 , key : param2
 	    MimeMessage mail = mailSender.createMimeMessage(); // Mime타입 : 사진이나 동영상을 형변환 하는 타입
 	    String htmlTxt = "<h2> 안녕하세요 Blossom 입니다 :)</h2><br><br>"
 	    		       + "<h3>" + id + "님</h3>" + "<p>인증하기 버튼을 누르시면 Blossom 사이트 활동이 가능합니다"

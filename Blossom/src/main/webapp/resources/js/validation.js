@@ -148,7 +148,7 @@ var joinvalidate = {
 			return this.resultCode.first_special_id;
 		} else if(id.length < 5 || id.length > 20) {  
 			return this.resultCode.length_id;
-		} else if(idCheck(id)) {
+		} else if(idCheck(id)) { // idCheck(id)가 true 일경우 --> true 여부 함수는 아래 기재 해둔 상태
 			return this.resultCode.overlap_id;
 		} else {
 			return this.resultCode.succes_id;
@@ -260,16 +260,19 @@ var joinvalidate = {
 	
 	
 }
-	function idCheck(id){
+	function idCheck(id){ // idCheck(id) 가 true 인지 알려주는지 확인 하는 함수
 		var return_val = true;
-		
+    // 같은 화면에서 아이디 중복 체크가 필요해서 ajax로 진행 
+    // ajax는 url이 바뀌지 않고 원래 페이지로 돌아오기때문에
+	// 쿼리스트링 을 POST방식에 사용 
 		$.ajax({
+			
 			type: 'POST',
-			url: 'idoverlap?id='+id,
+			url: 'idoverlap?id='+id, // member/idoverlap 으로 안써준 이유는 아이디 입력하는  페이지가 join.jsp 이고 이페이지 안에서페이지 전환 없이 member/join에서 작업하도록 
 			async: false,
 			success: function(data) {
 				console.log(data);
-				if(data=="1") {
+				if(data=="1") { // DB 리턴값이 1이면 True 반환 
 					return_val = true; 
 					} else {
 						return_val = false;
@@ -280,6 +283,10 @@ var joinvalidate = {
 				}
 			});
 		return return_val;
+		
+		 // ajax는 원래 비동기 방식 인데 
+		 // 비동기 방식은 차례대로 실행이 안되기 때문에
+		 // return 을 사용 하려면 async : false를 사용 해줘야 한다 
 	} 
 
 

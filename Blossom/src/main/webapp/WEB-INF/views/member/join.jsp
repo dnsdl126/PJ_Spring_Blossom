@@ -370,13 +370,14 @@
 								</span>
 								<span class="email_input_separator">@</span>
 								<span class="email_input_domain">
-									<select class="form_control empty" id="umail">
+								   
+									<select class="form_control empty selectEmail" id="umail" >
 										<option selected value disabled>선택해 주세요</option>
-									<option value="directVal">직접입력</option>	
-									<option value="naver.com">naver.com</option>
-									<option value="daum.net">daum.net</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="nate.com">nate.com</option>
+										<option value="directVal">직접입력</option>	
+										<option value="naver.com">naver.com</option>
+										<option value="daum.net">daum.net</option>
+										<option value="gmail.com">gmail.com</option>
+										<option value="nate.com">nate.com</option>
 									</select>
 									<input type="hidden" name="email" id="emailAll">
 								</span>
@@ -530,15 +531,11 @@ $(function(){
  	// 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
 	var checkAll = false;	
 	 		
-	 		
-	$('#selmail').change(function(){
-		var url = $(this).val();
-		if(url != 'directVal') {
-			$('#email_url').val(url).prop('readonly', true);
-		} else {
-			$('#email_url').val('').removeAttr('readonly').focus();
-		}
-	});
+	// 이메일 직접입력	
+	
+	$('.selboxDirect').hide();
+	
+	
 
 	// 아이디 유효성 체크 
 	$('#uid').keyup(function () {

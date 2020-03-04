@@ -519,11 +519,11 @@
 				 return false;
 			}
 			/*유효성 체크 통과시 회원가입 페이지 이동*/
-			location.href="${path}/member/join?useon="+agree_one
+			location.href="${path}/member/join?useon="+agree_one // 쿼리스트링 형식이어서 Getmapping 방식의 /join으로 이동
 													  +"&primaryon="+agree_two
 													  +"&locon="+agree_three
 													  +"&eventon="+agree_four
-													  +"&flag=1";
+													  +"&flag=1"; // 정상적인 접근 여부 확일 할수있는 값
 				
 		});
 		

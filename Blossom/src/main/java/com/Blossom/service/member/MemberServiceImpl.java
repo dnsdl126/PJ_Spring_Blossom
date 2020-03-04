@@ -11,12 +11,12 @@ import com.Blossom.persistence.MemberDAO;
 // 실제 구현은 MemberService 가 아닌 MemberServiceImpl (자식)이진행 하므로 IOC 패턴을 적용 
 @Service
 public class MemberServiceImpl implements MemberService{
-	@Autowired
+	@Autowired// DB 연결 
 	private SqlSession sqlSession;
 	
 	private MemberDAO mDao;
 	@Autowired
-	public void newMemberDAO() {
+	public void newMemberDAO() { //DAO 와 mapper 연결 
 		mDao = sqlSession.getMapper(MemberDAO.class);
 	}
 	
