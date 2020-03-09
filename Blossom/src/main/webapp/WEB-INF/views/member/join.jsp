@@ -501,26 +501,6 @@
 <script type="text/javascript">
 	
 $(function(){
-	
-	alert('user: ' + '${user}');
-	
-	 // 버튼 텍스트가 스정하기
-	 
-	
-	if('${user}' !='') {
-		 //회원 정보 수정 디자인 변경
-		 // -> 버튼 텍스트가 수정하기로 변경
-		 $('#btn_join').text('수정하기');
-		 //->비밀번호, 비밀번호 재설정 제거
-		 $('.user_sign_up_form_group_description').css('display','none');
-		 $('.user_sign_up_form_group_input:eq(2)').css('display','none');
-		 $('.user_sign_up_form_group_input:eq(3)').css('display','none');
-		 // id에 readonly 효과를 줘서 입력이 불가능
-		 // id=#id를 제거해서 우리가 입력한 유효성 체크 동작 불가능
-		 $('#uid').attr('readonly','true').removeAttr('id');
-		 $('.email_input_separator').css('display','none');
-		 $('.email_input_domain').css('display','none');
-	}
 	// 비밀번호가 유효한 값인지 체크해주는 flag 값
  	var pwFlag = false;
 
@@ -530,6 +510,65 @@ $(function(){
  
  	// 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
 	var checkAll = false;	
+	
+	alert('user: ' + '${user}');
+	
+	 // 버튼 텍스트가 스정하기
+	 
+	
+	if('${user}' !='') {
+		 //->비밀번호, 비밀번호 재설정 제거
+		 $('.user_sign_up_form_group_description').css('visibility','hidden');
+		 $('.user_sign_up_form_group_input:eq(2)').css('visibility','hidden');
+		 $('.user_sign_up_form_group_input:eq(3)').css('visibility','hidden');
+		 // id에 readonly 효과를 줘서 입력이 불가능
+		 
+		 // id=#id를 제거해서 우리가 입력한 유효성 체크 동작 불가능
+		 $('#uid').attr('readonly','true').removeAttr('id');
+		 $('.email_input_separator').css('display','none');
+		 $('.email_input_domain').css('display','none');
+		
+		 //회원 정보 수정 디자인 변경
+		 // -> 버튼 텍스트가 수정하기로 변경
+		 $('#btn_join').text('수정하기');
+		// DB에서 가져온 값 기존에 사용자가 등록한 값 변수에 담음
+		  var name = '${user.name}';
+		  var phone = '${user.phone}';
+		  var postcode = '${user.postcode}';
+		  var addr1 = '${user.addr1}';
+		  var addr2 = '${user.addr2}';
+		// 유효성 체크 진행 -> 무조건 통과가 들어가야 한다 
+		  ckName(name); 
+		  ckPhone(phone);
+		  ckAddr(addr2, addr1);
+		  checkArr[0] = true;
+		  checkArr[1] = true;
+		 // 
+		  ckColorBtn();
+		 // 값 여부 확인 
+		 printCheckArr(checkArr);
+		  
+		
+	}
+	 
+function ckDesign(code, desc, line, msg){
+	  if(code == 0 || code == 10){ //통과o
+			$('.email_input_local:eq('+line+')').css('border','1px solid #3885ca');
+			$('.join_err_msg:eq('+msg+')').css('visibility','visible')
+								   .text(desc)
+								   .css('color','#3885ca');
+			return true;
+			
+		} else { // 통과x
+			$('.email_input_local:eq('+line+')').css('border','1px solid #f24443');
+			// 테두리 색생변경
+			$('.join_err_msg:eq('+msg+')').css('visibility','visible')
+								   .text(desc)
+								   .css('color','#f24443');
+			// 에러메세지 출력
+			return false;
+		}
+	}
 	 		
 	// 이메일 직접입력	
 	
@@ -581,13 +620,13 @@ $(function(){
 	    } else {
 	    	pwFlag = false;
 	    	ckDesign(result.code, result.desc, 2, 1);
-	    } 
-	    if(result.code == 10){
+	    }  if(result.code == 10){
 	    	checkArr[1] = true;		
 		    $('.user_sign_up_form_group_input:eq(2)').css('border','1px solid #3885ca');
 	    } else {
 	    	checkArr[1] = false;
 	    }
+	   
 	});
 
 	// 비밀번호 재확인 유효성 체크 
@@ -612,9 +651,14 @@ $(function(){
 	// 이름 유효성체크
 	$('#uname').keyup(function(){
 		var name = $(this).val().trim();
+		ckName(name);
 		console.log(name); // 꼭 확인하고 넘어가기
 		$('.cnt').text(name.length);
 		
+	});
+	
+	function ckName(name) {
+
 		var result = joinvalidate.checkName(name);
 		 console.log("이름코드" + result.code);
 		if(result.code == 0){
@@ -624,25 +668,32 @@ $(function(){
 		}
 		printCheckArr(checkArr);
 		ckDesign(result.code, result.desc, 4,3);
-	});
+	}
 			
 	// 이름 카운트
 		
 
 	// 전화번호 유효성체크
 	$('#uphone').keyup(function(){
-		var phone = $(this).val().trim();
+		var phone = $.trim($('#uphone').val());
 		console.log(phone); 
+		$('.phone_cnt').text(phone.lengh);
+		ckPhone(phone);
 
+	});
+	
+	function ckPhone(phone) {
 		var result = joinvalidate.checkPhone(phone);
+		ckDesign(result.code, result.desc, 8, 5);
+		
 		if(result.code == 0){
 			checkArr[4] = true;
 		} else {
 			checkArr[4] = false;
 		}
 		printCheckArr(checkArr);
-		ckDesign(result.code, result.desc, 8, 5);
-	});
+		
+	}
 
 	// 주소 이벤트
 	// 사용자가 주소를 직접 적는 걸 막고 우편번호찾기 버튼으로 주소찾게 하기위해서
@@ -661,11 +712,13 @@ $(function(){
 	
 	// 주소 유효성체크
 	$('#sample6_detailAddress').keyup(function(){ //keyup : 키보드로 입력할때 마다 
-		var addrDetail = $.trim($(this).val());
-		var addrPost = $('#sample6_postcode').val();
-		console.log(addrDetail+','+addrPost); // 확인
-
-		var result = joinvalidate.checkAddr(addrDetail, addrPost); // 유효성 체크 
+		var addr2 = $.trim($(this).val());
+		var postcode = $('#sample6_postcode').val();
+		ckAddr(postcode, addr2)
+	
+	});
+	function ckAddr(postcode, addr2) {
+		var result = joinvalidate.checkAddr(addr2, postcode); // 유효성 체크 	
 		if(result.code == 3){ // 우편번호&주소x
 			checkArr[3] = false;
 			ckDesign(result.code, result.desc, 5,4);
@@ -679,10 +732,15 @@ $(function(){
 			ckDesign(result.code, result.desc, 6,4);
 		}
 		printCheckArr(checkArr);
-	});
+	}
 
 	//버튼 활성화!
 	$('.int_log').keyup(function(){
+		
+		ckColorBtn();
+		
+	});
+	function ckColorBtn() {
 		var checkAll = true;
 		for(var i = 0; i < checkArr.length; i++){
 			if(!checkArr[i]){
@@ -697,8 +755,8 @@ $(function(){
 			$('.btn_type').removeClass('btn_agree');
 			$('.btn_type').css('cursor','no-drop');
 		}
-	});
 	
+	}
 
 	//회원가입 버튼 클릭!
 	$('#btn_join').click(function(){
@@ -731,26 +789,9 @@ $(function(){
 		}
 	});
 
-});
+
   
- 
-function ckDesign(code, desc, line, msg){
-	if(code == 0 || code == 10){ //통과o
-		$('.email_input_local:eq('+line+')').css('border','1px solid #3885ca');
-		$('.join_err_msg:eq('+msg+')').css('visibility','visible')
-							   .text(desc)
-							   .css('color','#3885ca');
-		return true;
-	} else { // 통과x
-		$('.email_input_local:eq('+line+')').css('border','1px solid #f24443');
-		// 테두리 색생변경
-		$('.join_err_msg:eq('+msg+')').css('visibility','visible')
-							   .text(desc)
-							   .css('color','#f24443');
-		// 에러메세지 출력
-		return false;
-	}
-}
+
 		
 		 
 //Login 버튼 클릭시 Modal 창 Open
@@ -777,5 +818,11 @@ function FunLoadingBarStart() {
 	$('#back').css('display', 'flex');
 	$('#loadingImg').show();
 }
+
+});
+
+
+	
+
 </script>
 </html>
