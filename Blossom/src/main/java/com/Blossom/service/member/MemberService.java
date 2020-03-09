@@ -1,5 +1,7 @@
 package com.Blossom.service.member;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import com.Blossom.domain.MemberDTO;
@@ -14,4 +16,8 @@ public interface MemberService {
 	
 	// 1명의 회원정보
 	public MemberDTO userView(String id);
+	
+	// 회원 수정 (DB에 수정)
+	public void memUpdate(MemberDTO mDto, HttpSession session);
+		
 }

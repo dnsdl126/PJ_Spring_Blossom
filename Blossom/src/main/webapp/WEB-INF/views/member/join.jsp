@@ -546,7 +546,7 @@ $(function(){
 		 // 
 		  ckColorBtn();
 		 // 값 여부 확인 
-		 printcheckArr(checkArr);
+		 printCheckArr(checkArr);
 		  
 		
 	}
@@ -558,6 +558,7 @@ function ckDesign(code, desc, line, msg){
 								   .text(desc)
 								   .css('color','#3885ca');
 			return true;
+			
 		} else { // 통과x
 			$('.email_input_local:eq('+line+')').css('border','1px solid #f24443');
 			// 테두리 색생변경

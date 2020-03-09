@@ -11,6 +11,9 @@ public interface MemberDAO {
 	// mamper.xml 에 있는 memInsert 하는 작업이랑 같다고 맞춰뒀기 때문에 
 	public int memInsert(MemberDTO mDto);
 	
+	//회원가입 DB에 회원 수정
+	public int memUpdate(MemberDTO mDto);
+	
 	//회원가입 진행시 난수 생성 및 useyn 컬럼에 난수 입력
 	public int getKey(String id, String key);
 	
