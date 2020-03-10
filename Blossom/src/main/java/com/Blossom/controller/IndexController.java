@@ -2,6 +2,8 @@ package com.Blossom.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class IndexController {
 	
 	
 	@RequestMapping("/") // localhost:8081/프로젝트 이름 /(까지가 contextroot)-->  context루트 다음에 붙는 /를의미 
-	public String indexView(Model model) {
+	public String indexView(Model model, HttpSession session) {
 		log.info(">>>>>> INDEX PAGE 출력");
 		// 컨트롤러는 기능을 처리 하는 것이 아니라 어디로 가라고 지정만 해줌 				
 		//1. View 단에 출력할 베스트 상품 5건		
@@ -38,6 +40,12 @@ public class IndexController {
 		// 서비스 단으로 이동
 		model.addAttribute("NewPdt",iService.newPdtList());
 		
+		
+		//개발 종료시 삭제할것
+		session.removeAttribute("userid"); //removeAttribute 세션에 userid 값을 초기화 
+		session.removeAttribute("name");
+		session.setAttribute("userid", "admin"); // 위에 초기화된 session에 oginDto.getId() 넣겠다
+		session.setAttribute("name","관리자" );
 		
 		//2. 출력할 화면을 결정  
 		return "index";

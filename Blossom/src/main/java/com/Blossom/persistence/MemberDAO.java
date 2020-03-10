@@ -22,4 +22,10 @@ public interface MemberDAO {
 	
 	//1명의 회원 정보
 	public MemberDTO userView(String id);
+	
+	//비밀번호 수정:현재 비밀번호체크
+	
+	public int pwCheck (String id, String pw);
+	
+	
 }

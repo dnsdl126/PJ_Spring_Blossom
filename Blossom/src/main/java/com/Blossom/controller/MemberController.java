@@ -260,7 +260,33 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
+	@GetMapping ("pwupdate")
+	public String pwUpdate(HttpSession session) {
+		log.info(">>>>>>>>>>>>> GET : Password Update Page");
+		String id=(String)session.getAttribute("userid");
+		if(id == null) {
+			return "redirect:/";
+		}
+		return "member/pwupdate";
+	}
+	@ResponseBody
+	@PostMapping("/pwcheck")
+	public Integer pwCheck(String pw, HttpSession session) {
+		log.info(">>>>>>>>>> POST : PWCheck(AJAX)");
+		// 사용자가 입력한 PW
+		// DB에 가서 PW가 같은지 체크
 		
+		String id = (String)session.getAttribute("userid"); 
+		// DB에서 같은값의 비밀번호를 찾는게 아니라
+		// 해당 유저의 비밀번호를 찾아야 하므로 HttpSession 으로 불러온다
+		
+		return mService.pwCheck(id, pw);
+		// AJAX 돌아갈때 1 or 0이 담긴다 
+		
+		 
+		
+		
+	}
 	
 }
 	

@@ -9,7 +9,7 @@ var joinvalidate = {
 	}, 
 	space_length_val : {
 	code: 2,
-	desc :'공백없이  입력해주세요'
+	desc :'공백없이 입력해주세요'
 	},
 	//ID
 	succes_id :{
@@ -47,6 +47,10 @@ var joinvalidate = {
 	 	code: 10,
 		desc: '입력한 비밀번호가 일치합니다.'
 	 },
+	 success_nowpw : {
+		code: 100,
+		desc: '확인되었습니다'
+	},
 	 invalid_pw : {
 		code: 3,
 		desc: '비밀번호는 8자 이상, 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.'
@@ -256,6 +260,21 @@ var joinvalidate = {
 			return this.resultCode.success_addr; //0
 		}
  
+	},
+	checkNowpw : function(pw) {
+		var regEmpty = /\s/g;   // 공백문자
+		if(pw == '' || pw.length == 0){ // 1. 값이 있는지 체크
+			return this.resultCode.empty_val;
+		
+		}else if(pw.match(regEmpty)){ // 2. 공백값이 있는지 체크
+			return this.resultCode.space_length_val;
+		
+		} else if(pwCheck(pw)) { // 3. 현재 비밀번호 동일여부 체크 
+			return this.resultCode.other_pw;
+		} else { // 4. 유효성 체크 통과
+			return this.resultCode.success_nowpw;
+		}
+		
 	}
 	
 	
@@ -288,5 +307,28 @@ var joinvalidate = {
 		 // 비동기 방식은 차례대로 실행이 안되기 때문에
 		 // return 을 사용 하려면 async : false를 사용 해줘야 한다 
 	} 
+
+function pwCheck(pw) {
+	var return_val = true;
+	
+	$.ajax({
+		type: 'POST',
+		url : 'pwcheck?pw='+pw,
+		async: false,
+	    success: function(data) {
+	    	console.log(data);
+	    	if(data == 1) { // 값이 정상
+	    		return_val = false; 
+	    	}else if(date == 0) {
+	    		return_val = true; // 값이 비정상
+	    	}
+	    },
+	    error: function() {
+	    	alert('System ERROR:(');
+	    }
+	});
+	return return_val;
+
+}
 
 

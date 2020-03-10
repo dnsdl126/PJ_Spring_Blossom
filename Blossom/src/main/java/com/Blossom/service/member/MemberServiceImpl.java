@@ -58,6 +58,12 @@ public class MemberServiceImpl implements MemberService{
 		
 		
 		
+	}
+
+	@Override
+	public int pwCheck(String id, String pw) { // 서비스 단에서 id, pw 받음
+		
+		return mDao.pwCheck(id,pw); 
 	}	
 	
 }
