@@ -344,6 +344,29 @@
 		#address a:hover {
 			color: #1fbc02;
 		}
+		
+		.direct_url_wrap {
+			position: relative;
+		}
+		#direct_url {
+			font-size: 15px;
+    		border-radius: 4px;
+    		padding-right: 25px; 
+		}
+		.direct_url_btn {
+			position: absolute;
+			top: 12px;
+			right: 5;
+			background-color: transparent;
+			border: none;
+			outline: none;
+			cursor: pointer;
+		}
+		.direct_url_btn > i {
+			background-color: none;
+			font-size: 15px;
+			height: 10px;
+		}
 	
    </style>
    
@@ -372,13 +395,17 @@
 								<span class="email_input_domain">
 								   
 									<select class="form_control empty selectEmail" id="umail" >
-										<option selected value disabled>선택해 주세요</option>
-										<option value="directVal">직접입력</option>	
+										<option value = "" selected>선택해 주세요</option>
+										<option value="1">직접입력</option>	
 										<option value="naver.com">naver.com</option>
 										<option value="daum.net">daum.net</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="nate.com">nate.com</option>
 									</select>
+									<div class="direct_url_wrap">
+										<input type="text" id="direct_url" class="form_control">
+										<button type="button" class="direct_url_btn"><i class="fas fa-times"></i></button>
+									</div>
 									<input type="hidden" name="email" id="emailAll">
 								</span>
 							</div>
@@ -571,11 +598,23 @@ function ckDesign(code, desc, line, msg){
 	}
 	 		
 	// 이메일 직접입력	
+	$('.direct_url_wrap').hide();
+	$('.selectEmail').change(function(){
+		if($('.selectEmail').val() == 1){
+			$('.direct_url_wrap').show();
+			$('.selectEmail').hide();
+			$('#direct_url').val('');
+		} else {
+			$('#direct_url').val($(this).val());
+		}
+	});
 	
-	$('.selboxDirect').hide();
+	$('.direct_url_btn').on('click', function(){
+		$('.direct_url_wrap').hide();
+		$('.selectEmail').show();
+	});
 	
 	
-
 	// 아이디 유효성 체크 
 	$('#uid').keyup(function () {
 		// 사용자가 입력한 값의 좌우여백을 제거하고 id에 입력
@@ -771,16 +810,17 @@ function ckDesign(code, desc, line, msg){
 		printCheckArr(checkArr);
 		if(invalidAll){
 			
-			FunLoadingBarStart(); //로딩바 생성
+			
 			
 			console.log(invalidAll);
 			var id = $('#uid').val();
-			var url = $('#umail').val();
-	
+			var url = $('#direct_url').val();
+			
 			$('#emailAll').val(id+"@"+url);
 			console.log($('#emailAll').val(id+"@"+url));
 		
 			alert('회원가입성공');
+			FunLoadingBarStart(); //로딩바 생성
 			$('#frm_member').submit();
 		} else{
 			console.log(invalidAll);
