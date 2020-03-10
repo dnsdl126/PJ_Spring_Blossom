@@ -260,7 +260,7 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-	@GetMapping ("pwupdate")
+	@GetMapping ("/pwupdate")
 	public String pwUpdate(HttpSession session) {
 		log.info(">>>>>>>>>>>>> GET : Password Update Page");
 		String id=(String)session.getAttribute("userid");
@@ -269,6 +269,27 @@ public class MemberController {
 		}
 		return "member/pwupdate";
 	}
+	
+	@PostMapping("/pwupdate")
+	public String pwUpdate(HttpSession session, MemberDTO mDto) {
+		log.info(">>>>>> POST : Password Update Action");
+		log.info("수정비밀번호:" + mDto.getPw());
+		String encPw = passwordEncoder.encode(mDto.getPw());
+	      // encPw = 암호화 된 비밀번호 
+		  // security에 담긴 기능 
+		mDto.setPw(encPw);
+		String id=(String)session.getAttribute("userid");
+		mDto.setId(id);
+		log.info(mDto.toString());
+		
+		int result = mService.pwUpdate(mDto);
+		if(result == 1) {
+			log.info("성공!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+		return "redirect:/";
+		
+	}
+	
 	@ResponseBody
 	@PostMapping("/pwcheck")
 	public Integer pwCheck(String pw, HttpSession session) {

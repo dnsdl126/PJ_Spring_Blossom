@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Blossom.domain.MemberDTO;
@@ -15,6 +16,9 @@ import com.Blossom.persistence.MemberDAO;
 public class MemberServiceImpl implements MemberService{
 	@Autowired// DB 연결 
 	private SqlSession sqlSession;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	private MemberDAO mDao;
 	@Autowired
@@ -62,8 +66,20 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int pwCheck(String id, String pw) { // 서비스 단에서 id, pw 받음
+		String encPw = mDao.pwCheck(id);
+		int result = 0;
+		if(passwordEncoder.matches(pw, encPw)) {
+			result = 1;
+		}
+		return result;
+	}
+
+	@Override
+	public int pwUpdate(MemberDTO mDto) {
 		
-		return mDao.pwCheck(id,pw); 
+		int result = 0;
+		result = mDao.pwUpdate(mDto);
+		return result;
 	}	
 	
 }

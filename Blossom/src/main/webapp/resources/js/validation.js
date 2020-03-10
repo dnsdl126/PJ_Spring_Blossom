@@ -162,7 +162,7 @@ var joinvalidate = {
 
 	 // 비밀번호 유효성 체크 
 
-	 checkpw : function(pw, rpw) {
+	 checkpw : function(nowpw, pw, rpw) {
 
 	 	// 값이 있으면 true를 보냄 
 		var regEmpty = /\s/g;   // 공백문자
@@ -188,7 +188,10 @@ var joinvalidate = {
 		// 값이 없는데 값이 같은지 다른지 체크하면 아직 재확인 pw를 적지않았는데도 두개가 같지않다고 나옴 
 		// 그래서 값이 있는지 없는지를 먼저 체크해야함
 		
-		} else if(rpw != '' || rpw.length != 0){ // 6. 비밀번호 재확인 값이 있으면 실행
+		} else if(pw == nowpw) {
+			
+			return this.resultCode.equal_pw;
+		}  else if(rpw != '' || rpw.length != 0){ // 6. 비밀번호 재확인 값이 있으면 실행
 			if(pw == rpw){
 				return this.resultCode.equal_success_pw;
 			} else{
@@ -319,7 +322,7 @@ function pwCheck(pw) {
 	    	console.log(data);
 	    	if(data == 1) { // 값이 정상
 	    		return_val = false; 
-	    	}else if(date == 0) {
+	    	}else if(data == 0) {
 	    		return_val = true; // 값이 비정상
 	    	}
 	    },

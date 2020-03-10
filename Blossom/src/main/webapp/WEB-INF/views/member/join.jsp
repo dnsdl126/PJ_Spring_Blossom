@@ -647,7 +647,7 @@ function ckDesign(code, desc, line, msg){
 	    var rpw = $('#urpw').val().trim();
 	    
 	    //2. 유효성 체크하기
-	    var result = joinvalidate.checkpw(pw, rpw);
+	    var result = joinvalidate.checkpw("",pw, rpw);
 	    // console.log(result.code="," + result.desc);
 
 	    if (result.code == 0 || result.code == 10) {
@@ -796,6 +796,8 @@ function ckDesign(code, desc, line, msg){
 		}
 	
 	}
+	
+	
 
 	//회원가입 버튼 클릭!
 	$('#btn_join').click(function(){
