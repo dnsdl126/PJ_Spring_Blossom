@@ -87,6 +87,19 @@ public class MemberServiceImpl implements MemberService{
 	public void dropMem(HttpSession session, Model model) {
 		
 		
+	}
+
+	@Override
+	public void myPage(MemberDTO mDto, HttpSession session) {
+		int result = mDao.myPage(mDto);
+		
+		if(result > 0) {
+			session.removeAttribute("name");
+			session.setAttribute("userid", mDto.getEmail()); 
+			session.setAttribute("name", mDto.getName());
+			session.setAttribute("name", mDto.getPhone());
+			session.setAttribute("name", mDto.getAddr1());
+		}
 	}	
 	
 }

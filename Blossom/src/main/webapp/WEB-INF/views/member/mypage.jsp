@@ -110,19 +110,19 @@ border-bottom: dashed 3px #9EE6CF;
 		 	<form class="mypage_info_wrap" style=" margin-top: 51px;" >
 		 	  <div class="mypage_ifno" style="display: flex; margin-top: 10px;">
 		 	  	 <strong><div class="name" style="margin-right: 5px;"> 아이디/이메일 :</div></strong>
-		 	  	 <div class="name_info" style="margin-left: 5px;"> dnsdl123@naver.com</div>
+		 	  	 <div class="name_info" style="margin-left: 5px;"> ${user.email}</div>
 		 	  </div>
 		 	   <div class="mypage_ifno" style="display: flex; margin-top: 10px;">
 		 	  	 <strong><div class="name" style="margin-right: 5px;"> 이름 :</div></strong>
-		 	  	 <div class="name_info" style="margin-left: 5px;"> 김장뇽덕</div>
+		 	  	 <div class="name_info" style="margin-left: 5px;"> ${user.name}</div>
 		 	  </div>
 		 	   <div class="mypage_ifno" style="display: flex; margin-top: 10px;">
 		 	  	 <strong><div class="name" style="margin-right: 5px;"> 연락처 :</div></strong>
-		 	  	 <div class="name_info" style="margin-left: 5px;"> 01012345678</div>
+		 	  	 <div class="name_info" style="margin-left: 5px;"> ${user.phone}</div>
 		 	  </div>
 		 	   <div class="mypage_ifno" style="display: flex; margin-top: 10px;">
 		 	  	 <strong><div class="name" style="margin-right: 5px;"> 주소 :</div></strong>
-		 	  	 <div class="name_info" style="margin-left: 5px;"> dnsdl123@naver.com</div>
+		 	  	 <div class="name_info" style="margin-left: 5px;"> ${user.addr1}</div>
 		 	  </div>
 		  	</form>	
 

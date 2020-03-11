@@ -51,5 +51,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 SET pw = #{pw}
 	 WHERE id = #{id}
 	</update>
+	
+	<insert id = "myPage">
+	    UPDATE tbl_member SET
+		 name = #{name},
+		 phone = #{phone},
+		 email = #{email},
+		 addr1 = #{addr1},		 
+		WHERE id = #{id}
+	</insert>
 
 </mapper>	

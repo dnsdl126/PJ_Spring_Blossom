@@ -30,6 +30,9 @@ public interface MemberDAO {
 	// 비밀번호 수정 : DB에 수정
 	
 	public int pwUpdate(MemberDTO mDto);
+
+	//마이페이지 
+	public int myPage(MemberDTO mDto);
 	
 	
 	

@@ -332,6 +332,8 @@ public class MemberController {
 			return "redirect:/";
 		} 
 		 
+		model.addAttribute("user", mService.userView(id));
+		
 		return "member/mypage";
 	}
 	}
