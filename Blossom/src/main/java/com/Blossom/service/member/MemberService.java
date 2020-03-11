@@ -3,6 +3,7 @@ package com.Blossom.service.member;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.Blossom.domain.MemberDTO;
 
@@ -25,5 +26,9 @@ public interface MemberService {
 	
 	//비밀번호 수정 : DB에 수정
 	public int pwUpdate(MemberDTO mDto);
+	
+	// 회원 탈퇴 
+	
+	public void dropMem (HttpSession session, Model model);
 		
 }

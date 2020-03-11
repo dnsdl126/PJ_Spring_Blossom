@@ -32,4 +32,6 @@ public interface MemberDAO {
 	public int pwUpdate(MemberDTO mDto);
 	
 	
+	
+	
 }

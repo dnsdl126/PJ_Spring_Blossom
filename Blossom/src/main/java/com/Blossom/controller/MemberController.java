@@ -303,11 +303,38 @@ public class MemberController {
 		
 		return mService.pwCheck(id, pw);
 		// AJAX 돌아갈때 1 or 0이 담긴다 
-		
 		 
+	}
+	@GetMapping("/drop")
+	public String dropMem (HttpSession session, Model model) {
+		log.info(">>>>>>>>>>>> POST : DRop");
+		log.info("아이디 확인 : " +  session.getId());
 		
+		String id = (String)session.getAttribute("userid");
 		
+		if(id == null) { // null : 로그인이 안됨
+			
+			return "redirect:/";
+		} 
+		 
+		return "member/drop";
+	}
+		
+	@GetMapping("/mypage")
+	public String myPage (HttpSession session, Model model) {
+		log.info(">>>>>>>>>>>> POST : DRop");
+		log.info("아이디 확인 : " +  session.getId());
+		
+		String id = (String)session.getAttribute("userid");
+		
+		if(id == null) { // null : 로그인이 안됨
+			
+			return "redirect:/";
+		} 
+		 
+		return "member/mypage";
+	}
 	}
 	
-}
+
 	

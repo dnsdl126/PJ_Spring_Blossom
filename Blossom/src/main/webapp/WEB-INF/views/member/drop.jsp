@@ -49,7 +49,7 @@
    }
    .b_logo {
 		width: 158px;
-		height: 107px;			
+		height: 98px;			
 		margin-left: 20px;
 		margin-right: auto;	
    	      
@@ -299,93 +299,73 @@
   <div class="modal_wrap" style="">
 		<div class="modal_content">
 			<div class="login_close">
-			<button><i class="fas fa-times"></i></button>
-		</div>
+				<button><i class="fas fa-times"></i></button>
+			</div>
 			<div class="modal_logo"></div>
 			<div class = "modal_text">
 				탈퇴를 진행 하시겠습니까?
 			</div>
-
-			
-				<div class="modal_check">
-	   			  	<span><a href="#" class="btn_type btn_default">취소</a></span>
-	   				<span><a href="#" class="btn_type btn_agree">확인</a></span>	   			  	  	
-	   			</div>
-			
-			
+			<div class="modal_check">
+   			  	<span><a href="#" class="btn_type btn_default">취소</a></span>
+   				<span><a href="#" class="btn_type btn_agree">확인</a></span>	   			  	  	
+   			</div>
 		</div>
 
+ </div>
 
-
-	</div>
-
-
-	<div id="container" class="snbContainer">
+<div id="container" class="snbContainer">
 		<div class="mypage_top">
 			<div class="logo">
-				<img class = "b_logo" src="../../../img/HatchfulExport-All (2)/logo.png" alt="logo">
+				<img class = "b_logo" src="${path}/resources/img/linkedin_banner_image_1.png" alt="logo">
 			</div>
-			
 			<p class="user" >
 				<span class="userInfo"><strong>Welcom</strong></span><br>
-			
-			<span class="usermessege" >
-				<strong>"조운이"</strong> 고객님 환영합니다.
-			</span>
+			    <span class="usermessege" ><strong>"조운이"</strong> 고객님 환영합니다.</span>
 			</p>
 			<div class="position">
 				<div class="position_nav">
 					<div class="position_nav_group">
 						<p>
-						<a href="#" class="position_icon">
-							<img src="../../../img/icon/point.png" class="img_position">
-							<strong class="text_size">보유 포인트 </strong>
-							<div class="text_position"><strong>"2,000"점</strong></div>
-
-						</strong>
-						</a>
-						
-					</p>
+							<a href="#" class="position_icon">
+								<img src="${path}/resources/img/point.png" class="img_position">
+								<strong class="text_size">보유 포인트 </strong>
+								<div class="text_position"><strong>"2,000"점</strong></div>
+							</a>
+					    </p>
 					</div>
 				</div>
 				<div class="position_nav">
 					<div class="position_nav_group">
 						<p>
-						<a href="#" class="position_icon">
-							<img src="../../../img/icon/coupon.png" class="img_position">
-							<strong class="text_size">보유 쿠폰</strong>
-							<div class="text_position"><strong>"0"장</strong></div>
-						</a>
-						
-					</p>
+							<a href="#" class="position_icon">
+								<img src="${path}/resources/img/coupon.png" class="img_position">
+								<strong class="text_size">보유 쿠폰</strong>
+								<div class="text_position"><strong>"0"장</strong></div>
+							</a>
+					   </p>
 					</div>
 				</div>
 				<div class="position_nav">
 					<div class="position_nav_group">
-						<p>
+					  <p>
 						<a href="#" class="position_icon">
-							<img src="../../../img/icon/post.png" class="img_position">
+							<img src="${path}/resources/img/post.png" class="img_position">
 							<strong class="text_size">구매 내역 </strong>
 							<div class="text_position"><strong>"2"건</strong></div>
 						</a>
-						
-					</p>
+					  </p>
 					</div>
 				</div>
-				
 			</div>
-
-				
 		</div>
-		<div></div>
-			<section id ="contents">
+		
+	<section id ="contents">
 				<section class="contents">
 					<div class="error_img">
-						<img src="../../../img/error.png" class="error_img_position">
+						<img src="${path}/resources/img/error.png" class="error_img_position">
 					</div>
 					<div class="bloosom_out_text">
 				 	<h3 class="subtitle">회원탈퇴 전 꼭 확인 해주세요 </h3>
-				 	
 				 		<p class="tit_t1"> Bloosom 웹사이트를 이용하는 데 불편한 사항이 있으셨나요?</p>
 				 		<p class="txt_t2">
 				 			" 사이트를 이용하시며, 불편한 점이 있으셨다면 아래에 사유를 남겨주세요." <br>
@@ -427,7 +407,7 @@
 					 		</div>
 				 		</div>
 
-				 	</div>
+</div>
 
 				 	</div>
 				 		

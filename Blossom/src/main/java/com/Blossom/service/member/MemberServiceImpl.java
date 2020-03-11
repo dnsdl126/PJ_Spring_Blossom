@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.Blossom.domain.MemberDTO;
 import com.Blossom.persistence.MemberDAO;
@@ -80,6 +81,12 @@ public class MemberServiceImpl implements MemberService{
 		int result = 0;
 		result = mDao.pwUpdate(mDto);
 		return result;
+	}
+
+	@Override
+	public void dropMem(HttpSession session, Model model) {
+		
+		
 	}	
 	
 }
