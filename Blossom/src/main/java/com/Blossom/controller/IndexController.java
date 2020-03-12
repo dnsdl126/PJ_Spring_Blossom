@@ -42,10 +42,12 @@ public class IndexController {
 		
 		
 		//개발 종료시 삭제할것
-	    session.removeAttribute("userid"); //removeAttribute 세션에 userid 값을 초기화 
-		session.removeAttribute("name");
-	    session.setAttribute("userid", "dnsdl1331@naver.com"); // 위에 초기화된 session에 oginDto.getId() 넣겠다
-		session.setAttribute("name","김뇽꾸렁" );
+		/*
+		 * session.removeAttribute("userid"); //removeAttribute 세션에 userid 값을 초기화
+		 * session.removeAttribute("name"); session.setAttribute("userid",
+		 * "dnsdl1331@naver.com"); // 위에 초기화된 session에 oginDto.getId() 넣겠다
+		 * session.setAttribute("name","김뇽꾸렁" );
+		 */
 		
 		//2. 출력할 화면을 결정  
 		return "index";

@@ -60,5 +60,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 addr1 = #{addr1},		 
 		WHERE id = #{id}
 	</insert>
+	
+	<update id="dropMem">
+	   UPDATE tbl_member SET
+		 useyn= 'd'
+	   WHERE id = #{id}
+	</update>
 
 </mapper>	

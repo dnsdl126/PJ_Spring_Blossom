@@ -267,7 +267,7 @@ var joinvalidate = {
 	checkNowpw : function(pw) {
 		var regEmpty = /\s/g;   // 공백문자
 		if(pw == '' || pw.length == 0){ // 1. 값이 있는지 체크
-			return this.resultCode.empty_val;
+			return this.resultCode.empty_val; //this = joinvalidate
 		
 		}else if(pw.match(regEmpty)){ // 2. 공백값이 있는지 체크
 			return this.resultCode.space_length_val;

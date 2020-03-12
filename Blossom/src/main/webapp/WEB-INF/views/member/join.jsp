@@ -821,7 +821,7 @@ function ckDesign(code, desc, line, msg){
 			$('#emailAll').val(id+"@"+url);
 			console.log($('#emailAll').val(id+"@"+url));
 		
-			alert('회원가입성공');
+			
 			FunLoadingBarStart(); //로딩바 생성
 			$('#frm_member').submit();
 		} else{

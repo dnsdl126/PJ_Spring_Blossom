@@ -51,6 +51,11 @@ public class LoginServiceImpl implements LoginService{
 			  result = 0; 		
 			  return result;
 		  } 
+		   // 탈퇴한 회원일 경우
+		  if(loginDto.getUseyn().equals("d")) {
+			  result = 3;
+			  return result;
+		  }
 		   //인증 안했을 경우
 		  if(!(loginDto.getUseyn().equals("y"))) { //y가 아닌경우 N이거나 난수인 경우를 지칭하기 어려우므로
 			  result = 2;

@@ -38,6 +38,7 @@
  background: #9EE6CF;
  color: white;
  height: 20%;
+
  }
  
  .mypage_content_img{
@@ -78,6 +79,8 @@ border-bottom: dashed 3px #9EE6CF;
 	display: flex;
     justify-content: space-between;
     margin-top: 56px;
+    text-align: center;
+    line-height: 2.5;
 }
 .button_box{
     border: none;   
@@ -85,10 +88,18 @@ border-bottom: dashed 3px #9EE6CF;
     height: 40px;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
+    background-color : #e5e5e5;
+    t
 }
 .button_box:hover {
 
 	border: solid 1px  #1F8AD8;
+}
+
+.button_box:visited {
+	text-decoration: none;
+	color : black;
 }
 
 
@@ -128,10 +139,9 @@ border-bottom: dashed 3px #9EE6CF;
 
 	  </div>	
 	  <div class="button ">
-			<button type="button" class="button_box constract" id = "constract"> 개인정보수정</button>
-			<button type="button" class="button_box" id = "pwupdate"> 비밀번호 변경</button>
-			<button type="button" class="button_box" id = "drop"> 회원탈퇴</button>
-
+	  		<a href="${path}/member/update" class="button_box constract" id = "constract">회원정보수정</a>
+			<a href="${path}/member/pwupdate"  class="button_box" id = "pwupdate">비밀번호</a>
+			<a href="${path}/member/drop" class="button_box" id = "drop">회원탈퇴</a>
 	  </div>
  </div>
 </body>

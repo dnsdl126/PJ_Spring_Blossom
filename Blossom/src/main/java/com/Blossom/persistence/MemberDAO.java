@@ -34,7 +34,8 @@ public interface MemberDAO {
 	//마이페이지 
 	public int myPage(MemberDTO mDto);
 	
-	
+	// 회원 탈퇴 : useyn = n
+	public int dropMem(String id);
 	
 	
 }

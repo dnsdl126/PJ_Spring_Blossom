@@ -43,8 +43,8 @@
 }
 .present_password {
 	position: relative;
-    height: 43px;   
-    
+    height: 42px;   
+    outline:none;
 }
 .presen_password_input {
 	transition: .2s border-color, .2s box-shadow, .2s background-color;
@@ -61,7 +61,8 @@
 }
 .present_password_change {
 	position: relative;
-    height: 40px;
+    height: 42px;
+    outline: none;
 }
 .change_agree {
 	color: white;
@@ -223,7 +224,7 @@
 		
 			var result = joinvalidate.checkRpw(pw, rpw, pwFlag);
 				//console.log(result.code+","+result.desc);
-			ckDesign(result.code, result.desc, 1, 1);
+			ckDesign(result.code, result.desc, 2, 1);
     	    	
 	
 			if(result.code == 10){
@@ -234,6 +235,7 @@
 				
 			} else {
 				checkArr[1] = false;
+				
 			}
 			
 		});

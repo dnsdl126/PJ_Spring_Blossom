@@ -306,24 +306,32 @@ public class MemberController {
 		 
 	}
 	@GetMapping("/drop")
-	public String dropMem (HttpSession session, Model model) {
-		log.info(">>>>>>>>>>>> POST : DRop");
-		log.info("아이디 확인 : " +  session.getId());
+	public String dropMem ( Model model) {
+		log.info(">>>>>>>>>>>> GET : DRop");
 		
-		String id = (String)session.getAttribute("userid");
-		
-		if(id == null) { // null : 로그인이 안됨
-			
-			return "redirect:/";
-		} 
+			model.addAttribute("key", "drop");	
+
 		 
 		return "member/drop";
 	}
+	
+	@GetMapping("/dropAction")
+	public String dropMem(HttpSession session, RedirectAttributes rttr) {
+		log.info(">>>>>>>>>>>>>GET: Member Drop Action");
+		String id = (String)session.getAttribute("userid");
+		
+		rttr.addFlashAttribute("id" , id);
+		rttr.addFlashAttribute("key" , "dropResult");
+		
+		mService.dropMem(session, id);
+		
+		return "redirect:/";
+	} 
 		
 	@GetMapping("/mypage")
 	public String myPage (HttpSession session, Model model) {
 		log.info(">>>>>>>>>>>> POST : DRop");
-		log.info("아이디 확인 : " +  session.getId());
+		
 		
 		String id = (String)session.getAttribute("userid");
 		

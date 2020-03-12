@@ -65,9 +65,12 @@
     }
 
     .modal_check {
-		
+		display: flex;
 		overflow: hidden;
-		margin-left: 29px;
+		justify-content: space-around;
+	    padding-left: 35px;
+	    padding-right: 35px;
+	    padding-top: 15px;
 	}
 	.modal_check > span {
 		display: block;
@@ -96,9 +99,7 @@
 	    border: 1px solid #d6d6d6;
 	    text-align: center;
 	    display: inline-block;
-	    min-width: 118px;
 	    padding: 11px;
-	    margin-right: 10px;
 	    width: 140px;
    		
    	}
@@ -136,8 +137,8 @@
 				
 				<div></div>			
 				<div class="modal_check">
-		   			 <span><a href="#" class="btn_type modal_cancle" id="modal_msg_close">취소</a></span>
-		   			<span><a href="#" class="btn_type moadl_agree" id="modal_msg_yes">확인</a></span>	   			  	  	
+		   			 <a href="#" class="btn_type modal_cancle" id="modal_msg_close">취소</a>
+		   			<a href="#" class="btn_type moadl_agree" id="modal_msg_yes">확인</a>   			  	  	
 		   		</div>						
 			</div>
 		</div>
@@ -158,18 +159,29 @@
 		var join_sub_txt = email + '으로 인증메일을 보냈습니다. 인증하셔야만 사이트 활동이 가능합니다.';
 		var auth_mian_txt = id + '님 이메일 인증되셨습니다.';
 		var auth_sub_txt = '지금부터 사이트 활동이 가능합니다. 감사합니다';
+		var dropResult_main_txt = id +'님 탈퇴되셨습니다.';
+		var dropResult_sub_txt = '그동안 이용해주셔서 감사합니다.';
 		
 		if(key == 'join') {
 			$('.modal_msg_main_txt').text(join_main_txt);  // 메인 텍스트
 			$('.modal_msg_sub_txt').text(join_sub_txt);    // 서브 텍스트
-			$('#modal_msg_cancle').css('display','none');  // 취소버튼 제거
+			$('#modal_msg_yes').css('display','none')  // 확인버튼 제거
+			$('#modal_cancle').text('확인');
 			$('.modal_wrap').css('display','flex');   // 모달창 출력
 		} else if (key == 'auth') {
 			$('.modal_msg_main_txt').text(auth_mian_txt);  
 			$('.modal_msg_sub_txt').text(auth_sub_txt);   
-			$('#modal_msg_cancle').css('display','none'); 
+			$('#modal_msg_close').css('display','none')
+			                   .text('확인');
 			$('.modal_wrap').css('display','flex');  
+		} else if (key == 'dropResult') {
+			$('.modal_msg_main_txt').text(dropResult_main_txt); 
+			$('.modal_msg_sub_txt').text(dropResult_sub_txt);
+			$('#modal_msg_yes').css('display','none')  // 확인버튼 제거
+			$('#modal_msg_close').text('확인');
+			$('.modal_wrap').css('display','flex');
 		}
+		
 		$('#modal_msg_yes').on('click',function(){
 			$('.modal_wrap').css('display', 'none');			
 		});

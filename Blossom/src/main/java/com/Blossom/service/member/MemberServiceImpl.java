@@ -84,8 +84,25 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void dropMem(HttpSession session, Model model) {
+	public void dropMem(HttpSession session, String id) {
+		//비즈니스 로직
+		// 1) : 해당 회원의 useyn=n으로 Update(DB)
+		int result = mDao.dropMem(id);
 		
+		
+		
+		// 2) 로그인 정보를 삭제 (session 초기화)
+			 // 로그인 한상태 session : 김쪼막지
+			 // session에 값이 있으면 로그인 ok
+			 // 김쪼막지 ==> 회원탈퇴 (session 값이 없어지는것은 아니다 공유 영역에 있기 때문에)
+			 // session도 초기화가 필요 
+		 if(result > 0) {
+			  session.invalidate(); 
+			  // session에 로그인된 회원의 값을 삭제 
+			  // invalidate(); = 무효화 함수
+			  
+		 }
+	
 		
 	}
 

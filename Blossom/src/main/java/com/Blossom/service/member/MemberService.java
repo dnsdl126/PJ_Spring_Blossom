@@ -28,7 +28,7 @@ public interface MemberService {
 	public int pwUpdate(MemberDTO mDto);
 	
 	// 회원 탈퇴 	
-	public void dropMem (HttpSession session, Model model);
+	public void dropMem (HttpSession session, String id);
 		
 	//마이페이지 정보 가지고 오기 
 	public void myPage(MemberDTO mDto, HttpSession session);
