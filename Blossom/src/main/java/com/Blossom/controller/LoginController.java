@@ -39,7 +39,7 @@ public class LoginController {
 	public void logOut(HttpSession session) {
 		log.info(">>>> POST : LOGOUT/LOGOUT ACTION");
 		// 비즈니스 로직 : 로그아웃
-		
+		// 비즈니스 로직 : 내가할 기능 
 		//세션을 초기화 
 		lService.logout(session);
 	}
