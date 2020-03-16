@@ -14,6 +14,8 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!-- 드라이버 클래스 이름이 변경됨 -->
 		<!-- : 실행하는 SQL문이라든지 다양한 Log 출력 -->
+		<!-- mybatis에서 실행되는 log를 볼수있게 해준다  -->
+		<!-- log4jdbc.log4j2.properties 파일이 필수  -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<!-- 연결문자열에 log4jdbc가 추가됨 -->
 		<!-- : DB에 대한 Log를 출력해줌 -->
@@ -22,10 +24,13 @@
 		<property name="password" value="1234" />
 	</bean>
 	<!-- SqlSessionFactory 객체 주입 -->
+	<!-- 마이바이티스를 어떻게 실행할 것인지  -->
+	<!-- resources/mybatis-config.xml 파일이 필수  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+		<!-- mappers/**/*Mapper.xml : mappers 폴더 안에  **maper.xml 로 되는 파일이 있어야한다 -->
 	</bean>
 	<!-- SqlSession 객체 주입 -->
 	<!-- mybatis의 mapper.xml과 DAO를 구분해서 사용하는 경우(설정을 XML로 하는 경우, JAVA 방식을 사용하지 않는 경우)

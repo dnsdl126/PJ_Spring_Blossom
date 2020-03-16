@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/include.jsp"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
      
 <!DOCTYPE html>
 <html>
@@ -311,6 +311,7 @@ cursor : no-drop;
    
 </head>
 <body>
+<form:form id="frm_member" modelAttribute= "memberDTO" autocomplete="on"> 
 <!-- 회원탈퇴 방법 -->
  <!-- 방법 1 : DELETE 로 바로 삭제 -->
  <!-- 방법 2:  useyn =n 으로 변경 -->
@@ -387,7 +388,7 @@ cursor : no-drop;
  	  
  	  	<a href="#" class="btn_type btn_agree" id="drop_yes">탈퇴하기</a>	   			  	  	
 </div>
-	
+</form:form>	
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="${path}/resources/js/validation.js"></script>
@@ -470,7 +471,7 @@ cursor : no-drop;
 	});
 	
 	$('#modal_yes').click(function(){
-		location.href="${path}/member/dropAction"
+		$('#frm_member').submit();
 	}); 
 	   
 	 $('#moal_close').on('click', function() {
@@ -479,6 +480,7 @@ cursor : no-drop;
 	
 	 $('#btn_default').on('click', function() {
 	       $('.modal_wrap').css('display','none'); 
+	       
 	  });
 	        
    });

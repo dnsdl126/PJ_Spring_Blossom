@@ -236,12 +236,12 @@ public class MemberController {
 		// session 에 담는 순간 자신의 타입을 읽어버리고 object 타입이 된다
 		// (String)으로 형변환 필요
 		String id = (String)session.getAttribute("userid");
-		
-		if(id == null) { // null : 로그인이 안됨
-			
-			return "redirect:/";
-		}
-		
+//		
+//		if(id == null) { // null : 로그인이 안됨
+//			
+//			return "redirect:/";
+//		}
+//		
 		// 로그인된 유저의 정보를 GET하여
 		// 회원정보 수정 페이지로 보내기 
 //		MemberDTO mDto = mService.userView(id);
@@ -261,12 +261,12 @@ public class MemberController {
 		return "redirect:/";
 	}
 	@GetMapping ("/pwupdate")
-	public String pwUpdate(HttpSession session) {
+	public String pwUpdate() {
 		log.info(">>>>>>>>>>>>> GET : Password Update Page");
-		String id=(String)session.getAttribute("userid");
-		if(id == null) {
-			return "redirect:/";
-		}
+//		String id=(String)session.getAttribute("userid");
+//		if(id == null) {
+//			return "redirect:/";
+//		}
 		return "member/pwupdate";
 	}
 	
@@ -315,7 +315,7 @@ public class MemberController {
 		return "member/drop";
 	}
 	
-	@GetMapping("/dropAction")
+	@PostMapping("/drop") // POST로 변경 하기 
 	public String dropMem(HttpSession session, RedirectAttributes rttr) {
 		log.info(">>>>>>>>>>>>>GET: Member Drop Action");
 		String id = (String)session.getAttribute("userid");
@@ -334,11 +334,11 @@ public class MemberController {
 		
 		
 		String id = (String)session.getAttribute("userid");
-		
-		if(id == null) { // null : 로그인이 안됨
-			
-			return "redirect:/";
-		} 
+//		
+//		if(id == null) { // null : 로그인이 안됨
+//			
+//			return "redirect:/";
+//		} 
 		 
 		model.addAttribute("user", mService.userView(id));
 		

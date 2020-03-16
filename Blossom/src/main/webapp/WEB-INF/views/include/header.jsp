@@ -560,6 +560,17 @@
 </body>
 
 <script type="text/javascript">
+
+	 $(function(){
+		 var message = '${message}';
+		 if(message == 'nologin') {
+			 $('.modal_login_wrap').css('display','flex');
+			   $('#login_id').focus();
+			   $('.login_err_msg').css('display', 'block')
+			   					  .text('로그인이 필요한 기능입니다.');
+		 }
+	 }); 
+
    //jQuery 문법
    // $('선택자').옵션();
    // $('#test').css('color', 'green');
@@ -583,6 +594,7 @@
    //            나를(#test) 글자색을 blue로 변경해라!
 
 
+   
    //로그인 input(id, pw)에 focus 되면 테두리색 변경
    $(document).on('focus', '.div_input', function(){
        $(this).css('border', '1.2px solid #40BF75')
