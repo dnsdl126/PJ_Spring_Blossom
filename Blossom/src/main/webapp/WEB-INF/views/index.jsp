@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${path}/resources/css/common.css">
 <script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
 <style type="text/css">
-		* {box-sizing:border-box}
+* {box-sizing:border-box}
 
 
 /*top버튼*/
@@ -292,6 +292,7 @@
 	justify-content: space-around;
 }
 
+
 	</style>
 </head>
 <body>
@@ -446,6 +447,8 @@
 
 
 	</section>
+	
+	
 		
 </body>
 </html>

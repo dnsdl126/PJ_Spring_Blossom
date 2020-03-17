@@ -65,7 +65,7 @@
          color: white
       }
       button.btn-support:hover {
-         background-color: #81CBD5;
+         background-color: #9EE6CF;
          border-color: transparent;
       }
 
@@ -75,7 +75,7 @@
          display: block; /*가로다 내꺼 */
          width: 0;
          height: 2.5px;
-         background-color: #7DD481;
+         background-color: #9EE6CF;
          transition: width .3s; /*하려고 하는 행위의 지연시간 */
       }
       .magicline:hover:after {

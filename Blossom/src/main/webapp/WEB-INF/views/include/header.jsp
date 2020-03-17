@@ -387,7 +387,8 @@
     <div id= content_layout>
          <header>
             <div  id="header_div">
-               <img class="modal_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지" style = "width: 184px">               
+               <a hrer=""><img class="modal_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지" style = "width: 184px"></a>
+                              
             </div>
          </header>
          <div class="login_err_msg">
@@ -454,7 +455,7 @@
    	<div class="header_wrap">
    		<div class="header_content">
    			<div class="header_content_logo">
-               <a href="#">
+               <a href="${path}">
                   <img class="hearder_content_logo_img" src="${path}/resources/img/linkedin_banner_image_1.png" alt="로고이미지">
                   
                 </a>               
@@ -509,7 +510,7 @@
                   </div>
                </div>
    					<div class="header_content_dropdown_group"><a href="#" class="magicline">리뷰</a></div>
-   					<div class="header_content_dropdown_group"><a href="#" class="magicline">브랜드소개</a></div>
+   					<div class="header_content_dropdown_group"><a href="${path}/board/list"" class="magicline">자유게시판</a></div>
                </div>
    				<div class="header_content_member">
                   <div class="header_content_dropdown_wrap">
