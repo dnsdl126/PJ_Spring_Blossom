@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.Blossom.persistence.BoardDAO">
+	<select id="listAll" resultType="BoardDTO"><!-- resultTtpe을 간단히 하려면 Mybatis-config 명시 필요 -->
+		SELECT * 
+		FROM tbl_board b, tbl_member m
+		WHERE b.writer = m.name AND b.show = 'y'
+		ORDER BY b.bno DESC
+	</select>
+
+</mapper>	

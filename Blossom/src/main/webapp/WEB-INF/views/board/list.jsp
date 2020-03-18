@@ -254,9 +254,31 @@ padding-top: 10px;
 }
 
 
+.twincle_eff {
+	animation-name: twinkle;
+	animation-duration: 1.2s;
+	animation-iteration-count: infinite; 
+}
+@keyframes twinkle {
+	0%{ opacity: 0; }
+	100%{ opacity: 1; }
+}
+
+.new_color{
+border: 1px solid tomato;
+color: tomato;
+padding: 3px 5px;
+margin-left: 7px;
+font-weight: bold;
+font-size: 12px;
+}
+
+
 </style>
 </head>
 <body>
+	<jsp:useBean id="now" class="java.util.Date"/> 
+	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
  	<div class="content">
 		<div class="sub_title">
 			<h1>자유게시판</h1>
@@ -287,56 +309,43 @@ padding-top: 10px;
 			<table border="1"  class="table_css" style=" border-collapse: collapse">
 			  <thead class="thead">			   
 					<tr style="">
-						<th scope="co1" style="width: 142px">no</th>	
-						<th scope="co1" style="width: 661px">subject</th>
-						<th scope="co1" style="width: 77px">writer</th>
-						<th scope="co1" style="width: 60px">date</th>
-						<th scope="co1" style="width: 79px">comnet</th>
+						<th scope="co1" style="width: 184px">no</th>	
+						<th scope="co1" style="width: 508px">subject</th>
+						<th scope="co1" style="width: 220px">writer</th>
+						<th scope="co1" style="width: 113px">date</th>
+						<th scope="co1" style="width: 87px">coment</th>
 						<th scope="co1" style="width: 124px">file</th>
 					</tr>
 			   </thead>	
-			   <tbody class="table_body">
-			   	 <tr>
-			   	 	<td>1</td>
-			   	 	<td><a href="" class="subject">무궁화 샴푸 후기</a></td>			   	 	
-			   	 	<td>김뇽덕이</td>
-			   	 	<td>2020-03-17</td>
-			   	 	<td>10</td>
-			   	 	<td><i class="far fa-folder"></i></td>
-			   	 </tr>
-			   	 <tr>
-			   	 	<td>2</td>
-			   	 	<td><a href="" class="subject">무궁화 샴푸 후기</a></td>
-			   	 	<td>김장뇽덕</td>
-			   	 	<td>2020-03-16</td>
-			   	 	<td>5</td>
-			   	 	<td><i class="far fa-folder"></td>
-			   	 </tr>
-				 <tr>
-			   	 	<td>3</td>
-			   	 	<td><a href="" class="subject">무궁화 샴푸 후기</a></td>
-			   	 	<td>뇽맨</td>
-			   	 	<td>2020-03-13</td>
-			   	 	<td>15</td>
-			   	 	<td><i class="far fa-folder"></i></td>
-			   	 </tr>
-			   	 <tr>
-			   	 	<td>4</td>
-			   	 	<td><a href="" class="subject">무궁화 샴푸 후기</a></td>
-			   	 	<td>수소프로뇽덕</td>
-			   	 	<td>2020-03-10</td>
-			   	 	<td>10</td>
-			   	 	<td><i class="far fa-folder"></i></td>
-			   	 </tr>
-			   	 <tr>
-			   	 	<td>5</td>
-			   	 	<td><a href="" class="subject">무궁화 샴푸 후기</a></td>
-			   	 	<td>무심뇽구리</td>
-			   	 	<td>2020-03-07</td>
-			   	 	<td>19</td>
-			   	 	<td><i class="far fa-folder"></i></td>
-			   	 </tr>	
-			   </tbody>			   	
+			   <c:forEach items="${map.list}" var="list"> 
+			      
+			   	  <fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
+				   <tbody class="table_body">
+				   	 <tr>
+				   	 	<td>${list.bno}</td>
+				   	 	<td><a href="" class="subject">${list.title}</a>
+					   	 	  <c:if test="${today == regdate}">
+					   	 	  	<span class="new_color twincle_eff">N</span>
+					   	 	  </c:if>	
+				   	 	</td>			   	 	
+				   	 	<td>${list.writer}</td>
+				   	 	<td>
+				   	 	<c:choose>
+					   	 	<c:when test="${today == regdate}" >
+					   	 		<fmt:formatDate value="${list.updatedate}" pattern="HH:mm:ss"/>
+					   	 	</c:when>
+					   	 	<c:otherwise>
+					   	 		<fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd"/>
+					   	 	</c:otherwise>
+					   	 	
+				   	 	</c:choose>
+				   	 	</td>
+				   	 	<td>${list.replycnt}</td>
+				   	 	<td><i class="far fa-folder"></i></td>
+				   	 </tr>
+			   	 				
+			   </tbody>	
+			   </c:forEach>			   	
 			</table>
 		</div>
 		<div class="pagination">
