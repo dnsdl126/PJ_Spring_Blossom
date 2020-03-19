@@ -4,12 +4,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.Blossom.persistence.BoardDAO">
 	<select id="listAll" resultType="BoardDTO"><!-- resultTtpe을 간단히 하려면 Mybatis-config 명시 필요 -->
-		<include refid="paging_header"/>
+		<include refid="paging_header"/><!-- paging_header 가 먼저 나와라   -->
 		SELECT bno, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
 		FROM tbl_board b, tbl_member m
-		WHERE b.writer = m.name AND b.show = 'y'
-		ORDER BY b.bno DESC
-		<include refid="paging_footer"/>
+		<include refid="search"></include>
+		<if test="map.sort_option == 'new'">
+			ORDER BY bno DESC
+		</if>
+		<if test="map.sort_option == 'cnt'">
+			ORDER BY viewcnt DESC
+		</if>
+		<if test="map.sort_option == 'reply'">
+			ORDER BY replycnt DESC
+		</if>
+		<if test="map.sort_option == 'good'">
+			ORDER BY goodcnt DESC
+		</if>
+		
+		<include refid="paging_footer"/><!-- paging_footer 나와라   -->
+		<!-- id="paging_header">
+			SELECT *
+			FROM (
+				SELECT rownum AS rnum, A.* A테이블의 모든 컬럼을쓰겠다 
+				FROM(               
+						SELECT bno, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
+						FROM tbl_board b, tbl_member m
+						WHERE b.writer = m.name AND b.show = 'y'
+						ORDER BY b.bno DESC
+							) A 결과문을 A라는 테이블로 명시
+					) WHERE rnum BETWEEN #{map.start} AND #{map.end}
+				
+				 -->
 	</select>
 	<sql id="paging_header">
 		SELECT *
@@ -26,8 +51,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="countArticle" resultType="Integer">
 		SELECT COUNT(*)
 		FROM tbl_board b, tbl_member m
-		WHERE b.writer = m.name AND b.show = 'y'
-		ORDER BY b.bno DESC
+		<include refid="search"></include>
 	</select>
+	
+	<sql id="search">
+		<choose>
+			<when test="map.search_option !='all'"><!-- 검색 옵션이 있을경우만  -->
+				WHERE b.writer = m.name	
+					AND b.show = 'y'
+					AND #{map.search_option} LIKE #{map.keyword}
+			</when>
+			<otherwise>
+				WHERE b.writer = m.name
+					AND b.show = 'y'
+					AND (title LIKE #{map.keyword}
+						 OR content LIKE #{map.keyword}
+						 OR name LIKE #{map.keyword})
+			</otherwise>
+		</choose> 
+	</sql>
 
 </mapper>	

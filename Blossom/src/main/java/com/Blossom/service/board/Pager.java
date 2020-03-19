@@ -19,14 +19,14 @@ public class Pager {
 	private int blockEnd; // 블록의 끝페이지 번호 
 	
 	//Pager(레코드갯수, 출력할페이지 번호)
-	public Pager(int count, int curPage) {
+	public Pager(int count, int curPage) { // 1. count 에는 15 curpage  에는 1이 들어온 상황
 		curBlock = 1; //  현재 블록 번호 
-		this.curPage = curPage; // 현재 페이지 번호
-		setTotPage(count); //현재 페이지번호 
+		this.curPage = curPage; // 현재 페이지 번호 // 2. 전역변수 curpage에 1을 넣어라 
+		setTotPage(count); //현재 페이지번호  // 6. 2라는 값이 들어온다
 		setPageRange(); // #{start}, #{end}값 계산
 		setTotBlock(); // 전체 블록 갯수 계산 
 		setBlockRange(); // 블록의 시작, 끝 번호 계산
-	}
+	} // 생성자 계산이 끝나면 다시 boardController에 pager에 값이 들어간다 
 	
 	public void setBlockRange() {
 		//원하는 페이지가 몇번째 블록에 속하는지 계산
@@ -39,6 +39,7 @@ public class Pager {
 			blockEnd = totPage;
 		}
 		//[이전][다음]을 눌렀을때 이동할 페이지 번호
+		// 3항 연산자 ? 기준으로 -> true ? false
 		prevPage=(curBlock==1) ? 1 : (curBlock-1)*BLOCK_SCALE;
 		nextPage=curBlock>totBlock ? (curBlock*BLOCK_SCALE)
 				: (curBlock*BLOCK_SCALE)+1;
@@ -57,8 +58,8 @@ public class Pager {
 	public void setPageRange() {
 		//시작번호=(현재페이지-1)x 페이지당 게시물수 + 1
 		// 끝번호=시작번호 + 페이지당 게시물 수 -1
-			pageBegin = (curPage-1) * PAGE_SCALE + 1;
-			pageEnd = pageBegin + PAGE_SCALE -1;
+			pageBegin = (curPage-1) * PAGE_SCALE + 1; // 7. curpage : 2, page_scale: 10 
+			pageEnd = pageBegin + PAGE_SCALE -1; // 8. 결과값 10 
 	}
 
 	public int getCurPage() {
@@ -89,10 +90,10 @@ public class Pager {
 		return totPage;
 	}
 
-	public void setTotPage(int count) {
+	public void setTotPage(int count) { //3. count에 15가 들어옴 
 		//MATH.ceil() 올림
-		totPage = (int)Math.ceil(count*1.0 / PAGE_SCALE);
-	}
+		totPage = (int)Math.ceil(count*1.0 / PAGE_SCALE);// 4. 15.0 / 10  
+	}													 // 5. 1.5를 ceill로 올림 하게 되므로 2라는 결과값이 나온다 
 
 	public int getTotBlock() {
 		return totBlock;

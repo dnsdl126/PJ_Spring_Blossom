@@ -65,7 +65,7 @@
          width: 44px;
          height: 44px;
          cursor: pointer;
-         color: #40BF75;
+         color: #9EE6CF;
          border-top-right-radius: 20px;
          border-bottom-right-radius: 20px;
          
@@ -238,7 +238,7 @@
       #btn_login {
           border: none;
           display: block;
-          background-color: #40BF75;
+          background-color: #9EE6CF;
           color: white;
           font-size: 20px;
           width: 281px;
@@ -598,7 +598,7 @@
    
    //로그인 input(id, pw)에 focus 되면 테두리색 변경
    $(document).on('focus', '.div_input', function(){
-       $(this).css('border', '1.2px solid #40BF75')
+       $(this).css('border', '1.2px solid #9EE6CF')
    });
    $(document).on('blur', '.div_input', function(){
        $(this).css('border', '1.2px solid #757575')

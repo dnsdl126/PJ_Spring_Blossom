@@ -147,7 +147,7 @@ height: 28px;
 padding: 2px;
 
 }
-#search {
+.search {
 height: 28px;
 padding: 3px;
 width: 243px;
@@ -273,6 +273,12 @@ font-weight: bold;
 font-size: 12px;
 }
 
+#check_color{
+background-color:#9EE6CF;
+color:white;
+
+}
+
 
 </style>
 </head>
@@ -291,16 +297,18 @@ font-size: 12px;
 			</div>
 			<div class="board_content">
 				<div class="board_contet_list">
-					<a href="" class="content_01 contnt_css">최신순</a>
-					<a href="" class="content_01 contnt_css">조회순</a>
-					<a href="" class="content_01 contnt_css">댓글순</a>
-					<a href="" class="content_01 contnt_css">추천순</a>
+					<a href="${path}/board/list?sort_option=new&keyword=${map.keyword}" id ="sort_new" class="content_01 contnt_css">최신순</a>
+					<a href="${path}/board/list?sort_option=cnt&keyword=${map.keyword}" id ="sort_cnt" class="content_01 contnt_css">조회순</a>
+					<a href="${path}/board/list?sort_option=reply&keyword=${map.keyword}" id ="sort_reply" class="content_01 contnt_css">댓글순</a>
+					<a href="${path}/board/list?sort_option=good&keyword=${map.keyword}" id ="sort_good" class="content_01 contnt_css">추천순</a>
 				
 				</div>
 				<div class="board_search">
 					<p>				
-						<input type="text" name="search" id="search" placeholder="검색하세요">
-						<button>search</button>
+					<form action="${path}/board/list" method="GET">
+						<input type="text" name="keyword" class="search" placeholder="검색하세요">
+						<button type="submit">search</button>
+					</form>	
 					</p>
 				</div>
 			</div>
@@ -314,6 +322,7 @@ font-size: 12px;
 						<th scope="co1" style="width: 220px">writer</th>
 						<th scope="co1" style="width: 113px">date</th>
 						<th scope="co1" style="width: 87px">coment</th>
+						<th scope="co1" style="width: 87px">like</th>
 						<th scope="co1" style="width: 124px">file</th>
 					</tr>
 			   </thead>	
@@ -341,6 +350,7 @@ font-size: 12px;
 				   	 	</c:choose>
 				   	 	</td>
 				   	 	<td>${list.replycnt}</td>
+				   	 	<td>${list.goodcnt}</td>
 				   	 	<td><i class="far fa-folder"></i></td>
 				   	 </tr>
 			   	 				
@@ -348,18 +358,60 @@ font-size: 12px;
 			   </c:forEach>			   	
 			</table>
 		</div>
-		<div class="pagination">
-			  <a href="#" style="background: white">&laquo;</a>
-			  <a href="#">1</a>
-			  <a class="active" href="#">2</a>
-			  <a href="#">3</a>
-			  <a href="#">4</a>
-			  <a href="#">5</a>
-			  <a href="#">6</a>
-			  <a href="#" style="background: white">&raquo;</a>
-		</div>
+		
+			<div class="pagination">
+				<c:if test="${map.pager.curBlock > 1}">
+				     <a href="${path}/board/list?curPage=${map.pager.blockBegin-10}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="page_left" style="background: white">&laquo;</a>
+					 <a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">1</a>
+					 <span>...</span>
+				</c:if>
+				
+			
+				<c:forEach var="num" begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}">
+				<c:choose>
+					<c:when test="${num == map.pager.curPage}">
+					  <a href="${path}/board/list?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="no_color" id="check_color">${num}</a>
+					</c:when>
+					<c:otherwise>
+					  <a href="${path}/board/list?curPage=${num}&sort_option=${map.sort_option}&keyword=${map.keyword}">${num}</a>
+					</c:otherwise>			  
+				</c:choose>	
+				</c:forEach>	
+				
+				
+				<c:if test="${map.pager.curBlock < map.pager.totBlock}">
+					<span>...</span>
+					<a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=${map.sort_option}&keyword=${map.keyword}" class="">${map.pager.totPage}</a>
+					<a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}"  class="page_right" style="background: white">&raquo;</a>
+				</c:if>  
+			</div>
 		
 		
 	</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	var sort_option = '${map.sort_option}';
+		
+	if(sort_option == 'new') {
+		$('#sort_new').css('color','#9EE6CF');
+	 } else if (sort_option == 'cnt'){
+		 $('#sort_cnt').css('color','#9EE6CF');
+	 } else if (sort_option == 'reply'){
+		 $('#sort_reply').css('color','#9EE6CF');
+	 }else if (sort_option == 'good'){
+		 $('#sort_good').css('color','#9EE6CF');
+	 }
+	 
+	
+	
+	
+});
+
+	
+ 
+ 
+</script>
 </html>
