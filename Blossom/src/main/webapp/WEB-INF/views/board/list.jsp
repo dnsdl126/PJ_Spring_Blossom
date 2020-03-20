@@ -139,6 +139,12 @@ padding: 10px;
 display: flex;
 justify-content: center;
 }
+.board_search_cnt{
+ font-size: 15px;
+ padding: 10px;
+ text-align: right;
+ 
+}
 
 .search_key{
 margin: 0;
@@ -166,6 +172,21 @@ vertical-align: middle;
 cursor: pointer;
 
 }
+.return{
+display: inline-block;
+border: 1px solid #ddd;
+line-height: 27px;
+height: 29px;
+padding: 0px 12px;
+vertical-align: middle;
+font-size: 13px;
+}
+.return:hover{
+color: white;
+background: #9EE6CF;
+outline: none;
+}
+
 .board_search button:hover {
 color: white;
 background: #9EE6CF;
@@ -301,17 +322,24 @@ color:white;
 					<a href="${path}/board/list?sort_option=cnt&keyword=${map.keyword}" id ="sort_cnt" class="content_01 contnt_css">조회순</a>
 					<a href="${path}/board/list?sort_option=reply&keyword=${map.keyword}" id ="sort_reply" class="content_01 contnt_css">댓글순</a>
 					<a href="${path}/board/list?sort_option=good&keyword=${map.keyword}" id ="sort_good" class="content_01 contnt_css">추천순</a>
-				
 				</div>
+				
 				<div class="board_search">
 					<p>				
 					<form action="${path}/board/list" method="GET">
-						<input type="text" name="keyword" class="search" placeholder="검색하세요">
-						<button type="submit">search</button>
+						<input type="text" name="keyword" class="search" placeholder="검색하세요" value="${map.keyword}">
+						<button type="submit" >search</button>
+						<a href="${path}/board/list" class=return>return</a>
 					</form>	
 					</p>
 				</div>
 			</div>
+			<!-- 검색결과 알림 출력 -->
+			<c:if test="${!empty map.keyword }">
+				<div class = "board_search_cnt">
+					<span style='color:tomato '>"${map.keyword}"</span> 검색결과 <span style='color:tomato'><strong>"${map.count}"</strong></span>건 검색되었습니다.
+				</div>
+			</c:if>
 		</div>
 		<div class="boardList">
 			<table border="1"  class="table_css" style=" border-collapse: collapse">
@@ -392,8 +420,18 @@ color:white;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+/* $(function(){
+	var keyup = '${map.keyword}';
+	if(keyup == '') {
+		$('.board_search_cnt').css('display','none')
+							  .css('justify-content','flex-end');
+		} 
+	
+}); */
+
 $(function(){
 	var sort_option = '${map.sort_option}';
+	
 		
 	if(sort_option == 'new') {
 		$('#sort_new').css('color','#9EE6CF');
@@ -405,7 +443,6 @@ $(function(){
 		 $('#sort_good').css('color','#9EE6CF');
 	 }
 	 
-	
 	
 	
 });

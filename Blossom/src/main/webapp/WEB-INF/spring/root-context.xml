@@ -31,6 +31,7 @@
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 		<!-- mappers/**/*Mapper.xml : mappers 폴더 안에  **maper.xml 로 되는 파일이 있어야한다 -->
+		<!-- /**/에는 대소문자 상관 없지만 /*Mapper이름은 그대로 사용해야 한다  -->
 	</bean>
 	<!-- SqlSession 객체 주입 -->
 	<!-- mybatis의 mapper.xml과 DAO를 구분해서 사용하는 경우(설정을 XML로 하는 경우, JAVA 방식을 사용하지 않는 경우)
@@ -42,6 +43,7 @@
 		destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
+	 <!-- ref (= sqlSessionFactory)를 참조하여  sqlSession을 만들어라  -->
 	
 	
 	

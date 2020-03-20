@@ -45,6 +45,7 @@
 	<beans:bean id="loginInterceptor" class="com.Blossom.interceptor.LoginInterceptor"></beans:bean>
 	
 	<!-- URL Mapping for Interceptor call -->
+	<!-- interceptors는 beans가 아니다  -->
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/update"/>
