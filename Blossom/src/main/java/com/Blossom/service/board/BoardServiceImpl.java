@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.Blossom.domain.BoardDTO;
 import com.Blossom.persistence.BoardDAO;
@@ -35,6 +38,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("sort_option", sort_option);
 		map.put("search_option", search_option);
 		map.put("keyword", "%"+keyword+"%");
+	
 		
 		return bDao.listAll(map);
 		
@@ -55,10 +59,27 @@ public class BoardServiceImpl implements BoardService {
 		
 		return bDao.countArticle(map);
 	}
+	@Override
+	public BoardDTO boardview(int bno) {				
+		return bDao.view(bno);
+	}
 
 
 	
 	
 	
+		
+	
 
-}
+
+	
+	}
+
+	
+	
+
+	
+	
+	
+
+

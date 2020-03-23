@@ -82,5 +82,22 @@ public class BoardController {
 		
 		return "board/list";
 		
+		
+			
+		}
+		
+		@GetMapping("/view")
+		public String view (int bno,  Model model ) {
+			 log.info("GET Board Detail Page ");
+			 //해당 bno 게시글 정보를 DB에서 가져와 BoardDTO에서 model에 담아
+			 //board/view.jsp로 전달 
+			 // model ("one",bDto);
+			
+			
+			 model.addAttribute("one", bService.boardview(bno));
+			
+		
+			 
+			return "board/view";
 	}
 }

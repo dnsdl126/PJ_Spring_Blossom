@@ -360,7 +360,7 @@ color:white;
 				   <tbody class="table_body">
 				   	 <tr>
 				   	 	<td>${list.bno}</td>
-				   	 	<td><a href="" class="subject">${list.title}</a>
+				   	 	<td><a href="${path}/board/view?bno=${list.bno}" class="subject">${list.title}</a>
 					   	 	  <c:if test="${today == regdate}">
 					   	 	  	<span class="new_color twincle_eff">N</span>
 					   	 	  </c:if>	
@@ -420,14 +420,6 @@ color:white;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-/* $(function(){
-	var keyup = '${map.keyword}';
-	if(keyup == '') {
-		$('.board_search_cnt').css('display','none')
-							  .css('justify-content','flex-end');
-		} 
-	
-}); */
 
 $(function(){
 	var sort_option = '${map.sort_option}';
