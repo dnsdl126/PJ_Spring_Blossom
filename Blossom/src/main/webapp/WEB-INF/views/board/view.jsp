@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 width: 1400px;
 background-color: white;
 position: relative;
-margin-top: 150px;
+
 margin: auto;
 
 
@@ -276,9 +277,11 @@ margin: auto;
 	background: tomato}
 	
 </style>
-</head>
 
+</head>
+<%@ include file = "../include/Modal.jsp"%>
 <body>
+	
 	<div class="content">
 		<div class= sub_title>
 			<h1>FAQ</h1>
@@ -346,7 +349,7 @@ margin: auto;
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="#" class="box_deco">수정</a>
-				<a href="#" class="box_deco">삭제</a>
+				<a href="#" class="box_deco delete">삭제</a>
 			</c:if>	
 			</div>
 			
@@ -415,4 +418,19 @@ margin: auto;
 
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+/*  삭제 버튼 클릭시 모달창 open */
+ $('.delete').click( function(){
+	$('.modal_wrap').css('display','flex');	 
+ });
+ 
+ $('#modal_msg_yes').click( function(){
+	 location.href='${path}/board/delete?bno=${one.bno}';
+ });
+ 
+ 
+ 
+
+</script>
 </html>
