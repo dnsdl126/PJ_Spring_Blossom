@@ -23,5 +23,8 @@ public interface BoardDAO {
 	public void increaseViewCnt(@Param("bno") int bno);
 	
 	//게시글 삭제
+	// 게시글을 바로 삭제하는 것이 아니여서
+	// mapper 에서 updqte 로 보이지만 않게 수정  
 	public void delBoard(int bno);
+	
 }

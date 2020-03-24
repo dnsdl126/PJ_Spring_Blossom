@@ -8,6 +8,7 @@
 		 <typeAlias type="com.Blossom.domain.ProductDTO" alias="ProductDTO"></typeAlias>
 		 <typeAlias type="com.Blossom.domain.MemberDTO" alias="MemberDTO"></typeAlias>
 		 <typeAlias type="com.Blossom.domain.BoardDTO" alias="BoardDTO"></typeAlias>
+		 <typeAlias type="com.Blossom.domain.ReplyDTO" alias="ReplyDTO"></typeAlias>
 	</typeAliases>
 
 </configuration>

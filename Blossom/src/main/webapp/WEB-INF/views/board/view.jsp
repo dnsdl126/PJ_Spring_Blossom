@@ -355,72 +355,17 @@ margin: auto;
 			
 		</div>
 	</div>
-	<div class="coment">
-		<div class="cometn_sub_title">
-			Coment List
-		</div>
-		<div class="coment_box">
-			<div class="coment_box_css">			
-				
-				<div class="coment_box_list2">
-					<div class="box_list">
-						<div class="box_box" style="display: flex">
-							<div class="like" style="padding: 5px;">
-								2019-03-23
-							</div>
-							<div class="coment_like" style="margin-top: 5px;">
-								<a href="#" class="like_list"><i class="fas fa-heart"></i></a>							
-							</div>
-							<div class="review_like_action__score">
-								<div class="review_like_action__score_arrow"></div>
-								<span class="review_like_action__score_text" style="color: white">0</span>						
-							</div>
-						</div>
-						<div class="coment_content">
-							뇽덕이 꿀꿀 점심달라 꿀굴 
-						</div>
-					</div>
-					<div class="coment_content_title">						
-						
-					</div>					
-				</div>
-				<div class="coment_box_list1">
-					<ul>
-						<li>
-							<div class="coment_box_list_box" style="font-weight: bold">
-								작성자
-							</div>
-							<div class="coment_box_list_title" style="padding: 10px">
-								김뇽꾸렁
-							</div>
-						</li>
-					</ul>
-				</div>
-				
-			</div>			
-		</div>
-		<div class="cometn_sub">
-			Coment
-		</div>
-		<div class="list_box">
-			<div class="coment_plus">
-				<div class="plus_box">
-				 <input type="text" name="" placeholder="댓글을 입력하세요" class="coment_input" style="border: none;">					
-				</div>
-				<div class="comment_commit">
-				 <a href="">commnet</a>
-				</div>
-			</div>			
-		</div>
-
-
-	</div>
-
+	
+	<!-- 댓글창 -->
+	<div id="listReply"></div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 /*  삭제 버튼 클릭시 모달창 open */
+ $(function(){
+	 
+	 listReply();
  $('.delete').click( function(){
 	$('.modal_wrap').css('display','flex');	 
  });
@@ -428,8 +373,19 @@ margin: auto;
  $('#modal_msg_yes').click( function(){
 	 location.href='${path}/board/delete?bno=${one.bno}';
  });
+ });
  
- 
+ // 댓글 목록 출력 함수
+ function listReply(){
+	 $.ajax({
+		 type: "get",
+		 url: "${path}/reply/list?bno=${one.bno}",
+		 success: function(result){
+			 //result:  responeseText 응답텍스트 (html)
+		 	$("#listReply").html(result);
+		 }		 
+	 });
+ }
  
 
 </script>
