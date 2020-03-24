@@ -180,6 +180,10 @@ CREATE TABLE tbl_reply(
     writer VARCHAR2(100) NOT NULL,
     regdate DATE DEFAULT SYSDATE,
     bno NUMBER NOT NULL
+    -- 게시글을 댓글이 있어되고 없어도 되지만
+    -- 댓글은 게시글이 있어야 댓글을 달수가 있다 
+    -- tbl_board 의 bno와 관계를 맺어야 하는데 외래키는 한쪽이 반드시 PK 여야 한다 
+    -- tbl-board : bno -> PK ,tbl_reply : bno -->FK 
 );
 
 ALTER TABLE tbl_reply ADD CONSTRAINT pk_reply
