@@ -201,3 +201,22 @@ ALTER TABLE tbl_reply
 ADD CONSTRAINT fk_reply_bno
 FOREIGN KEY (bno) REFERENCES tbl_board(bno)
 ON DELETE CASCADE;
+
+
+INSERT INTO tbl_reply(rno, type, content, writer, bno)
+VALUES(seq_reply.NEXTVAL,'free' , 'text01', '김뇽꾸렁dl', 339 );
+
+INSERT INTO tbl_reply(rno, type, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, 'free' ,'text01', '김뇽꾸렁dl', 337 );
+
+INSERT INTO tbl_reply(rno, type, content, writer, bno)
+VALUES(seq_reply.NEXTVAL, 'free' ,'text01', '김뇽꾸렁dl', 339 );
+
+SELECT
+    *
+FROM tbl_reply;
+
+commit;
+
+
+
