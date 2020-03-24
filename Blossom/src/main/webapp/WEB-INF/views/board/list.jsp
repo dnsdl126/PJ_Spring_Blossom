@@ -351,6 +351,7 @@ color:white;
 						<th scope="co1" style="width: 113px">date</th>
 						<th scope="co1" style="width: 87px">coment</th>
 						<th scope="co1" style="width: 87px">like</th>
+						<th scope="co1" style="width: 87px">VIEW</th>
 						<th scope="co1" style="width: 124px">file</th>
 					</tr>
 			   </thead>	
@@ -379,6 +380,7 @@ color:white;
 				   	 	</td>
 				   	 	<td>${list.replycnt}</td>
 				   	 	<td>${list.goodcnt}</td>
+				   	 	<td>${list.viewcnt}</td>
 				   	 	<td><i class="far fa-folder"></i></td>
 				   	 </tr>
 			   	 				

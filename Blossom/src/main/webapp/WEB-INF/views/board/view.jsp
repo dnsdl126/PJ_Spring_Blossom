@@ -39,7 +39,7 @@ margin: 100px 0 40px;
 }
 .main{
 	text-align: center;
-	width: 297px;
+	width: 340px;
 }
 .size {
 padding: 10px;
@@ -295,6 +295,7 @@ margin: auto;
 				${one.title}
 			</div>						  			
 		</div>
+		<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
 		<div class="content_ist">
 			<div class="title size right font_we">
 			   writer
@@ -306,7 +307,14 @@ margin: auto;
 			   날짜
 			</div>
 			<div class="contet_sub size right">
-				${one.regdate}
+				<c:choose>
+			   	 	<c:when test="${today == regdate}" >
+			   	 		<fmt:formatDate value="${one.updatedate}" pattern="HH:mm:ss"/>
+			   	 	</c:when>
+			   	 	<c:otherwise>
+			   	 		<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd"/>
+			   	 	</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="title size right font_we">
 			   coment
@@ -317,9 +325,15 @@ margin: auto;
 			<div class="title size right font_we">
 			   like
 			</div>
-			<div class="contet_sub size">
+			<div class="contet_sub size right">
 				${one.goodcnt}
-			</div>	
+			</div>
+			<div class="title size right font_we">
+			   View
+			</div>
+			<div class="contet_sub size">
+				${one.viewcnt}
+			</div>		
 			</div>
 										  			
 		</div>
@@ -328,7 +342,7 @@ margin: auto;
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">
-				<a href="#" class="box_deco">목록</a>
+				<a href="${path}/board/list" class="box_deco">목록</a>
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="#" class="box_deco">수정</a>

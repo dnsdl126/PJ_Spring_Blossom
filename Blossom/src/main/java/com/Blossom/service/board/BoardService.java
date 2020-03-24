@@ -25,6 +25,8 @@ public interface BoardService {
 	// 리턴시 BoardDTO로 받아야하기 때문에
 	// public BoardDTO로 정의
 	
+	public void increaseViewCnt( HttpSession session, int bno);
+	
 	
 	
 }
