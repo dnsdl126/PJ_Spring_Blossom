@@ -345,7 +345,7 @@ margin: auto;
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">
-				<a href="${path}/board/list" class="box_deco">목록</a>
+				<a href="${header.referer}" class="box_deco">목록</a>
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="#" class="box_deco">수정</a>
