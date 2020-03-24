@@ -20,7 +20,10 @@ public interface BoardService {
 	//목록(페이지 나누기, 검색기능 포함)
 	public List<BoardDTO> listAll(String sort_option, String search_option, String keyword, int start, int end);
 
-	public BoardDTO boardview (int bno);
+	public BoardDTO boardview (int bno); 
+	// 돌아올 타입에따라 정의
+	// 리턴시 BoardDTO로 받아야하기 때문에
+	// public BoardDTO로 정의
 	
 	
 	

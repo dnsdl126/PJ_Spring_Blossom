@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>상세게시글</title>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css"  href="${path}/resources/css/common.css">
 	 <script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
 <style type="text/css">
+
 
 .content {
 width: 1400px;
@@ -23,7 +24,7 @@ margin: auto;
 .sub_title {
 text-align: center;
 min-height: 30px;
-margin: 40px 0 40px;
+margin: 100px 0 40px;
 
 }
 .content_ist {
@@ -61,7 +62,7 @@ vertical-align: middle;
 	padding: 50px;
 	border-top: solid  #9EE6CF;
 	border-bottom: solid #9EE6CF;   
-	width: 80%;
+	width: 59%;
     margin: auto;
     height: 400px;
 }
@@ -76,7 +77,7 @@ vertical-align: middle;
 
 	display: flex;
     justify-content: flex-end;
-    width: 80%;
+    width: 59%;
     outline: none;
     margin: auto;
 }
@@ -313,13 +314,14 @@ margin: auto;
 			<div class="contet_sub size right">
 				${one.replycnt}
 			</div>
-			</div>
 			<div class="title size right font_we">
 			   like
 			</div>
 			<div class="contet_sub size">
 				${one.goodcnt}
-			</div>								  			
+			</div>	
+			</div>
+										  			
 		</div>
 		<div class="box">
 			동백샴푸는 인덕ㅇ친덕 ㅓ해요 
@@ -328,8 +330,10 @@ margin: auto;
 			<div class="button_list">
 				<a href="#" class="box_deco">목록</a>
 				<a href="#" class="box_deco">답변</a>
+			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="#" class="box_deco">수정</a>
 				<a href="#" class="box_deco">삭제</a>
+			</c:if>	
 			</div>
 			
 		</div>

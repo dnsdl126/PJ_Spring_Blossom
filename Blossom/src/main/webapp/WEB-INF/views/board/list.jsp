@@ -360,7 +360,7 @@ color:white;
 				   <tbody class="table_body">
 				   	 <tr>
 				   	 	<td>${list.bno}</td>
-				   	 	<td><a href="${path}/board/view?bno=${list.bno}" class="subject">${list.title}</a>
+				   	 	<td><a href="${path}/board/view/${list.bno}" class="subject">${list.title}</a>
 					   	 	  <c:if test="${today == regdate}">
 					   	 	  	<span class="new_color twincle_eff">N</span>
 					   	 	  </c:if>	
