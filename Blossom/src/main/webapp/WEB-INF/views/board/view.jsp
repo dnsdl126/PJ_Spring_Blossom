@@ -354,7 +354,7 @@ margin: auto;
 			</div>
 			
 		</div>
-	</div>
+	
 	
 	<!-- 댓글창 -->
 	<div id="listReply"></div>
@@ -363,23 +363,26 @@ margin: auto;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 /*  삭제 버튼 클릭시 모달창 open */
- $(function(){
+ $(function(){ //화면단이 다만들어지면 시작해라 
 	 
-	 listReply();
- $('.delete').click( function(){
-	$('.modal_wrap').css('display','flex');	 
- });
+	 listReply(); //페이지 시작하자마자  호출해라 listReply(); 메서드를  
+	 			  // listReply(); 아래 정의 되어있음
+	 
+	 $('.delete').click( function(){
+		$('.modal_wrap').css('display','flex');	 
+	 });
+	 
+	 $('#modal_msg_yes').click( function(){
+		 location.href='${path}/board/delete?bno=${one.bno}';
+	 });
  
- $('#modal_msg_yes').click( function(){
-	 location.href='${path}/board/delete?bno=${one.bno}';
- });
  });
  
  // 댓글 목록 출력 함수
  function listReply(){
 	 $.ajax({
 		 type: "get",
-		 url: "${path}/reply/list?bno=${one.bno}",
+		 url: "${path}/reply/list?bno=${one.bno}", // replyController에 list를 찾음
 		 success: function(result){
 			 //result:  responeseText 응답텍스트 (html)
 		 	$("#listReply").html(result);

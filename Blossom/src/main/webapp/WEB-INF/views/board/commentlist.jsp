@@ -9,9 +9,8 @@
 </head>
 <body>
 <div class="coment">
-<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
 		<div class="cometn_sub_title">
-			Comment List ${list.size()}
+			 Comment "${list.size()}" 건
 		</div>
 		<c:forEach items = "${list}" var="list">
 		<div class="coment_box">
@@ -21,15 +20,7 @@
 					<div class="box_list">
 						<div class="box_box" style="display: flex">
 							<div class="like" style="padding: 5px;">
-								
-								<c:choose>
-							   	 	<c:when test="${today == regdate}" >
-							   	 		<fmt:formatDate value="${list.regdate}" pattern="HH:mm:ss"/>
-							   	 	</c:when>
-							   	 	<c:otherwise>
-							   	 		<fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/>
-							   	 	</c:otherwise>
-								</c:choose>
+							   	 <fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/>
 							</div>
 							<div class="coment_like" style="margin-top: 5px;">
 								<a href="#" class="like_list"><i class="fas fa-heart"></i></a>							
@@ -64,15 +55,15 @@
 		</div>
 		</c:forEach>
 		<div class="cometn_sub">
-			Coment
+			Comment
 		</div>
 		<div class="list_box">
 			<div class="coment_plus">
 				<div class="plus_box">
-				 <input type="text" name="" placeholder="댓글을 입력하세요" class="coment_input" style="border: none;">					
+				 <textarea placeholder="댓글을 입력하세요" class="coment_input" style="border: none;"></textarea>						
 				</div>
 				<div class="comment_commit">
-				 <a href="">commnet</a>
+				 <a href="">Comment</a>
 				</div>
 			</div>			
 		</div>

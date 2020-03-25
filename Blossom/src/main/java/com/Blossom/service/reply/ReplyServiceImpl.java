@@ -23,11 +23,15 @@ public class ReplyServiceImpl implements ReplyService {
 	@Autowired
 	public void newReplyDAO() {
 		rDao = sqlSession.getMapper(ReplyDAO.class);
+		// rDao = mapper + Dao  
 	}
 
 	@Override
 	public List<ReplyDTO> list(int bno) {
-		// TODO Auto-generated method stub
+		// 해당 게시글의 댓글 못록을 보내야 한다 
+		// 댓글 목록은 DB에 있어서 
+		// DAO로 이동이 필요하다 
+		
 		return rDao.list(bno);
 	}
 
