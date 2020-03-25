@@ -22,7 +22,7 @@ public class ReplyController {
 	private ReplyService rService;
 	
 	@GetMapping("/list")
-	public String list(int bno, Model model) {
+	public String list(int bno, Model model) { // int bno는  ajax의  url: ?bno=${one.bno}" 명시된 bno 
 		
 		log.info(">>>>> GET: Reply List PAGE"); 
 		// log처리가 되면 ajax 를 타고 여기까지 잘 왔다는 의미
@@ -42,7 +42,7 @@ public class ReplyController {
 		// 해당 댓글의 목록를 list로 만들어서 보내야 하기 때문에
 		// return으로  list로 보내야 한다 
 		
-		return "/board/commentlist";
+		return "/board/commentlist"; // ajax의 result
 		// 화면단 어디로 이동할것인지 명시 
 		// return할 view단의 jsp 파일명과 일치 해야 한다 
 		

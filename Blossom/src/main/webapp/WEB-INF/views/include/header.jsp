@@ -190,9 +190,10 @@
          display: none;
          justify-content: center;
          align-items: center;
+         top: 0;
 
       }
-      .modal_box {
+      .modal_box_box {
          position: relative;
          width: 372px;
          height: 600px;
@@ -380,7 +381,7 @@
 </head>
 <body>
    <div class="modal_login_wrap">
-     <div class="modal_box">
+     <div class="modal_box_box">
        <div class="login_close">
           <button><i class="fas fa-times"></i></button>
        </div>
@@ -665,10 +666,11 @@
     $(document).on('click', '#btn_login', function(){
  	   var id = $('#login_id').val();
  	   var pw = $('#login_pw').val();
- 	   
+ 	
  	 // 유효성 체크 (id, pw) NULL 체크
  	   if(id != '' && pw !='' && id.length !=0 && pw.length !=0) {
  		  
+    	alert("123245555555");
  	     $.ajax({
  	    	 url: '${path}/login/in',
  	    	 type: 'POST',

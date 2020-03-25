@@ -180,7 +180,7 @@ margin: auto;
 .coment_box_list1{
 	 width: 20%;
     padding: 39px;
-    border-left: solid;
+    border-left: solid 1px #a4b0be;
     text-align: center
 }
 .coment_box_list1 li:first-child{
@@ -234,6 +234,7 @@ margin: auto;
 	display: flex;
 }
 .coment_input{
+
 	outline: none;
     width: 100%;
     height: 100%;
@@ -276,6 +277,25 @@ margin: auto;
 	color:white;
 	background: tomato}
 	
+.login_box_content_list_01{
+	width: 100%;
+    height: 75px;
+    padding: 7px;
+
+}
+.login_box_content_css {
+	padding : 5px;
+	border: solid 1px ;	
+	height: 50px;
+    font-size: 15px;
+    padding: 14px;
+}
+.reply_btn{
+	font-weight: bold;
+    color: skyblue;
+    cursor: pointer;
+	
+}
 </style>
 
 </head>
@@ -375,15 +395,27 @@ margin: auto;
 	 $('#modal_msg_yes').click( function(){
 		 location.href='${path}/board/delete?bno=${one.bno}';
 	 });
+	 
+	
  
  });
+ 
+ $(document).on('click','.reply_btn',function(){
+		$('.modal_login_wrap').css('display','flex');
+		
+	});
+ 
+ 
  
  // 댓글 목록 출력 함수
  function listReply(){
 	 $.ajax({
 		 type: "get",
 		 url: "${path}/reply/list?bno=${one.bno}", // replyController에 list를 찾음
-		 success: function(result){
+		 success: function(result){ 
+			  // result에는 commentlist.jsp가 들어있다 
+			  // http://localhost:8081/Blossom/reply/list?bno=339 를 url로 입력하면
+			  // commentlist.jsp의 값들이 출력된다  	  
 			 //result:  responeseText 응답텍스트 (html)
 		 	$("#listReply").html(result);
 		 }		 
