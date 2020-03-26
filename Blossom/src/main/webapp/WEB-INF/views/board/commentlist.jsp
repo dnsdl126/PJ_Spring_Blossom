@@ -13,6 +13,7 @@
 <div class="coment">
 		
 		<div class="cometn_sub_title">
+			<input type="hidden" class="replyListCnt" value="${list.size()}">
 			 Comment "${list.size()}" 건
 		</div>
 		<c:forEach items = "${list}" var="list">
@@ -99,7 +100,10 @@
 			</div>			
 		</div>
 		</c:if>
-		<div class="cometn_sub">
+		<div class="new_button_comment" >
+			<button type="button" class="new_button_comment_button">새로운 Comment 확인하기</button>
+		</div>
+		<div class="cometn_sub" >
 			Comment
 		</div>
 		<div class="list_box" >
@@ -112,14 +116,23 @@
 					</div>
 				</c:when>
 				<c:otherwise>
-				<div class="coment_plus">
-					<div class="plus_box">
-					 	<textarea placeholder="댓글을 입력하세요" class="coment_input" style="border: none;"></textarea>						
+				<form class="frm_reply">
+					<input type="hidden" name="bno" class="reply_bno">
+					<input type="hidden" name="type" class="reply_type">
+					<input type="hidden" name="writer" class="reply_writer">
+					<div class="coment_plus">
+						<div class="plus_box">
+						 	<textarea placeholder="댓글을 입력하세요" name ="content" class="coment_input" style="border: none;"></textarea>						
+						</div>
+						<div class="comment_commit">
+							
+						 	<button type="button" class="reply_btn_plus">Comment</button>
+						</div>
+				    </div>	
+				    <div class = "err_msg">
+						<Strong>Comment</Strong>를 입력해주세요 
 					</div>
-					<div class="comment_commit">
-					 	<a href="">Comment</a>
-					</div>
-			    </div>	
+				</form>
 				</c:otherwise>
 			</c:choose>
 					

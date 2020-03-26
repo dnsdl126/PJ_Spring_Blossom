@@ -669,8 +669,6 @@
  	
  	 // 유효성 체크 (id, pw) NULL 체크
  	   if(id != '' && pw !='' && id.length !=0 && pw.length !=0) {
- 		  
-    	alert("123245555555");
  	     $.ajax({
  	    	 url: '${path}/login/in',
  	    	 type: 'POST',

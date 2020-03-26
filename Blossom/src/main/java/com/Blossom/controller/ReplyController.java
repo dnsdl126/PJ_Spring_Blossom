@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Blossom.domain.ReplyDTO;
 import com.Blossom.service.reply.ReplyService;
@@ -50,6 +52,18 @@ public class ReplyController {
 		// 데이터자체 로 인식 /board/commentlist 문자그대로 출력하게 되어
 		// 붙이지 않는다
 		// Model은 화면이동시 쓸수 있으므로 @Responsebody 인식시 사용 불가 
+	}
+	
+	@ResponseBody
+	@PostMapping("/insert")
+	public void insert(ReplyDTO rDto) {
+		log.info(">>>>>>>>>>>>>>>>POST: Reply Insert DB");
+		
+			 rService.insert(rDto);
+		
+			
+			
+			
 	}
 
 }

@@ -15,4 +15,8 @@ public interface ReplyDAO {
 	// public List<ReplyDTO> list(int bno);
 	// 이럴경우는 @param1 으로 적용됨
 	
+	public void insert(ReplyDTO rDto);
+	
+	//댓글 수 +1
+	public void replyCntPlus(@Param("bno") int bno);
 }

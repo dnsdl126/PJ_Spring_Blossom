@@ -111,6 +111,7 @@ background-color: white;
 position: relative;
 margin-top: 150px;
 margin: auto;
+margin-bottom: 120px;
 }
 .cometn_sub_title{
 	width: 80%;
@@ -209,8 +210,31 @@ margin: auto;
 	padding: 5px;
 	border-top: solid 1px;
 }
+
+.new_button_comment{
+	display: flex;
+    justify-content: center;
+    padding: 11px;
+    width: 79%;
+    margin: auto;
+}
+.new_button_comment_button{
+    font-size: 15px;
+    background: #f1f2f6;
+    border: none;  
+    color: black;
+    cursor: pointer;
+    outline: none;
+    border-radius: 4px;
+
+}
+.new_button_comment_button:hover {
+	 background:#9EE6CF;
+	 color: white;
+
+}
 .cometn_sub {
-	width: 80%;
+	width: 79%;
 	height: 30px;
 	text-align: left;
 	font-weight: bold;
@@ -219,9 +243,10 @@ margin: auto;
 	background:  #3D87C1;
 	color: white;
 	padding: 5px;
+	margin-top: 10;
 }
 .list_box {
-	width: 80%;
+	width: 79%;
 	margin: auto;
 }
 .plus_box {
@@ -229,9 +254,17 @@ margin: auto;
 	width: 80%;
 	height: 100px;
 }
+.err_msg {
+	color: tomato;
+	font-size: 14px;
+	margin-left:10px;
+	visibility: hidden;
+	
+}
 .coment_plus{
 	padding: 10px;
 	display: flex;
+	border: solid 1px #a4b0be;
 }
 .coment_input{
 
@@ -245,16 +278,26 @@ margin: auto;
 	width: 13%;
     margin: auto;
     text-align: center;
-    height: 69px;
-    padding: 24px;
-    font-size: 15px;
+   
     border-radius: 4px;
-	background: #f1f2f6;
+	
+} 
+
+.reply_btn_plus{
+	padding: 32px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    background: #f1f2f6;
+    outline: none;
 }
-.comment_commit:hover {
-	background:  #9EE6CF;
-	color: white; 
+.reply_btn_plus:hover {
+	color: white;
+	background:#9EE6CF;
 }
+
+
+
 .like_button{
 	display: flex;
 	justify-content: flex-end;
@@ -342,7 +385,7 @@ margin: auto;
 			<div class="title size right font_we">
 			   coment
 			</div>
-			<div class="contet_sub size right">
+			<div class="contet_sub size right replycnt_plus">
 				${one.replycnt}
 			</div>
 			<div class="title size right font_we">
@@ -400,17 +443,51 @@ margin: auto;
  
  });
  
+
+ 
  $(document).on('click','.reply_btn',function(){
 		$('.modal_login_wrap').css('display','flex');
 		
 	});
  
- 
+ $(document).on('click','.reply_btn_plus',function(){ 
+	 // 문서에서 reply_btn_plus 클릭이 되면
+	 // commentlist.jsp는 정확히 말하면 include.jsp가 include 된 상태는 아니다
+	 
+	 	var reply_txt = $('.coment_input').val();
+	 		console.log(reply_txt);
+	 
+	 	if(reply_txt == '' || reply_txt.length == 0) {
+	 		$('.reply_txt').focus();
+	 		$('.err_msg').css('visibility', 'visible');
+	 		return false;
+	 	}	
+	 	
+	 	$('.reply_bno').val('${one.bno}'); // 게시글 번호 입력
+	 	$('.reply_type').val('${one.type}'); 
+	 	$('.reply_writer').val('${name}');
+	 	
+	 	
+	 	$.ajax({
+	 		// 댓글 등록
+	 		// type, content, writer, bno
+	 		url: '${path}/reply/insert',
+	 		type: 'POST',
+	 		data: $('.frm_reply').serialize(), //frm_reply 4개의 정보가 담겨 있음 .serialize()는 직렬화 해주는 함수
+	 		success: function() {
+	 			
+	 			listReply();
+	 		}
+	 		
+	 	});
+		
+	});
  
  // 댓글 목록 출력 함수
  function listReply(){
 	 $.ajax({
 		 type: "get",
+		 async: false,
 		 url: "${path}/reply/list?bno=${one.bno}", // replyController에 list를 찾음
 		 success: function(result){ 
 			  // result에는 commentlist.jsp가 들어있다 
@@ -420,7 +497,12 @@ margin: auto;
 		 	$("#listReply").html(result);
 		 }		 
 	 });
+	 $('.replycnt_plus').text($('.replyListCnt').val());
+	 // ajax는 비동기 방식이기 때문에 동시에 같이 처리되어 replycnt가 +1 되기전에 처리된다
+	 // async: false로 처리해야 된다 
  }
+ 
+
  
 
 </script>

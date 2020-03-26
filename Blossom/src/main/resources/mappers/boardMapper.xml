@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.Blossom.persistence.BoardDAO">
 	<select id="listAll" resultType="BoardDTO"><!-- resultTtpe을 간단히 하려면 Mybatis-config 명시 필요 -->
 		<include refid="paging_header"/><!-- paging_header 가 먼저 나와라   -->
-		SELECT bno, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
+		SELECT bno, type, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show
 		FROM tbl_board b, tbl_member m
 		<include refid="search"></include>
 		<if test="map.sort_option == 'new'">
