@@ -61,6 +61,16 @@ public class ReplyServiceImpl implements ReplyService {
 		
 	}
 
+
+	//댓글 삭제
+	@Override
+	public void delete(int rno, int bno) {
+		rDao.delete(rno);
+		
+		rDao.replyCntMinus(bno);
+		
+	}
+
 	
 
 	

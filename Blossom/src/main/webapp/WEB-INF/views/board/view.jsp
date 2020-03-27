@@ -229,7 +229,7 @@ margin-bottom: 120px;
 
 }
 .new_button_comment_button:hover {
-	 background:#9EE6CF;
+	 background:#3D87C1;
 	 color: white;
 
 }
@@ -339,6 +339,33 @@ margin-bottom: 120px;
     cursor: pointer;
 	
 }
+
+.delete_button_css{
+
+    margin: auto;
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+
+}
+.comment_delete_button{
+font-size: 16px;
+ outline: none;
+ background: white;
+ color: tomato;
+ border: solid 1px tomato;
+ width: 50xp;
+ width: 50px;
+ height: 30px;
+ cursor: pointer;
+
+}
+
+.comment_delete_button:hover {
+ color: white;
+ background: tomato;
+
+}
 </style>
 
 </head>
@@ -408,6 +435,7 @@ margin-bottom: 120px;
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">
+			<!-- header는  http 의 header 을 사용 -->
 				<a href="${header.referer}" class="box_deco">목록</a>
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
@@ -450,6 +478,8 @@ margin-bottom: 120px;
 		
 	});
  
+
+ 
  $(document).on('click','.reply_btn_plus',function(){ 
 	 // 문서에서 reply_btn_plus 클릭이 되면
 	 // commentlist.jsp는 정확히 말하면 include.jsp가 include 된 상태는 아니다
@@ -483,6 +513,29 @@ margin-bottom: 120px;
 		
 	});
  
+ 
+ // 댓글 삭제
+ $(document).on('click', '.comment_delete_button', function(){
+	 var rno = $(this).attr('data_num');
+	 var bno = '${one.bno}';
+	 
+	 //comment_delete_button 는 for문으로 댓글 목록을 다 생성후 삭제를 진행 하여서
+	 // 바로 rno(댓글 번호)를 가지고 올수 없다 (같은번호만 불러온다 )
+	 // data_num="${list.rno} 으로 rno를 부른다음 
+	 // $(this) = comment_delete_button 로 자신의 번호를 가지고 오라고 인식해줘야 한다 
+	 
+	 $.ajax({
+		 type: "POST",
+		 url: "${path}/reply/delete", // replyController에 list를 찾음
+		 data: {'rno' : rno, 'bno' : bno},
+		 success: function(){ 
+			  
+		 	listReply();
+		 }		 
+	 });
+	 
+ });
+ 
  // 댓글 목록 출력 함수
  function listReply(){
 	 $.ajax({
@@ -501,8 +554,13 @@ margin-bottom: 120px;
 	 // ajax는 비동기 방식이기 때문에 동시에 같이 처리되어 replycnt가 +1 되기전에 처리된다
 	 // async: false로 처리해야 된다 
  }
+
  
 
+ 
+ 
+
+ 	
  
 
 </script>

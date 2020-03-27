@@ -17,4 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SET replycnt=replycnt+1
 			WHERE bno= #{bno}
 	</update>
+	<delete id="delete">
+		DELETE tbl_reply
+			WHERE rno =#{rno}	
+	</delete>
+	<update id="replyCntMinus">
+		UPDATE tbl_board
+			SET replycnt=replycnt-1
+			WHERE bno= #{bno}
+	</update>
 </mapper>

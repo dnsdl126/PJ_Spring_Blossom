@@ -60,10 +60,16 @@ public class ReplyController {
 		log.info(">>>>>>>>>>>>>>>>POST: Reply Insert DB");
 		
 			 rService.insert(rDto);
+			
+	}
+	
+	@ResponseBody
+	@PostMapping("/delete")
+	public void delete(int rno, int bno) {
+		log.info(">>>>>>>>>> POST: reply DELETE DB ");
 		
-			
-			
-			
+			rService.delete(rno, bno);
+		
 	}
 
 }

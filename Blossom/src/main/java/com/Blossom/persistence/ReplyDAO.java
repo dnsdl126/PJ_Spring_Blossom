@@ -19,4 +19,8 @@ public interface ReplyDAO {
 	
 	//댓글 수 +1
 	public void replyCntPlus(@Param("bno") int bno);
+	
+	public void delete(@Param("rno") int rno);
+	
+	public void replyCntMinus(@Param("bno") int bno);
 }

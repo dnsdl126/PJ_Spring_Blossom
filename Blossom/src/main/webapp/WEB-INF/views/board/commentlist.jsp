@@ -16,7 +16,9 @@
 			<input type="hidden" class="replyListCnt" value="${list.size()}">
 			 Comment "${list.size()}" 건
 		</div>
+		
 		<c:forEach items = "${list}" var="list">
+		
 		<div class="coment_box">
 			<div class="coment_box_css">			
 				
@@ -45,19 +47,28 @@
 				<div class="coment_box_list1">
 					<ul>
 						<li>
+							
 							<div class="coment_box_list_box" style="font-weight: bold">
 								작성자
 							</div>
 							<div class="coment_box_list_title" style="padding: 10px">
-								${list.writer}
+									${list.writer}
 							</div>
+							<c:if test="${name == list.writer}">
+								<div class="delete_button_css">
+									<button type="button" class="comment_delete_button" data_num="${list.rno}"> 삭제</button>
+								</div>	
+							</c:if>	
+							
 						</li>
 					</ul>
 				</div>
 				
-			</div>			
+			</div>
+					
 		</div>
 		</c:forEach>
+		
 		<c:if test="${list.size() == 0}">
 			<div class="coment_box">
 			<div class="coment_box_css">			
