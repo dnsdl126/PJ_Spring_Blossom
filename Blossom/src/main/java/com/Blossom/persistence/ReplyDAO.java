@@ -18,9 +18,12 @@ public interface ReplyDAO {
 	public void insert(ReplyDTO rDto);
 	
 	//댓글 수 +1
-	public void replyCntPlus(@Param("bno") int bno);
+	public void replyUpdate(@Param("bno") int bno, @Param("type") String type);
+	// Map으로 처리 방법
+//	public void replyUpdate(@Param("mpa") Hashmap<String, object> map);
+	
 	
 	public void delete(@Param("rno") int rno);
 	
-	public void replyCntMinus(@Param("bno") int bno);
+	
 }

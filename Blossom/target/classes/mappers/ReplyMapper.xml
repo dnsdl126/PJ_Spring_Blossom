@@ -12,18 +12,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO tbl_reply(rno, type, content, writer, bno)
 			VALUES (seq_reply.NEXTVAL, #{type}, #{content}, #{writer}, #{bno})
 	</insert>
-	<update id="replyCntPlus">
-		UPDATE tbl_board
-			SET replycnt=replycnt+1
-			WHERE bno= #{bno}
-	</update>
 	<delete id="delete">
 		DELETE tbl_reply
 			WHERE rno =#{rno}	
 	</delete>
-	<update id="replyCntMinus">
+	<update id="replyUpdate">
 		UPDATE tbl_board
-			SET replycnt=replycnt-1
-			WHERE bno= #{bno}
+		<if test="type == 'plus'">
+			SET replycnt = replycnt +1
+		</if>
+		<if test="type == 'Minus'">
+			 SET replycnt = replycnt -1
+		</if>
+		WHERE bno =#{bno}	
 	</update>
 </mapper>

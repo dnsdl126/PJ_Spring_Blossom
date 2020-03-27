@@ -1,5 +1,6 @@
 package com.Blossom.service.reply;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -55,7 +56,8 @@ public class ReplyServiceImpl implements ReplyService {
 		rDao.insert(rDto);
 		
 		// 2. 게시글 댓글 수 + 1
-		rDao.replyCntPlus(rDto.getBno());
+		String type = "plus";
+		rDao.replyUpdate(rDto.getBno(), type);
 		
 		
 		
@@ -65,10 +67,18 @@ public class ReplyServiceImpl implements ReplyService {
 	//댓글 삭제
 	@Override
 	public void delete(int rno, int bno) {
+		// 댓글 삭제 
 		rDao.delete(rno);
 		
-		rDao.replyCntMinus(bno);
+		String type = "Minus";
+		rDao.replyUpdate(bno, type);
 		
+//		// map 으로 하는 방법
+//		HashMap<String, object>map = new HashMap<>();
+//		map.put("bno", bno);
+//		map.put("type", "minus");
+//		rDao.replyUpdate(map);
+//		
 	}
 
 	
