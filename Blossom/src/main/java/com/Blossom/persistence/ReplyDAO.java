@@ -20,7 +20,7 @@ public interface ReplyDAO {
 	//댓글 수 +1
 	public void replyUpdate(@Param("bno") int bno, @Param("type") String type);
 	// Map으로 처리 방법
-//	public void replyUpdate(@Param("mpa") Hashmap<String, object> map);
+//	public void replyUpdate(@Param("map") Hashmap<String, object> map);
 	
 	
 	public void delete(@Param("rno") int rno);

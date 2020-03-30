@@ -59,7 +59,7 @@ public class ReplyController {
 	public void insert(ReplyDTO rDto) {
 		log.info(">>>>>>>>>>>>>>>>POST: Reply Insert DB");
 		
-			 rService.insert(rDto);
+			 rService.insert(rDto); // rDto에는 bno, type, writer, content가 담긴 상태
 			
 	}
 	

@@ -136,7 +136,6 @@
 						 	<textarea placeholder="댓글을 입력하세요" name ="content" class="coment_input" style="border: none;"></textarea>						
 						</div>
 						<div class="comment_commit">
-							
 						 	<button type="button" class="reply_btn_plus">Comment</button>
 						</div>
 				    </div>	

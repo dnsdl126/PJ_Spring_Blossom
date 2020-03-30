@@ -485,25 +485,42 @@ font-size: 16px;
 	 // commentlist.jsp는 정확히 말하면 include.jsp가 include 된 상태는 아니다
 	 
 	 	var reply_txt = $('.coment_input').val();
+	 // 2. reply_txt라고 변수에 사용자가 입력한 댓글의 내용(coment_input)을 담음
 	 		console.log(reply_txt);
 	 
+	 //3. 조거문 사용자가 입력한 값이 ''이거나 깅이가 00이면
+	 // 널값이기 때문에 댓글 입력부분으로 포커스를 이동하라
+	 // 경고 메세지를 출력하고 여기서 이벤트를 종료
+	 // 사용자가 입력한 값이 있으면 실행하지 않고 종료 
 	 	if(reply_txt == '' || reply_txt.length == 0) {
 	 		$('.reply_txt').focus();
 	 		$('.err_msg').css('visibility', 'visible');
 	 		return false;
 	 	}	
 	 	
-	 	$('.reply_bno').val('${one.bno}'); // 게시글 번호 입력
+	 	$('.reply_bno').val('${one.bno}'); 
+	 	  // 게시글 번호를 reply_bno에 담아라 
 	 	$('.reply_type').val('${one.type}'); 
 	 	$('.reply_writer').val('${name}');
+	 	// commentlist에 form태그로 싸고 input으로 선언했기 때문에 불러올수 있다
+	 	// textarea도 마찬가지 
+	 	
 	 	
 	 	
 	 	$.ajax({
 	 		// 댓글 등록
 	 		// type, content, writer, bno
+	 		
 	 		url: '${path}/reply/insert',
 	 		type: 'POST',
 	 		data: $('.frm_reply').serialize(), //frm_reply 4개의 정보가 담겨 있음 .serialize()는 직렬화 해주는 함수
+	 		//원래는 data{"bno": bno , "type" : type, "writer":name , "content":content}
+	 		// {"key":value} 이렇게 담아줘야한다
+	 		//DTO 선언한 변수명과 동일 해야 한다 
+	 		//url: '${path}/reply/insert?bno='+bno+'&type='+type+'&writer='+nmae+'&content'+content,도 마찬가지 
+	 		// 쿼리스트링으로 써줘야 한다
+	 		// 위 작업들을 serialize가 쿼리스트링을 자동으로 만들어서 보내기때문
+	 		
 	 		success: function() {
 	 			
 	 			listReply();
