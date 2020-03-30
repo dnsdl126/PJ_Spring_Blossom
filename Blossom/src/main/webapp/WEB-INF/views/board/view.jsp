@@ -455,6 +455,8 @@ font-size: 16px;
 <script type="text/javascript">
 /*  삭제 버튼 클릭시 모달창 open */
  $(function(){ //화면단이 다만들어지면 시작해라 
+	
+	 setInterval(refreshReply, 3000000); // 5분에 한번씩 refreshReply를 실행해라 setInterval는 spring 내장함수
 	 
 	 listReply(); //페이지 시작하자마자  호출해라 listReply(); 메서드를  
 	 			  // listReply(); 아래 정의 되어있음
@@ -530,6 +532,11 @@ font-size: 16px;
 		
 	});
  
+//새로운 댓글 확인하기 버튼 클릭시
+ 	$(document).on('click','new_button_comment_button', function(){
+ 		
+ 		listReply();
+ 	});
  
  // 댓글 삭제
  $(document).on('click', '.comment_delete_button', function(){
@@ -573,8 +580,11 @@ font-size: 16px;
  }
 
  
-
- 
+function refreshReply() {
+	
+	listReply();
+	
+}
  
 
  	
