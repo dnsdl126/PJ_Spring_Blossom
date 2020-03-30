@@ -113,4 +113,11 @@ public class BoardController {
 			
 			return "redirect:/board/list";
 		}
+		
+		@GetMapping("/Newcontent")
+		public String newcontent() {
+			log.info(">>>>>>>>>>>>>GET BOARD NEW ACTION");
+			return "board/Newcontent";
+			
+		}
 }

@@ -456,7 +456,7 @@ font-size: 16px;
 /*  삭제 버튼 클릭시 모달창 open */
  $(function(){ //화면단이 다만들어지면 시작해라 
 	
-	 setInterval(refreshReply, 3000000); // 5분에 한번씩 refreshReply를 실행해라 setInterval는 spring 내장함수
+	 setInterval(refreshReply, 1800000); // 5분에 한번씩 refreshReply를 실행해라 setInterval는 spring 내장함수
 	 
 	 listReply(); //페이지 시작하자마자  호출해라 listReply(); 메서드를  
 	 			  // listReply(); 아래 정의 되어있음

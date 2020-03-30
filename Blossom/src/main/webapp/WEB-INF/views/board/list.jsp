@@ -209,7 +209,7 @@ outline: none;
 .pagination {
 	display: flex;
 	justify-content: center;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 
@@ -299,6 +299,32 @@ background-color:#9EE6CF;
 color:white;
 
 }
+.new_css{
+	display: flex;
+    justify-content: flex-end;
+}
+
+.newContent{
+	width: 87px;
+    height: 41px;
+    border: solid 1px #1F8AD8;
+    color: #1F8AD8;
+    text-align: center;
+    padding: 7px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    
+}
+.newContent:hover{
+	background: #1F8AD8;
+	color: white;
+}
+
+.newContent_buttom{
+
+}
+
 
 
 </style>
@@ -387,6 +413,12 @@ color:white;
 			   </tbody>	
 			   </c:forEach>			   	
 			</table>
+			<div class="new_css">
+				<div class = newContent>
+					<a href="${path}/board/Newcontent" class="newContent_buttom">글쓰기</a>
+				</div>
+			</div>
+			
 		</div>
 		
 			<div class="pagination">
