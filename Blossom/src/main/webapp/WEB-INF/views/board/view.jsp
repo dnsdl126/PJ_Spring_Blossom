@@ -258,7 +258,7 @@ margin-bottom: 120px;
 	color: tomato;
 	font-size: 14px;
 	margin-left:10px;
-	visibility: hidden;
+	
 	
 }
 .coment_plus{
@@ -436,7 +436,7 @@ font-size: 16px;
 		<div class="flex_class" >
 			<div class="button_list">
 			<!-- header는  http 의 header 을 사용 -->
-				<a href="${header.referer}" class="box_deco">목록</a>
+				<a href="${header.referer}" class="box_deco test_list" >목록</a>
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="#" class="box_deco">수정</a>
@@ -473,6 +473,25 @@ font-size: 16px;
  
  });
  
+ 
+ $(document).on('click','.box_deco', function(){
+			
+		 var referer = '${header.referer}';
+		
+		console.log('이전 URL:' + referer);
+		
+		
+		var index = referer.indexOf('/board/list');
+		console.log('index :' + index);
+		
+		
+		if(index == '-1') {
+			// href 속성을 "${path}/board/list" 로 경로 변경 
+			$('.test_list').attr("href","${path}/board/list");
+			
+		} 
+	  
+	}); 
 
  
  $(document).on('click','.reply_btn',function(){

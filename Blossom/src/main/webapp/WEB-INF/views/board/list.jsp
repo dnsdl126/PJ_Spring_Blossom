@@ -415,7 +415,7 @@ color:white;
 			</table>
 			<div class="new_css">
 				<div class = newContent>
-					<a href="${path}/board/Newcontent" class="newContent_buttom">글쓰기</a>
+					<a href="${path}/board/write" class="newContent_buttom">글쓰기</a>
 				</div>
 			</div>
 			

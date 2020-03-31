@@ -193,6 +193,16 @@ margin-right: 8px;
    margin-left: 12px
 
 }
+.err_msg{
+	font-size: 15px;
+    margin-left: 131px;
+    margin-bottom: 10px;
+    color: tomato;
+    font-weight: bold;
+    display: none;
+   
+
+}
 
 	
 </style>
@@ -229,10 +239,9 @@ margin-right: 8px;
 				<div class="board_content_wrap_list_box1">
 					제목 :
 				</div>
-				<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" name="title"/>
-					
-				
+				<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" name="title" id="boadr_title"/>
 			</div>
+			<div class="err_msg"> 제목을 입력하세요</div>
 			<div class="board_content_wrap_list_S">
 				<div class="board_content_wrap_list_box1 box1_css" >
 					내용 :
@@ -269,13 +278,13 @@ margin-right: 8px;
 		
 	});
 	
+	/*  취소 버튼 클릭시 정상 비정상 경로 설정 */
 	$(document).on('click','.file_cancle_button', function(){
 		var referer = '${header.referer}';
 		console.log('이전 URL:' + referer);
 		
 		var index = referer.indexOf('/board/list');
 		console.log('index :' + referer.indexOf('/board/list'))
-         alert(index);
 			
 		if(index == '-1') {
 		 	location.href='${path}/board/list';
@@ -284,6 +293,22 @@ margin-right: 8px;
 		}
 	
 	}); 
+	
+	$(document).on('click','.file_agree_button', function (){
+		
+		// 유효성 체크 (제목)
+		var title = $('#boadr_title').val();
+		
+		if(title == '' || title.legnth == 0) {
+			//에러메세지 제목을 입력해주세요
+			alert('값 입력하시요 ');
+			$('.err_msg').css('display','block');
+			return false;
+		} else {
+			
+			$('#frm_baord').submit();
+		}
+	});
 
 </script>	
 	
