@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp"%> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +30,14 @@
 }
 .board_content_wrap_list_box1{
 	font-weight: bold;
-	width: 15%;
+	width: 120px;
 	font-size: 15px;
 	text-align: right;
+	height: 40px;
 	padding: 10px;
 }
 .board_content_wrap_list_box{
-	width: 73%;
+	width: 850px;
 	font-size: 15px;
 	margin-left: 5px;
 	border: solid 1px #a4b0be;
@@ -175,78 +177,126 @@
 	color: #1F8AD8;
 	margin-top: 150px;
 	font-size: 30px;
+	font-weight: bold;
 
 }
 
-body {
-top : 0;
+.board_content_wrap_list_S {
+  display: flex;
+    width: 980px;
+    height: 350px;
+
+}
+
+.box1_css{
+margin-right: 8px;
+   margin-left: 12px
+
 }
 
 	
-
-
 </style>
 </head>
 <body>
-	<div class="Newcontetn_titl" > 게시글 작성 </div>>
-	<div class="content_box_wrap">
-	<div class="board_content_wrap">
-		<div class="board_content_wrap_list">
-			<div class="board_content_wrap_list_box1">
-				작성자 :
+	<div class="Newcontetn_titl" > 게시글 등록 </div>>
+	<form:form id="frm_baord" >
+		<div class="content_box_wrap">
+		<div class="board_content_wrap">
+			<div class="board_content_wrap_list">
+		
+				<div class="board_content_wrap_list_box1">
+					작성자 :
+				</div>
+				<div class="board_content_wrap_list_box">
+					${name}
+					<input type="hidden" value="${name}" name="writer">
+				</div>
 			</div>
-			<div class="board_content_wrap_list_box">
-				뇽덕이LI
-			</div>
-		</div>
-		<div class="board_content_wrap_list">
-			<div class="board_content_wrap_list_box1">
-				종류 :
-			</div>
-			<div class="board_content_wrap_list_box">
-				<select class="select_box" style="font-size: 15px;">
-					<option value="">자유게시판</option>
-					<option value="">QnA게시판</option>
-					<option value="">리뷰</option>					
-				</select> 
-			</div>			
-			
-		</div>
-		<div class="board_content_wrap_list">
-			<div class="board_content_wrap_list_box1">
-				제목 :
-			</div>
-			<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" />
+			<div class="board_content_wrap_list">
+				<div class="board_content_wrap_list_box1">
+					종류 :
+				</div>
+				<div class="board_content_wrap_list_box" >
+					<select class="select_box" style="font-size: 15px;" name="type">
+						<option value="one">자유게시판</option>
+						<option value="two">QnA게시판</option>
+						<option value="three">리뷰</option>					
+					</select> 
+				</div>			
 				
-			
-		</div>
-		<div class="board_content_wrap_list">
-			<div class="board_content_wrap_list_box1">
-				내용 :
 			</div>
-			<textarea class="text_box board_content_wrap_list_box" > 
-				
-			</textarea>		
-		</div>	
-	</div>
-	<div class="board_content_wrap02">
-		<div class="board_content_wrap_list">
-			<div class="board_content_wrap_list_box1" >
-				첨부파일 :
-			</div>
-			<div class="board_content_wrap_list_box " style="height: 100px; display: flex; justify-content: center; border: dashed 2px  #9EE6CF;">
-				
-				<i class="fas fa-file-import icon_css"></i>
-				<span><div class="file_uplod">파일을 올려주세요 </div></span>
-			</div>
+			<div class="board_content_wrap_list">
+				<div class="board_content_wrap_list_box1">
+					제목 :
+				</div>
+				<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" name="title"/>
 					
+				
+			</div>
+			<div class="board_content_wrap_list_S">
+				<div class="board_content_wrap_list_box1 box1_css" >
+					내용 :
+				</div>
+				<script type="text/javascript" src="${path}/resources/smarteaditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+				<textarea class="text_box_03 board_content_wrap_list_box_03"  id="board_textbox_area" name="content"  style="min-width:850px;"> 
+					
+				</textarea>		
+			</div>	
 		</div>
-		<div class="text_box_02_button">
-			<button type="button" class="file_cancle_button">취소</button>
-			<button type="button" class="file_agree_button">완료</button>
+		<div class="board_content_wrap02">
+			<div class="board_content_wrap_list">
+				<div class="board_content_wrap_list_box1" >
+					첨부파일 :
+				</div>
+				<div class="board_content_wrap_list_box " style="height: 100px; display: flex; justify-content: center; border: dashed 2px  #9EE6CF;">
+					
+					<i class="fas fa-file-import icon_css"></i>
+					<div class="file_uplod">파일을 올려주세요</div>
+				</div>
+						
+			</div>
+			<div class="text_box_02_button">
+				<button type="button" class="file_cancle_button">취소</button>
+				<button type="button" class="file_agree_button">완료</button>
+			</div>	
+	
 		</div>	
+		</div>
+	</form:form>	
+<script type="text/javascript">
 
-	</div>	
-	</div>
+	$(function() {
+		
+	});
+	
+	$(document).on('click','.file_cancle_button', function(){
+		var referer = '${header.referer}';
+		console.log('이전 URL:' + referer);
+		
+		var index = referer.indexOf('/board/list');
+		console.log('index :' + referer.indexOf('/board/list'))
+         alert(index);
+			
+		if(index == '-1') {
+		 	location.href='${path}/board/list';
+		} else {
+			location.href='${header.referer}'; 	
+		}
+	
+	}); 
+
+</script>	
+	
+	<script type="text/javascript">
+		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		 oAppRef: oEditors,
+		 elPlaceHolder: "board_textbox_area",
+		 sSkinURI: "${path}/resources/smarteaditor/SmartEditor2Skin.html",
+		 fCreator: "createSEditor2"
+		});
+	</script>
+
+
 </body>
 </html>
