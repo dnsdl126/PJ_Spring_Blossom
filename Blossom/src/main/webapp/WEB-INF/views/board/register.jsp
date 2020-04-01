@@ -305,7 +305,7 @@ margin-right: 8px;
 			$('.err_msg').css('display','block');
 			return false;
 		} else {
-			
+			 oEditors.getById["board_textbox_area"].exec("UPDATE_CONTENTS_FIELD", []);
 			$('#frm_baord').submit();
 		}
 	});

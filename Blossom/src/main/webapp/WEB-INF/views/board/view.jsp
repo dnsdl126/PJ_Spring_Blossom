@@ -40,7 +40,7 @@ margin: 100px 0 40px;
 }
 .main{
 	text-align: center;
-	width: 340px;
+	width: 310px;
 }
 .size {
 padding: 10px;
@@ -49,9 +49,19 @@ border-top: solid  #9EE6CF;
 vertical-align: middle;
 }
 
+.size_01 {
+height: 44px;
+border-top: solid  #9EE6CF;   
+vertical-align: middle;
+font-size: 20px;
+ font-weight: bold;
+}
+
 .title_sub{
 	text-align: left;
-	width: 80%
+	width: 811px;
+	padding: 6px;
+	padding-left: 15px;
 }
 
 .contet_sub{
@@ -384,7 +394,7 @@ font-size: 16px;
 			<div class="main size right font_we">
 			   subject
 			</div>
-			<div class="title_sub size">
+			<div class="title_sub size_01">
 				${one.title}
 			</div>						  			
 		</div>
@@ -431,7 +441,7 @@ font-size: 16px;
 										  			
 		</div>
 		<div class="box">
-			동백샴푸는 인덕ㅇ친덕 ㅓ해요 
+			${one.content}
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">

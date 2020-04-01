@@ -126,6 +126,8 @@ public class BoardController {
 		public String write(BoardDTO bDto) {
 			log.info(">>>>>>>>>>>>>POST BOARD write ACTION");
 			log.info(bDto.toString());
+			bService.write(bDto);
+			
 			
 			return "redirect:/board/list";
 		}

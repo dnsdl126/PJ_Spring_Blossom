@@ -563,8 +563,10 @@
 
 <script type="text/javascript">
 
+	var message = '${message}';
+	var uri = '${uri}';
 	 $(function(){
-		 var message = '${message}';
+		 
 		 if(message == 'nologin') {
 			 $('.modal_login_wrap').css('display','flex');
 			   $('#login_id').focus();
@@ -681,7 +683,12 @@
  	    		 $('.login_err_msg').css('display', 'block').text('로그인중 문제가 발생했습니다. 아이디 및 비밀번호를 확인해주세요')
  	    	 } else if(data == 1) {
  	    		 console.log('로그인 성공');
- 	    		 location.reload(); // 새로고침 
+ 	    		 
+ 	    		 if(uri == '') {
+	 	    		 location.reload(); // 새로고침 
+ 	    		 } else {
+ 	    			 location.href= uri;
+ 	    		 }
  	    	 } else if(data ==  2) {
  	    		 $('.login_err_msg').css('display', 'block').text('이메일 인증을 하셔야만 로그인이 가능합니다.') 	    		 
  	    	 }

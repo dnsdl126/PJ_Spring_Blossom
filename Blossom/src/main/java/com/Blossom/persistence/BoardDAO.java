@@ -27,4 +27,8 @@ public interface BoardDAO {
 	// mapper 에서 updqte 로 보이지만 않게 수정  
 	public void delBoard(int bno);
 	
+	
+	//게시글 등록 
+	
+	public void write(BoardDTO bDto);
 }
