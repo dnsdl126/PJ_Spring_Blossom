@@ -626,6 +626,7 @@
        //$('.login_input').val('');
        
        $('.login_err_msg').css('display', 'none');
+       uri = '';
     });
    
   

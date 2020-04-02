@@ -131,4 +131,29 @@ public class BoardController {
 			
 			return "redirect:/board/list";
 		}
+		
+		@GetMapping("/update")
+		public String updateBoard(int bno, Model model) {
+			log.info(">>>>>>>>>GET: Board update View Page");
+			log.info("bno: " + bno);
+			
+			
+			// 수정을 원하는 게시글의 정보를 (1줄) 원함 
+			model.addAttribute("one", bService.boardview(bno));
+			BoardDTO bDto = bService.boardview(bno);
+			
+			
+			return "board/register";
+		}
+		
+		@PostMapping("/update")
+			public String updateBoard(@RequestParam int bno, BoardDTO bDto ) {
+			
+			
+			bService.updateBoard(bno, bDto);
+			 
+			String page = "redirect:/board/view/"+bno;
+			
+			return  page;
+		}
 }

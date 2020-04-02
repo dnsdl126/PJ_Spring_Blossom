@@ -31,4 +31,6 @@ public interface BoardDAO {
 	//게시글 등록 
 	
 	public void write(BoardDTO bDto);
+	
+	public void updateBoard(@Param("board") int bno, @Param("board")BoardDTO bDto);
 }

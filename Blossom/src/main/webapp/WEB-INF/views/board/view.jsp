@@ -449,7 +449,7 @@ font-size: 16px;
 				<a href="${header.referer}" class="box_deco test_list" >목록</a>
 				<a href="#" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
-				<a href="#" class="box_deco">수정</a>
+				<a href="${path}/board/update?bno=${one.bno}" class="box_deco">수정</a>
 				<a href="#" class="box_deco delete">삭제</a>
 			</c:if>	
 			</div>

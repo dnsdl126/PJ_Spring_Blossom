@@ -208,7 +208,7 @@ margin-right: 8px;
 </style>
 </head>
 <body>
-	<div class="Newcontetn_titl" > 게시글 등록 </div>>
+	<div class="Newcontetn_titl" > 게시글 등록 </div>
 	<form:form id="frm_baord" >
 		<div class="content_box_wrap">
 		<div class="board_content_wrap">
@@ -228,9 +228,9 @@ margin-right: 8px;
 				</div>
 				<div class="board_content_wrap_list_box" >
 					<select class="select_box" style="font-size: 15px;" name="type">
-						<option value="one">자유게시판</option>
-						<option value="two">QnA게시판</option>
-						<option value="three">리뷰</option>					
+						<option value="free">자유게시판</option>
+						<option value="qna" >QnA게시판</option>
+						<option value="review">리뷰</option>					
 					</select> 
 				</div>			
 				
@@ -239,7 +239,8 @@ margin-right: 8px;
 				<div class="board_content_wrap_list_box1">
 					제목 :
 				</div>
-				<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" name="title" id="boadr_title"/>
+				<!-- 등록이랑 수정이랑 페이지를 공유하지만 value값은 수정시에만 one.write를 가지고 오기때문에   -->
+				<input class="board_content_wrap_list_box" placeholder="제목을 입력하세요" type="text" name="title" id="boadr_title" value="${one.title}"/>
 			</div>
 			<div class="err_msg"> 제목을 입력하세요</div>
 			<div class="board_content_wrap_list_S">
@@ -248,7 +249,7 @@ margin-right: 8px;
 				</div>
 				<script type="text/javascript" src="${path}/resources/smarteaditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 				<textarea class="text_box_03 board_content_wrap_list_box_03"  id="board_textbox_area" name="content"  style="min-width:850px;"> 
-					
+					${one.content}
 				</textarea>		
 			</div>	
 		</div>
@@ -274,8 +275,19 @@ margin-right: 8px;
 	</form:form>	
 <script type="text/javascript">
 
-	$(function() {
+	$(function(){
 		
+		
+		alert('데이터');
+		
+		if('${one.bno}' != '') {
+			
+			
+			$('.Newcontetn_titl').text('게시글 수정');
+			
+			$('.select_box').val('${one.type}').attr('selected','selected');
+			
+		}
 	});
 	
 	/*  취소 버튼 클릭시 정상 비정상 경로 설정 */
