@@ -57,16 +57,29 @@ font-size: 20px;
  font-weight: bold;
 }
 
+.size_02{
+padding: 10px;
+height: 44px;
+border-top: solid  #9EE6CF;   
+vertical-align: middle;
+}
+
 .title_sub{
 	text-align: left;
 	width: 811px;
 	padding: 6px;
 	padding-left: 15px;
+	display: flex;
+    justify-content: space-between;
 }
 
 .contet_sub{
 	text-align: center;
-	width: 204px;
+	width: 105px;
+}
+.contet_sub_sub {
+   text-align: center;
+	width: 239px;
 }
 
 .box {
@@ -376,6 +389,12 @@ font-size: 16px;
  background: tomato;
 
 }
+
+.update_regdate {
+
+font-size: 12px;
+padding: 6;
+}
 </style>
 
 </head>
@@ -396,6 +415,11 @@ font-size: 16px;
 			</div>
 			<div class="title_sub size_01">
 				${one.title}
+				<div class="update_regdate">
+					<c:if test="${one.regdate != one.updatedate}">
+				   	 		 수정일 <fmt:formatDate value= "${one.updatedate }" pattern="yyyy-MM-dd HH:mm:ss"/>
+				   	 </c:if>
+				 </div>
 			</div>						  			
 		</div>
 		<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
@@ -409,14 +433,16 @@ font-size: 16px;
 			<div class="title size right font_we">
 			   날짜
 			</div>
-			<div class="contet_sub size right">
+			<div class="contet_sub_sub size_02 right">
 				<c:choose>
 			   	 	<c:when test="${today == regdate}" >
-			   	 		<fmt:formatDate value="${one.updatedate}" pattern="HH:mm:ss"/>
-			   	 	</c:when>
-			   	 	<c:otherwise>
-			   	 		<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd"/>
-			   	 	</c:otherwise>
+			   	 		<fmt:formatDate value="${one.regdate} " pattern="HH:mm:ss"/>
+			   	 	</c:when>	
+			   	 		<c:otherwise>
+			   	 		
+			   	 		 	작성일 <fmt:formatDate value="${one.regdate}" pattern="yyyy-MM-dd "/> 
+			   	 		</c:otherwise>
+			   	 	   	 	
 				</c:choose>
 			</div>
 			<div class="title size right font_we">
