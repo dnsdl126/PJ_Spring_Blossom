@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			SET type = #{board.type},
 			    title = #{board.title},
 			    content = #{board.content},	
-			    updatedate = systimestamp		  
+			    updatedate = sysdate		  
 			WHERE bno = #{board.bno}
 	
 	</update>

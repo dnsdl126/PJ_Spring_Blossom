@@ -29,74 +29,83 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//boolean : return 값으로 true  & false 만 받는다 
 		// true : Interceptor가 메서드 진행하도록 보내준다
 		// false : Interceptor가 돌려 보낸다 
-		// Session 객체 생성
 		
+		// Session 객체 생성
 		HttpSession session = request.getSession();
 		
+		//이동하기 전 있었던 page URL
 		String referer = request.getHeader("referer"); // 이전페이지 목적지만 알고있는 상태 
-		log.info("□■□■□■□■□■□■□■□■□■□■이전 URL :" + referer);
+		 log.info(">>>>>>>>>> referer: " +referer);
+		// 이동 하려고 했던 page  URL
+		String uri = request.getRequestURI(); // 내가 가려고 하는 페이지 
+		String ctx = request.getContextPath(); // context - root
+		String nextUrl = uri.substring(ctx.length()); //
+		String prevUrl = "";
+		String finalUrl = "http://localhost:8081/Blossom/";
 		
-		// Login NO
-		if(session.getAttribute("userid") == null) {
-			log.info("□■□■□■□■□■□■□■□■□■□■ NOLOGIN :(");
+		
+		
+		// 비정상적인 접근을 막는 기능
+		if(referer == null) { // url을 바로 다이렉트로 치고 들어오면 null 이다 
+			log.info("WARING>>>>>>>>>>> 비정상적인 점근 :(");
+			response.sendRedirect(finalUrl); 
+			// 비정상 접근시 바로 인덱스 페이지 로 이동
+			// session(로그인 정보)확인 안한 상태 
+			return false;
 			
-			 	// request : 서버로 요청
-				// Referer : 바로 직전에 머물렀던 웹 링크 주소 
-			    
+		 } else {
+			 
+			//게시글 등록, 수정(로그인이 필요한 view)단
+			// 내부에서 접근했지만 비정상 경로일때 
+			int indexQuery = referer.indexOf("?");
 			
-			 // URL만 신경, GET or POST 중요하지 않다
-			 // 회원수정 페이지: GET:/member/update
-			 // 회원수정 DB: POST:/meber/update
-			 // request(GET, POST) > response(forward, sendRedirect)
-			
-			//원페이지 가서 에러 메세지를 띄워야 한다 
-			// flashmap : 1회성 데이터 
-			// 1번 주고 사라진다 -> 새로고침하면 받아오지 못한다 
-			
-			
-			// login NO
-			
-				
-				String uri = request.getRequestURI();
-				log.info(">>>>> 목적지 : " + uri);
-				
-				if(referer == null) {
-					// 비정상 경로로 접근한 경우
-				    // url로 바로 접근한(외부에서 접근) 경우 (referer이 없는 경우)
-					referer = "http://localhost:8081/Blossom/";
-				} else {
-					//게시글 등록, 수정(로그인이 필요한 view)단
-					// 내부에서 접근했지만 비정상 경로일때 
-					int index = referer.lastIndexOf("/");
-					int len = referer.length();
-					log.info(">>>>>> 인덱스 : " + index);
-					log.info(">>>>>> 인덱스 : " + len);
-					String mapWord = referer.substring(index, len);
-					// substring 문자열을 잘라라 index에서 len 까지 (맨 끝에 write를 잘라라 )
-					log.info("수정된 URL:" + mapWord);
+			if(indexQuery == -1) { // 
+				prevUrl = referer.substring(finalUrl.length()-1);
+					// http://localhost:8081/metop/ 28-1 = 27
+			 } else {
 					
-					if(mapWord.equals("/write")) {
-						response.sendRedirect(request.getContextPath()+ "/board/list");
+				prevUrl = referer.substring(finalUrl.length()-1, indexQuery);
+				//indexQuery = 40
+				
+			 }	
+			log.info("prev URL >>>>>>>>>>>" + prevUrl);
+			log.info("NEX URL >>>>>>>>>>>" + prevUrl);
+		
+			if(nextUrl.equals("/board/update") || nextUrl.equals("/board/delete")) {
+				// 지금하려는 기능이 게시글 수정 or 삭제인것인지 
+				// referer 주소에 board/view가 있는지 
+				if(request.getParameter("title")==null) { 
+					// /update가 2가지 get, post 두가지 경우가 있음
+					// 상세계시글에서 view -> update로가는 경우
+					// 게시글 수정 후 update -> update 로 다시 돌아가는 경우
+					// update 에 수정하러 접속된 경우 작성자와 로그인 유저가 같다는 의미이므로
+					//view에서 접속시에만 확인 진행 
+					if(prevUrl.indexOf("board/view") == -1) {
+						// 상세 게시글에서 정상 접근 했는지를 확인 
+						// 글을 수정하거나 삭제할때 
+						// 조건 1 로그인
+						// 조건 2 해당글 작성자 
+						log.info("WARING >>>> 비정상적인 접근 :(");
+						response.sendRedirect(finalUrl);
 						return false;
 					}
 				}
-				
-				
-				
-				// 게시글 작성에서 로그아웃 할경우
-				 // return true : 게시글 등록 페이지 
-				 //  로그아웃기능 : 1. 세션을 초기화 2. 원페이지로 새로고침
-				 // 게시글 작성 페이지에서 로그아웃 하면 ajax를 타고 가서 세션이 먼저 삭제된다
-				 // 원페지 /board/write 로 돌아가는데  새로고침을 진행한다
-				 // /board/write 다시한번 입력 (input) 하는데
-				 // interceptor로 가게 해뒀기 때문에
-				 // interceptor로 가는데 session이 없기 때문에
-				 // nologin 메세지를 담아 referer (이전페이지 : /board/write)로 간다 
-				 // 위에 경로를 계속 반복하게 되다가 일정 횟수가 되면 timeout 기능으로 작업을 종료 
-				
-				
+			}
+	
+	   }		
+	// 정상적인 접근인 경우 실행 
+		if(session.getAttribute("userid") == null) {
+			// boaurd update 에서 로그아웃 누르면
+			// session 초기화 /board/update 새로고치면
+			// 다시 interceptor가 낚아챈다 
+			// 로그아웃으로 session이 없기 때문에
+			// 원래 페이지 board update 로 가게 되어 반복
 			
-			
+			if(prevUrl.equals(nextUrl)) {
+				log.info("Waring>>prevUrl == nextUrl :/");
+				response.sendRedirect(finalUrl);
+				return false;
+			}
 			
 			FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
 			fMap.put("message", "nologin");
@@ -105,34 +114,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			RequestContextUtils.saveOutputFlashMap(referer, request, response);
 			response.sendRedirect(referer ); // 이전 페이지로 보내준다 
 			
-			return false;
-			//URL로 바로 접근한 경우(referer 이 없는 경우) 인덱스 페이지로 
+			return false; // 이동 X
 			
-		}else { 
-			
-			
-			log.info("□■□■□■□■□■□■□■□■□■□■ LOGIN :)");
-			return true; // 원래 가려던 곳으로 이동 -> 이동 O 
-				 
-			// 이전 url
-				 // 상품페이지 15번 페이지에 20번재 게시물에 댓글 달려고 함
-				 // http://127.0.0.1:8081/metop/free/view?page=15&bno=20
-				 // 댓글을 작성 -> 로그인이 필요
-				 
-				 // request 
-				 // http://127.0.0.1:8081/metop/reply/insert?bno=20
-				 
-				 // Interceptor 체크하여 
-				 // 성공 : http://127.0.0.1:8081/metop/reply/insert?bno=20
-				 // 실패 : http://127.0.0.1:8081/metop/free/view?page=15&bno=20
-				 //        return 이전페이지;  
-			 
-		} 
-		
+		 } else { // login ok
+			 log.info(">>>>>>> LOGIN:)");
+			 return true;
+		 }
+	
 		
 	}
 	
-	
+}	
 //	@Override
 //	 // URL 후
 //	 //@Override : 부모 메서드를 재정의 해서 사용 
@@ -143,4 +135,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 //	}
 
 	
-}
+

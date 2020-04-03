@@ -115,9 +115,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void updateBoard(int bno, BoardDTO bDto) {
+	public void updateBoard(BoardDTO bDto) {
 		
-		 bDao.updateBoard(bno, bDto);
+		 bDao.updateBoard(bDto);
 	}
 
 

@@ -140,20 +140,20 @@ public class BoardController {
 			
 			// 수정을 원하는 게시글의 정보를 (1줄) 원함 
 			model.addAttribute("one", bService.boardview(bno));
-			BoardDTO bDto = bService.boardview(bno);
+			
 			
 			
 			return "board/register";
 		}
 		
 		@PostMapping("/update")
-			public String updateBoard(@RequestParam int bno, BoardDTO bDto ) {
+			public String updateBoard( BoardDTO bDto ) {
 			
 			
-			bService.updateBoard(bno, bDto);
+			bService.updateBoard(bDto);
 			 
-			String page = "redirect:/board/view/"+bno;
 			
-			return  page;
+			
+			return  "redirect:/board/view/"+bDto.getBno();
 		}
 }

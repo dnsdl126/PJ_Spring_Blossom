@@ -278,7 +278,6 @@ margin-right: 8px;
 	$(function(){
 		
 		
-		alert('데이터');
 		
 		if('${one.bno}' != '') {
 			
