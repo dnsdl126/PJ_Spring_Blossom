@@ -467,7 +467,7 @@ padding: 6;
 										  			
 		</div>
 		<div class="box">
-			${one.content}
+			${one.search_content}
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">

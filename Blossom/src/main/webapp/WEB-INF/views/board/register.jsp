@@ -248,9 +248,7 @@ margin-right: 8px;
 					내용 :
 				</div>
 				<script type="text/javascript" src="${path}/resources/smarteaditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-				<textarea class="text_box_03 board_content_wrap_list_box_03"  id="board_textbox_area" name="content"  style="min-width:850px;"> 
-					${one.content}
-				</textarea>		
+				<textarea class="text_box_03 board_content_wrap_list_box_03"  id="board_textbox_area" name="view_content"  style="min-width:850px;">${one.view_content}</textarea>
 			</div>	
 		</div>
 		<div class="board_content_wrap02">
@@ -316,8 +314,25 @@ margin-right: 8px;
 			$('.err_msg').css('display','block');
 			return false;
 		} else {
+			// 스마트 에디터의 값을 #board_textbox_area에 담아라 
 			 oEditors.getById["board_textbox_area"].exec("UPDATE_CONTENTS_FIELD", []);
-			$('#frm_baord').submit();
+				
+			 var view_content = $('#board_textbox_area').val();
+			
+			
+			 // 순수 텍스트
+			 //view_content 에서 정규식을 통해 HTML태그를 제거 후 순수 Text만 추출 
+			 var search_content = view_content.replace(/(<([^>]+)>)/ig,"").replace("&nbsp;", "");
+						 
+			  // 게시글 등록버튼을 눌렀을때 frm_board태그에 맨 마지막에
+			  // 평소에는 없다가 
+			  //'<textarea id= "search_content" name="search_content"></textarea> '를 추가 
+			  
+			 $('#frm_baord').append('<textarea id= "search_content" name="search_content"></textarea> ');
+			 $('#search_content').val(search_content);
+			 
+			  // 서버로 전송 
+		     $('#frm_baord').submit();
 		}
 	});
 

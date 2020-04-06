@@ -32,5 +32,5 @@ public interface BoardDAO {
 	
 	public void write(BoardDTO bDto);
 	
-	public void updateBoard(@Param("board")BoardDTO bDto);
+	public void updateBoard(BoardDTO bDto);
 }
