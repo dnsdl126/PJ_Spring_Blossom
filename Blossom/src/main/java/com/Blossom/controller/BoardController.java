@@ -128,8 +128,8 @@ public class BoardController {
 			log.info(bDto.toString());
 			bService.write(bDto);
 			
-			
-			return "redirect:/board/list";
+			log.info("currval:" +bDto.getBno());
+			return  "redirect:/board/view/"+bDto.getBno();
 		}
 		
 		@GetMapping("/update")
@@ -152,7 +152,37 @@ public class BoardController {
 			
 			bService.updateBoard(bDto);
 			 
+			// 게시글 작성후 상세페이지로 다시 return하려면 bno를 알아야하는데
+			// INSERT seq_board.NEXTVAl을 처리해서 
+			// NEXTVAL은 호출하는 순간 +1 이 증가
+			// 당시의 bno값을 알려면 seq_board.CURRVAL을 사용 
 			
+			// 잘못된 예
+			// <inxert id="write">
+			// 		INSERT INTO tbl_board(bno,~~~)
+			//		VALUES(seq_baord.NETVAL,~~~);
+			// <inxert id="write">
+			// <select id = "currval">
+			// 		SELECT seq_board.CURRVAL  FROM dual
+			// </select>
+			// --> 위의 경우(트랜잭션으로 처리 했을때)는 
+			//     NEXTVAL로 처리하여 commit하고 그다음 CURRVAL  이 해당 bno를 조회하러 가는데
+			//     조회하러 간사이에 다른 글이 작성되어 NEXTVAL이 하나 추가가 되어있을 수도 있어 
+			//     해당 bno가 아닌 그다음 bno를 가지고 올수 있다
+			
+			// 해결 방법 
+				/*<insert id="write">
+				 * INSERT INTO tbl_board(bno, type, title, content, writer)
+				 * VALUES(seq_board.NEXTVAL, #{type}, #{title}, #{content}, #{writer} )
+				 *    <selectKey keyProperty="bno" resultType ="Interger" order="AFTER">
+				         SELECT seq_board.CURRVAL FROM dual
+			          </selectKey> 
+			      </insert>
+				 */
+			// 동시에 시작하도록 SELECT  키를 사용한다 
+			// select키를 메인을 잡고 전후에 따라 select begin ,select after가 된다  
+			// keyProperty="bno"의 값이 #{type}으로 담긴다 
+		 
 			
 			return  "redirect:/board/view/"+bDto.getBno();
 		}
