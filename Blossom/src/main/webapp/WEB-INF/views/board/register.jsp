@@ -272,18 +272,32 @@ margin-right: 8px;
 		</div>
 	</form:form>	
 <script type="text/javascript">
+var flag = '${flag}';
+console.log('flag :' + flag);
 
-	$(function(){
+$(function(){
 		
-		
-		
-		if('${one.bno}' != '') {
-			
+	// resgister ==> 게시글 등록과 게시글 수정
+	// ${one}에 값이 있으면 수정 페이지 로딩 
+		if(flag == 'update') {
 			
 			$('.Newcontetn_titl').text('게시글 수정');
-			
+			 
+			// selectbox값으로 selected
 			$('.select_box').val('${one.type}').attr('selected','selected');
 			
+		} else if (flag == 'answer') {
+			
+			$('.Newcontetn_titl').text('게시글 답글');
+			
+			// selectbox값으로 selected
+			$('.select_box').val('${one.type}')
+			                .attr('selected','selected')
+			                .attr('onFocus', 'this.initialSelect = this.selectedIndex')
+			                .attr('onChange', 'this.selectedIndex = this.initialSelect');
+			
+		    $('#boadr_title').val('RE: ' + '${one.title}')
+		                     .attr('readonly', 'readonly');
 		}
 	});
 	

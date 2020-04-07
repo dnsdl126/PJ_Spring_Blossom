@@ -36,12 +36,25 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		//이동하기 전 있었던 page URL
 		String referer = request.getHeader("referer"); // 이전페이지 목적지만 알고있는 상태 
 		 log.info(">>>>>>>>>> referer: " +referer);
-		// 이동 하려고 했던 page  URL
+		 // ?(쿼리스트링)뒤에 값을 알려준다 쿼리스트링이 없으면 null 값이 들어온다 
+		// 인터셉터 /board/answer
+			// uri ==> 쿼리스트링으로 잘라둬서 board/answer 까지만 나타나는 상태 
+			
+			//  1)session 체크(NO 로그인)
+			//    referer(이전페이지로) 이동
+			//      + message(nologin) + uri(uri)
+			
+			// 이전페이지: /board/view/10
+			// message = nologin >> 로그인 모달창 출력
+			// uri ==> 로그인 버튼 클릭시 uri 이동
+		 String qString = request.getQueryString();
+		// 이동 하려고 했던 page  URL		 
 		String uri = request.getRequestURI(); // 내가 가려고 하는 페이지 
 		String ctx = request.getContextPath(); // context - root
 		String nextUrl = uri.substring(ctx.length()); //
 		String prevUrl = "";
 		String finalUrl = "http://localhost:8081/Blossom/";
+		
 		
 		
 		
@@ -109,6 +122,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			FlashMap fMap = RequestContextUtils.getOutputFlashMap(request);
 			fMap.put("message", "nologin");
+			if(qString !=null) {
+				
+				uri=uri+"?"+qString;
+				// 대댓글 달때 로그인이 안되어있으면 
+				// 로그인 후 answer로 보내줘야 하는데 갈때 bno가 필요함
+				// 쿼리스트링을 자르도록 설쟁해서 로그인시 
+				// board/answer만 보내는데
+				// qString으로 쿼리스트링 값을 알수 있게 해줌 
+				
+			}
 			fMap.put("uri", uri);
 			
 			RequestContextUtils.saveOutputFlashMap(referer, request, response);

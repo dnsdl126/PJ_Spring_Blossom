@@ -88,7 +88,7 @@ vertical-align: middle;
 	border-bottom: solid #9EE6CF;   
 	width: 59%;
     margin: auto;
-    height: 400px;
+    
 }
 .right{
 	border-right: solid 1px #9EE6CF;
@@ -467,13 +467,13 @@ padding: 6;
 										  			
 		</div>
 		<div class="box">
-			${one.search_content}
+			${one.view_content}
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">
 			<!-- header는  http 의 header 을 사용 -->
 				<a href="${header.referer}" class="box_deco test_list" >목록</a>
-				<a href="#" class="box_deco">답변</a>
+				<a href="${path}/board/answer?bno=${one.bno}" class="box_deco">답변</a>
 			<c:if test="${name ==one.writer }">	<!-- 로그인 유저랑 작성자랑 같을때만 수정 삭제 -->
 				<a href="${path}/board/update?bno=${one.bno}" class="box_deco">수정</a>
 				<a href="#" class="box_deco delete">삭제</a>

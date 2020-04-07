@@ -324,6 +324,10 @@ color:white;
 .newContent_buttom{
 
 }
+.table_css > tbody > tr > td:nth-child(2){
+	text-align: left;
+
+} 
 
 
 
@@ -387,7 +391,12 @@ color:white;
 				   <tbody class="table_body">
 				   	 <tr>
 				   	 	<td>${list.bno}</td>
-				   	 	<td><a href="${path}/board/view/${list.bno}" class="subject">${list.title}</a>
+				   	 	<td><c:if test="${list.re_level !=0}">
+				   	 			<c:forEach begin="1" end="${list.re_level}">
+				   	 		      <span><i class="fas fa-play" style="color:#1F8AD8;"></i> </span>				   	 	
+				   	 		    </c:forEach>
+				   	 	</c:if>
+				   	 	<a href="${path}/board/view/${list.bno}" class="subject">${list.title}</a>
 					   	 	  <c:if test="${today == regdate}">
 					   	 	  	<span class="new_color twincle_eff">N</span>
 					   	 	  </c:if>	

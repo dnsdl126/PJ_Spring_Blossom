@@ -120,6 +120,34 @@ public class BoardServiceImpl implements BoardService {
 		 bDao.updateBoard(bDto);
 	}
 
+	@Override
+	public void answer(BoardDTO bDto) {
+		// 답글 알로기름
+		// Current Status bDto"
+		// answer : title, writer, type, content
+		// main: bno, ref, re_level, re_step
+		
+			
+		// 1) re_step을 수정
+		//  : ref가 같은 row 중에 메인 게시글의 
+		//    re_step보다 크기가 큰값을 찾아
+		//    전부 + 1 ==> updateStep()	
+		   bDao.updateStep(bDto);	
+			
+
+		// 2) 답글 DB에 INSERT 
+		// re_step = 메인게시글 re_step +1
+		// re_level = 메인 게시글 re_step +1
+		// ref는 기존것 그대로 
+			bDto.setRe_level(bDto.getRe_level()+1);
+			 // 기존 메인의 re_level을  bDto.getRe_level에서 꺼내서 +1한 다음 setRe_level 담는다  
+			bDto.setRe_step(bDto.getRe_step()+1);
+			bDao.answer(bDto);
+			
+			
+		
+	}
+
 
 	
 	

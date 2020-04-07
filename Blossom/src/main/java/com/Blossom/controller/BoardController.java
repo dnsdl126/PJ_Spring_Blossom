@@ -140,6 +140,7 @@ public class BoardController {
 			
 			// 수정을 원하는 게시글의 정보를 (1줄) 원함 
 			model.addAttribute("one", bService.boardview(bno));
+			model.addAttribute("flag", "update");
 			
 			
 			
@@ -186,4 +187,72 @@ public class BoardController {
 			
 			return  "redirect:/board/view/"+bDto.getBno();
 		}
+		
+		@GetMapping("/answer")
+		public String answerBoard (BoardDTO bDto, Model model) {
+			// bno하나만 쓸때는 BoardDTO를 쓰는것이 비효율적이지만
+			// 게시글 정보를 받기위해 bDto가 필요하므로 비효율적인것은 아니다 
+			// (BoardDTO bDto, Model model) 객체 생성을 해야하지만
+			// @controller 붙은 클래스에 한해서 매게 변수로 선언한 것들을 
+			// 자동으로  객체를 생성 해주기때문에 
+			// new 를 사용하여 객체 생성 별도로 할 필요가 없다
+			
+			log.info(">>>>>>>>>>>> GET BOARD ANSWER VIEW PAGE ");
+			bDto =bService.boardview(bDto.getBno());
+			
+			String newContent = "<p>이전 게시글 내용</p>" +
+			                     bDto.getView_content() +
+			                     "<br> =========================================================== ";
+			
+			bDto.setView_content(newContent);
+			
+			// 게시글 정보
+			model.addAttribute("one",bDto);
+			// flag값을 answer를 준다 
+			model.addAttribute("flag", "answer");
+			
+			return "board/register";
+		}
+		
+		//get은  html상 head 부분에 담기는데 길이 제한이 있다
+		// Post방식으로 보내줘야 하는데 
+		// view -> controller 에 갈때 방법이 3가지가 있다
+		//  1) ajax 
+		//  2) 쿼리스트링
+		//  3) form 
+		// 페이지 전환이 일어나지 않는다 -> ajax
+		// 페이지 전환이 일어난다 -> 쿼리스트링, form
+		//   get방식 -> 쿼리스트링 post, get -> form
+		// 스프링 form  태그에 action 이 생략될경우 내 URL을 그대로 간다 (쿼리스트링 ? 때고 )
+		// method는 생략 할 경우 default 값인 Post방식으로 처리한다 
+		
+		@PostMapping("/answer")
+		public String answerBoard(BoardDTO bDto) {
+			log.info(">>>>>>>>>>>> POST BOARD ANSWER ACTION ");
+			
+			// 현재 답글(bno(메인게시글 ), 타입, 제목, 내용, 작성자)
+			log.info("답글 DTo: " +bDto.toString());
+			
+			
+			
+			// 메인게시글의 모든 정보 (메인게시글의 ref, re_step, re_level이 필요하므로 )
+			BoardDTO prevDto = bService.boardview(bDto.getBno());
+			log.info("메인 DTO: " + prevDto.toString());
+			
+			// 현재 상태 (bno(메인게시글 ), 타입, 제목, 내용, 작성자, ref(메인), re_step(메인), re_level(apdls)) 
+			bDto.setRef(prevDto.getRef());
+			bDto.setRe_step(prevDto.getRe_step());
+			bDto.setRe_level(prevDto.getRe_level());
+			
+			bService.answer(bDto);
+			    // ref = 메인게시글의  ref를 그대로 복사
+				// re_step = 메인게시글 re_step +1
+				// re_level = 메인 게시글 re_step +1
+			
+			
+			
+			
+			return "redirect:/board/view/"+bDto.getBno();
+		}
+		 
 }

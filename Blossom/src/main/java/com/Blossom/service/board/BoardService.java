@@ -29,9 +29,9 @@ public interface BoardService {
 	
 	public void delBoard(int bno);
 	
-	
 	public void write(BoardDTO bDto);
 	
 	public void updateBoard(BoardDTO bDto);
 	
+	public void answer(BoardDTO bDto);
 }
