@@ -111,7 +111,7 @@
     border: solid 1px tomato; 
     color: tomato;
     background: white;
-    margin-top: 70px;
+    margin-top: 35px;
 
 }
 
@@ -125,7 +125,7 @@
     border: solid 1px #1F8AD8; 
     color:#1F8AD8;
     background: white;
-    margin-top: 70px;
+    margin-top: 35px;
 
 }
 
@@ -204,6 +204,17 @@ margin-right: 8px;
 
 }
 
+
+.board_div {
+	width: 849px;
+    margin-left: 127px;
+    border: dashed 1px;
+    height: 76%;
+    line-height: 76px;
+    font-size:20px;
+    text-align: center;
+}
+
 	
 </style>
 </head>
@@ -252,20 +263,16 @@ margin-right: 8px;
 			</div>	
 		</div>
 		<div class="board_content_wrap02">
-			<div class="board_content_wrap_list">
-				<div class="board_content_wrap_list_box1" >
-					첨부파일 :
+		<!-- 첨부파일 -->
+			<div class="input_wrap form_group">
+				<div class = "board_div fileDrop">
+					<p ><i class="fas fa-paperclip"></i>첨부파일을 드래그 해주세요</p>
 				</div>
-				<div class="board_content_wrap_list_box " style="height: 100px; display: flex; justify-content: center; border: dashed 2px  #9EE6CF;">
-					
-					<i class="fas fa-file-import icon_css"></i>
-					<div class="file_uplod">파일을 올려주세요</div>
-				</div>
-						
+				<ul class="mailbox-attachments clearfix uploadedList"></ul>
 			</div>
 			<div class="text_box_02_button">
 				<button type="button" class="file_cancle_button">취소</button>
-				<button type="button" class="file_agree_button">완료</button>
+				<button type="button" class="file_agree_button">완료</button>                                          
 			</div>	
 	
 		</div>	
@@ -299,6 +306,57 @@ $(function(){
 		    $('#boadr_title').val('RE: ' + '${one.title}')
 		                     .attr('readonly', 'readonly');
 		}
+	
+		// 첨부파일 올리기
+	    	//1.웹브라우저에 drag&drop시 파일이 열리는 문제 (기본 효과)
+			//: 기본 효과 막음!
+			$('.fileDrop').on('dragenter dragover', function(e){
+				e.preventDefault();
+			});
+	    	
+	    	// 2. 사용자가 파일을 drop했을때
+	    	$('.fileDrop').on('drop',function(e){
+	    		e.preventDefault();
+	    		
+	    		var files=e.originalEvent.dataTransfer.files; 
+	    		// 드래그에 전달된 첨부파일
+	    		var file=files[0];
+	    		//그중 하나만 꺼내옴
+	    		// 파일은 한번에 여러개를 Drag&Drop해도 그중 맨앞에 한개파일만 업로드 된다
+	    		
+	    		var formData = new FormData(); 
+	    		// 폼 객체 생성
+	    		// 파일하나를 드래그 드롭하면 그순간 바로 Ajax를 바로 저장해야해서
+	    		// 한번에 form태그로 쌀필요가 없기때문에
+	    		// 깡통 formData를 만들어서이용
+	    		
+	    		formData.append('file',file); 
+	    		// 폼에 파일 1개 추가
+	    		// file 이란이름으로 fomData에 담는다 
+	    		
+	    		// 서버에 파일 업로드
+	    		$.ajax({
+	    			url: '${path}/upload/uploadAjax',
+	    			data: formData,
+	    			datatype: "text",  
+	    			processData: false,
+	    			// ajax는 쿼리스트링으로 보내는데
+	    			// 쿼리스트링은 길이 제한이 있어 쿼리스트링으로 보내면 받지를 못한다
+	    			// processData 를  false 로 하면  쿼리스트링 방식을 쓰지 않는다
+	    			contentType: false, 
+	    			// contentType를  false로 하면 서버단으로 전송하는 데이터 타입을  multipart로 들어간다
+	    			//multipart/form-data : 사진, 텍스트 등 다양한 종류 파일을 서버가 받을수 있는 multipart로 변환시킴
+	    			type: 'POST',
+	    			succeess: function(data){
+	    				console.log(data);
+	    				//data:업로드한 파일 정보와 http 상태코드
+	    				printFiles(data); //첨부파일 출력 메서드 호출 
+	    			}
+	    			
+	    		});
+	    	});
+		
+		
 	});
 	
 	/*  취소 버튼 클릭시 정상 비정상 경로 설정 */
