@@ -16,11 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UploadFileUtils {
 	public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception{
+		// file , DB 처리는 예외처리가 필요 
 		
 		// uuid  발급
 		UUID uid = UUID.randomUUID();
 		String savedName = uid.toString() + "_" + originalName;
-		// UUID 중복된 이름이 들어오는 것을 방지
+		// UUID 중복된 이름의 파일이 들어오는 것을 방지
 		// 똑같은 이름의 파일이 들어와도 앞에 random 한 값을 붙여서 방지
 		
 		
@@ -45,6 +46,7 @@ public class UploadFileUtils {
 		// a.jpg / aaa.bbb.ccc.jpg
 		String formatName = originalName.substring(originalName.lastIndexOf(".") + 1);
 		// formatName = 확장자가 들어온다 
+		// .을찾고 한칸뒤로 가라 
 		  
 		String uploadedFileName = null;
 		// 이미지 파일은 썸네일 사용 
@@ -65,17 +67,21 @@ public class UploadFileUtils {
 		 // 오늘치 달력값을 가지고와라 
 		
 		String yearPath = File.separator + cal.get(Calendar.YEAR);
-		//separator 구분자 ( / ) + 오늘치 달력 값에서 year을 가지고 와라 
+		//separator 구분자 (\) + 오늘치 달력 값에서 year을 가지고 와라 
 		
 		String monthPath = yearPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.MONTH)+1);
-		// /2020/04  
+		
 		// new DecimalFormat("00") -> 예를들어 4월의 경우 04로 나오도록 변환 
+		// \2020 + \ + 04  
 		
 		String datePath = monthPath + File.separator + new DecimalFormat("00").format(cal.get(Calendar.DATE));
-		// /2020/04/08
+		// \2020\04\09
 		
 		
 		makeDir(uploadPath, yearPath, monthPath, datePath);
+		// 디렉토리를 만들어서 uploadPath, yearPath, monthPath, datePath 담는다 
+		// 같은 클래스 내에 있어서 객체 생성할 필요가 없다
+		
 		log.info(datePath);
 		return datePath;
 	}
@@ -85,8 +91,8 @@ public class UploadFileUtils {
 		//String... : 동일한 type의 매게변수를 여러개 받을때 사용 한다. 동적으로 매게변수 갯수가 바뀌어야 할때 사용 
 		// paths : 배열로만들어서 넣어준다 
 		if(new File(paths[paths.length - 1]).exists()) {
-			//paths[paths.length - 1] = path [인덱스길이에서 -1 ] 마지막값을 알수 있다 
-			// exists 그날짜에 생성된 파일이 있는지 확인 있으면 return  그파일에 없으면 아래 for문으로 이동  
+			//paths[paths.length - 1] = path [3 -1 ] -> 년 월 일  
+			// exists 그날짜에 생성된 파일이 있는지 확인 있으면 true  그파일에 없으면 false 아래 for문으로 이동  
 			return;
 		 }
 		   for (String path : paths) {
@@ -94,13 +100,12 @@ public class UploadFileUtils {
 			   // paths에서 하나씩 꺼내서 String path 담는다 
 			File dirPath = new File(uploadPath + path);
 				// C://developer/upload + \2020
-				// C://developer/upload + \2020  + \04
-			    // C://developer/upload + \2020  + \04 + /08
 			if (!dirPath.exists()) {
-				dirPath.mkdir(); // 디렉토리 생성
+				dirPath.mkdir(); 
+				// 디렉토리 생성
 				// C://developer/upload + \2020 
-				// C://developer/upload + \2020  + \04 2020년 아래에 하위 폴더 생성
-				// C://developer/upload+ \2020  + \04 + /08 04월 하위폴더에 /08일 폴더 생성 
+				// C://developer/upload + \2020  + \04 ,2020년 아래에 하위 폴더 생성
+				// C://developer/upload+ \2020  + \04 + /08 ,04월 하위폴더에 /08일 폴더 생성 
 			}
 		}
 	}
