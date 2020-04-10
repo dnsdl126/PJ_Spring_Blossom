@@ -1,5 +1,6 @@
 package com.Blossom.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -119,4 +120,51 @@ public class AjaxUploadController {
 	
 	
 	}
-}
+	@ResponseBody
+	@PostMapping("/upload/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName) {// ajax에서 보낼때 file Name을 보낸다
+		// fileName: $(this).attr('data-src')} =/2020/04/10/s_3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG
+		
+		log.info("fileName: " + fileName);
+		
+		//확장자 검사
+		String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
+		// lastIndexOf 끝에서부터 .을 잘라라 +1칸 더가서
+		// formatName = jpg
+		// 이미지 는 썸네일 이미지와 그냥 이미지 2가지가 들어가기때문에 
+		// 삭제 버튼 클릭시 썸네일이미지는 삭제되지 않아서
+		// 추가 작업을 위해 그림인지 아닌지를 판단 
+		MediaType mType=MediaUtils.getMediaType(formatName);
+		 // MediaUtils에 getMediaType로 가서 formatName 를 보내라 
+		 // 리턴시 JPG가 담겨 있따 
+		
+		if(mType !=null) { // 이미지 파일이면 원본 이미지 삭제 
+			String front = fileName.substring(0, 12);
+			// 0번부터 11번까지 잘린다 (마지막 번호는 포함이 안된다)
+			// front: /2020/04/10/
+			
+			String end=fileName.substring(14);
+			// File.separatorChar: 유닉스 / 윈도우즈 \
+			// end :3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG (원본이미지 이름)
+			// 14번부터 잘린다
+			
+			new File(uploadPath+(front+end).replace('/', File.separatorChar)).delete();			
+			//(uploadPath+(front+end)(원본이미지 경로 ) : (C://developer/upload/2020/04/10/3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG
+			// .replace (앞, 뒤) : 앞에것을 찾아서 뒤에꺼로 바꿔라 (/를 모두 찾아서 \로 바뀌어라)
+			// 결과 --> C:\\developer\ upload\2020\04\10\3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG
+			//delete(); >> C:\\developer\ upload\2020\04\10\3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG
+		}
+		// 원본 파일 삭제 (이미지면 썸네일 삭제, 이미지 아닌 일반파일은 한번만 삭제 (프로세스 파악할것)
+		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+		// 레코드 삭제
+		// bService.deleteFile(fileName);
+		// new file (C://developer/upload/2020/04/10/s_3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG)
+		// replacee >> (C:\\developer\ upload\2020\04\10\3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG)
+		// delete >> \\developer\ upload\2020\04\10\3ff6903b-3392-4bb8-b0db-f1f6dd72ed40_나닫.PNG
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+		
+		// deleted라는 값과
+		// HttpStatus.OK (200번)을 보내주겠다 
+		// 성공시 ajax에 success: function(data) 에 deleted가 담긴다 
+	}
+ }

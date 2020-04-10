@@ -224,8 +224,19 @@ margin-right: 8px;
     width: 849px;
     margin-left: 127px;
 }
-
+.mailbox-attachment-info {
+ 	text-align: center;
+    background: #1F8AD8;
+    color: white;
+    margin-top: 5px;
+    height: 22px;
+    font-size: 14px;
+}
 	
+.delBtn {
+cursor: pointer;
+}
+
 </style>
 </head>
 <body>
@@ -289,12 +300,12 @@ margin-right: 8px;
 		</div>
 	</form:form>	
 <script id="fileTemplate" type="text/x-handlebars-template" >
-	<li>
+	<li style="margin-top: 10px; margin-right: 10px;">
 		<div class="mailbox-attachment-icon has-img">
 			<center><img src="{{imgSrc}}" alt="Attachment" class="s_img"></center>
 		</div>
 		<div class="mailbox-attachment-info">
-			<a href="{{originalFileUrl}}" class="mailbox-attachment-name">
+			<a href="{{originalFileurl}}" class="mailbox-attachment-name">
 				<i class="fa fa-paperclip"></i> {{originalFileName}}
 			</a>
 			<span class="btn btn-default btn-xs pull-right delBtn" data-src="{{basicFileName}}">
@@ -381,6 +392,34 @@ $(function(){
 	    			}
 	    			
 	    		});
+	    	});
+	    	
+	    	$('.uploadedList').on('click','.delBtn',function(event){
+	    		var bno ='${one.bno}';
+	    		var that = $(this);
+	    		
+	    		
+	    		if(bno == '') { // 게시글 등록 
+
+ 					$.ajax({
+ 						url: '${path}/upload/deleteFile',
+ 						type: 'POST',
+ 						data: {fileName: $(this).attr('data-src')},
+ 						success: function(data) { //success: function(data) = deleted가 담긴다 
+ 							if(data == 'deleted') {
+ 								that.parents('li').remove();
+ 								// 내 부모(상위태그들 중에 li  태그를 찾아라 )
+ 								//.remove(); 태그 없애라 
+ 							}
+ 							
+ 						}, error: function(){
+ 							alert('System Error!!!');
+ 						}
+ 						
+ 					});
+	    		} else {       // 게시글 수정 
+	    			
+	    		}
 	    	});
 	});
 	
