@@ -236,6 +236,10 @@ margin-right: 8px;
 .delBtn {
 cursor: pointer;
 }
+#search_content {
+
+visibility: hidden;
+}
 
 </style>
 </head>
@@ -396,6 +400,7 @@ $(function(){
 	    	
 	    	$('.uploadedList').on('click','.delBtn',function(event){
 	    		var bno ='${one.bno}';
+	    		
 	    		var that = $(this);
 	    		
 	    		
@@ -567,8 +572,6 @@ $(function(){
 			 oEditors.getById["board_textbox_area"].exec("UPDATE_CONTENTS_FIELD", []);
 				
 			 var view_content = $('#board_textbox_area').val();
-			
-			
 			 // 순수 텍스트
 			 //view_content 에서 정규식을 통해 HTML태그를 제거 후 순수 Text만 추출 
 			 var search_content = view_content.replace(/(<([^>]+)>)/ig,"").replace("&nbsp;", "");
@@ -580,8 +583,35 @@ $(function(){
 			 $('#frm_baord').append('<textarea id= "search_content" name="search_content"></textarea> ');
 			 $('#search_content').val(search_content);
 			 
-			  // 서버로 전송 
-		     $('#frm_baord').submit();
+			 // 첨부파일 목록[배열]도 추가
+			 var str='';
+			 // uploadedList  내부의 .file 태그 각각 반복
+			 $(".uploadedList .file").each(function(i){ 
+				 //uploadedList 안에 있는 file
+				 //.each 앞에 uploadedList만큼 반복해라 
+				 // i 는 인덱스값 
+				 console.log(i);
+				 //hidden 태그 구성
+				 str +="<input type='hidden' name='files["+i+"]' value='" + $(this).val()+"'>";
+			 });
+			 //로컬 드라이브에 저장되어있는 해당 게시글
+			 //첨부파일 삭제
+			/*  if(deleteFileList.length > 0) {
+				 $.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
+			 } */
+			 
+			 // 폼에 hidden태그들을 붙임
+			 $("#frm_baord").append(str);
+			 // 예를 들어 str + 가 3번 반복된 경우 
+			 //  str +="<input type='hidden' name='files[0]' value='" + $(this).val()+"'>"
+			 //  str +="<input type='hidden' name='files[1]' value='" + $(this).val()+"'>"
+			 //  str +="<input type='hidden' name='files[2]' value='" + $(this).val()+"'>"
+			 // 이것을 form태그 끝나는 곳에 붙여준다 
+			 
+			 //서버로 전송
+			 $('#frm_baord').submit();
+			 
+			 
 		}
 	});
 
