@@ -124,13 +124,25 @@ public class BoardController {
 		}
 		
 		@PostMapping("/write")
-		public String write(BoardDTO bDto) {
+		public String write(BoardDTO bDto,  Model model) {
 			log.info(">>>>>>>>>>>>>POST BOARD write ACTION");
 			log.info(bDto.toString());
-			 bService.write(bDto);
+			
+			if(bDto.getFiles() == null) { //첨부파일 NO
+				bDto.setFilecnt(0);
+			} else {
+				 log.info("첨부파일수 : "+bDto.getFilecnt());
+				 bDto.setFilecnt(bDto.getFiles().length);
+			}
 			
 			//log.info("currval:" +bDto.getBno());
+			
+			 model.addAttribute("filecnt", bDto.getFiles());
+			 bService.write(bDto);
+			 
 			return  "redirect:/board/view/"+bDto.getBno();
+			
+			
 		}
 		
 		@GetMapping("/update")

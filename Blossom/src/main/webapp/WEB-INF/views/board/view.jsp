@@ -86,7 +86,7 @@ vertical-align: middle;
 	padding: 50px;
 	border-top: solid  #9EE6CF;
 	border-bottom: solid #9EE6CF;   
-	width: 59%;
+	width: 1130px;
     margin: auto;
     
 }

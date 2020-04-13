@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.Blossom.persistence.BoardDAO">
 	<select id="listAll" resultType="BoardDTO"><!-- resultTtpe을 간단히 하려면 Mybatis-config 명시 필요 -->
 		<include refid="paging_header"/><!-- paging_header 가 먼저 나와라   -->
-		SELECT bno, type, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show, ref ,re_step ,re_level
+		SELECT bno, type, title, writer, name, updatedate, viewcnt, replycnt, goodcnt, show, filecnt, ref ,re_step ,re_level
 		       
 		FROM tbl_board b, tbl_member m
 		<include refid="search"/>
@@ -87,8 +87,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="write">
-		INSERT INTO tbl_board(bno, type, title, view_content, search_content, writer, ref)
-		VALUES(seq_board.NEXTVAL, #{type}, #{title}, #{view_content}, #{search_content}, #{writer}, seq_board.CURRVAl )
+		INSERT INTO tbl_board(bno, type, title, view_content, search_content, writer, filecnt, ref)
+		VALUES(seq_board.NEXTVAL, #{type}, #{title}, #{view_content}, #{search_content}, #{writer}, #{filecnt}, seq_board.CURRVAl )
 		
 		<selectKey keyProperty="bno" resultType ="Integer" order="AFTER">
 			SELECT seq_board.CURRVAL FROM dual
