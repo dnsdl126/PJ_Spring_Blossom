@@ -84,16 +84,16 @@
 	}
 	
 	//첨부파일 리스트를 출력하는 함수
-	function listAttach() {
+	function listAttach(path, bno) {
 		var listCnt = 0;
 		$.ajax({
 			type: "post",
-			url: "${path}/board/getAttach/${one.bno}",
-			asyncs: false,
+			url: path + '/board/getAttach?bno='+bno,
+			async: false,
 			success:function(list) {
 				// list : //json
-				// console.log(list)
-				listcnt = list.length;
+				 console.log(list)
+				listCnt = list.length;
 				
 				/* console.log(list.length);*/
 			
@@ -104,7 +104,7 @@
 				
 				$(list).each(function(i, e){
 					/* console.log(list) */
-					printFiles(e); //첨부파일 출력 메서드 호출
+					printFiles(e,path); //첨부파일 출력 메서드 호출
 				});
 			}
 		});

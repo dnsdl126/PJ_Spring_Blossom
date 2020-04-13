@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file = "../include/header.jsp"%> 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +8,7 @@
 <title>상세게시글</title>
 <link rel="stylesheet" type="text/css"  href="${path}/resources/css/common.css">
 	 <script src="https://kit.fontawesome.com/66fbac40f5.js" crossorigin="anonymous"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 <style type="text/css">
 
 
@@ -395,6 +395,25 @@ font-size: 16px;
 font-size: 12px;
 padding: 6;
 }
+
+.clearfix {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    
+}
+
+.mailbox-attachment-info {
+    text-align: center;
+    background: #1F8AD8;
+    color: white;
+    margin-top: 5px;
+    height: 22px;
+    font-size: 14px;
+}
+
+
 </style>
 
 </head>
@@ -467,6 +486,7 @@ padding: 6;
 										  			
 		</div>
 		<div class="box">
+		 <ul class="mailbox-attachments clearfix uploadedList"></ul>
 			${one.view_content}
 		</div>
 		<div class="flex_class" >
@@ -487,8 +507,45 @@ padding: 6;
 	<div id="listReply"></div>
 
 </body>
+<script id="fileTemplate" type="text/x-handlebars-template" >
+	<li style="margin-top: 10px; margin-right: 10px;">
+		<div class="mailbox-attachment-icon has-img">
+			<center><img src="{{imgSrc}}" alt="Attachment" class="s_img"></center>
+		</div>
+		<div class="mailbox-attachment-info">
+			<a href="{{originalFileurl}}" class="mailbox-attachment-name">
+				<i class="fa fa-paperclip"></i> {{originalFileName}}
+			</a>
+			<span class="btn btn-default btn-xs pull-right delBtn" data-src="{{basicFileName}}">
+				
+			</span>
+		</div>
+	</li>
+</script>	
+<script src="${path}/resources/js/fileAttach.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
+var fileTemplate = Handlebars.compile($("#fileTemplate").html());
+
+$(function() {
+	//첨부파일 목록 불러오기
+	var listCnt = listAttach('${path}', '${one.bno}');
+
+	// 첨부파일 0건일때 '첨부파일 없음'출력
+	console.log('FILE COUNT: ' + listCnt);
+	
+	if(listCnt == 0 ) {
+		var text = '<span class= "no_attach"> 첨부파일이 없습니다.</sapn> ';
+		$('.uploadedList').html(text);
+	} else {
+		
+	}
+	
+	
+	
+	
+});
+
 /*  삭제 버튼 클릭시 모달창 open */
  $(function(){ //화면단이 다만들어지면 시작해라 
 	
