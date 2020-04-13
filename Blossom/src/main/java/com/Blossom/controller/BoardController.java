@@ -124,7 +124,7 @@ public class BoardController {
 		}
 		
 		@PostMapping("/write")
-		public String write(BoardDTO bDto,  Model model) {
+		public String write(BoardDTO bDto) {
 			log.info(">>>>>>>>>>>>>POST BOARD write ACTION");
 			log.info(bDto.toString());
 			
@@ -137,7 +137,6 @@ public class BoardController {
 			
 			//log.info("currval:" +bDto.getBno());
 			
-			 model.addAttribute("filecnt", bDto.getFiles());
 			 bService.write(bDto);
 			 
 			return  "redirect:/board/view/"+bDto.getBno();
