@@ -576,7 +576,7 @@ $(function() {
 		 });
 		 //console.log(deleteFileList);
 		 if(deleteFileList.length > 0) {
-			 $.post('${path}/upload/deleteFileList',
+			 $.post('${path}/upload/deleteAllFile',
 					 {files: deleteFileList},
 					 function(){
 						 
