@@ -134,6 +134,17 @@ public class BoardServiceImpl implements BoardService {
 		 bDao.updateBoard(bDto);
 	}
 
+	@Transactional
+	// transaction을 해야 오류가 안나는 이유 
+	// 답글등록 (INSERT) NEXTVAL 
+	// Closed
+	// Connection
+	// 첨부파일 등록 (INSERT) CURRVAL
+	// Closed
+	// NEXTVAL 과 CURRVAL을 Transaction으로 묶어야
+	// CURRVAL이 NEXTVAL을 인식할수 있다 
+	// SELECT 키는 조회해서 무엇인가를 주기 때문에 선행작업이 필요할 경우 사용 한다 
+	// 이번의 경우 같은 INSERT  작업이므로 Transactional을 사용한다
 	@Override
 	public void answer(BoardDTO bDto) {
 		// 답글 알로기름
@@ -158,7 +169,16 @@ public class BoardServiceImpl implements BoardService {
 			bDto.setRe_step(bDto.getRe_step()+1);
 			bDao.answer(bDto);
 			
+			//tbl_attach에 해당 게시글 첨부파일 등록
+			String[] files = bDto.getFiles();
 			
+			if(files == null) {
+				return; //첨부파일 없음 종료
+			}
+			for (String name : files) {
+				bDao.addAttach(name);
+				// for each문으로 한건씩 처리한다 
+			}
 		
 	}
 

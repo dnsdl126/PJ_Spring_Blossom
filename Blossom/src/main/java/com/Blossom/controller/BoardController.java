@@ -251,6 +251,13 @@ public class BoardController {
 			BoardDTO prevDto = bService.boardview(bDto.getBno());
 			log.info("메인 DTO: " + prevDto.toString());
 			
+			if(bDto.getFiles() == null) { //첨부파일 NO
+				bDto.setFilecnt(0);
+			} else {
+				 log.info("첨부파일수 : "+bDto.getFilecnt());
+				 bDto.setFilecnt(bDto.getFiles().length);
+			}
+			
 			// 현재 상태 (bno(메인게시글 ), 타입, 제목, 내용, 작성자, ref(메인), re_step(메인), re_level(apdls)) 
 			bDto.setRef(prevDto.getRef());
 			bDto.setRe_step(prevDto.getRe_step());

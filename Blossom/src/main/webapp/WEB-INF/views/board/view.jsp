@@ -486,8 +486,8 @@ padding: 6;
 										  			
 		</div>
 		<div class="box">
-		 <ul class="mailbox-attachments clearfix uploadedList"></ul>
 			${one.view_content}
+		 <ul class="mailbox-attachments clearfix uploadedList"></ul>
 		</div>
 		<div class="flex_class" >
 			<div class="button_list">

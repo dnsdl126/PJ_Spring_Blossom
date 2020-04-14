@@ -416,9 +416,15 @@ color:white;
 				   	 	<td>${list.replycnt}</td>
 				   	 	<td>${list.goodcnt}</td>
 				   	 	<td>${list.viewcnt}</td>
-				   	 	<c:if test="${list.filecnt !=0}">
-				   	 	<td><i class="far fa-folder"></i></td>
-				   	 	</c:if>
+				   	 	<c:choose>
+				   	 		<c:when  test="${list.filecnt !=0}">
+				   	 		   <td><i class="far fa-folder"  ></i></td>
+				   	 		</c:when>
+				   	 		<c:otherwise >
+				   	 			 <td><i class="far fa-folder"  style="color:#ddd;"></i></td>
+				   	 		</c:otherwise>
+				   	 	
+				   	 	</c:choose>
 				   	 </tr>
 			   	 				
 			   </tbody>	
