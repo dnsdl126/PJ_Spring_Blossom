@@ -161,6 +161,14 @@ public class BoardController {
 		
 		@PostMapping("/update")
 			public String updateBoard( BoardDTO bDto ) {
+			log.info(">>>>>>>>>>>> POST : Board update Action");
+			
+			if(bDto.getFiles() == null) { //첨부파일 NO
+				bDto.setFilecnt(0);
+			} else {
+				 log.info("첨부파일수 : "+bDto.getFilecnt());
+				 bDto.setFilecnt(bDto.getFiles().length);
+			}
 			
 			
 			bService.updateBoard(bDto);

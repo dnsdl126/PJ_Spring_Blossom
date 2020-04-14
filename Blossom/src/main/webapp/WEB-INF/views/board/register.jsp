@@ -325,6 +325,8 @@ console.log('flag :' + flag);
 
 //Handlebars  파일 템플릿 컴파일 
 var fileTemplate = Handlebars.compile($("#fileTemplate").html());
+
+var deleteFileList =  new Array();
 $(function(){
 		
 	// resgister ==> 게시글 등록과 게시글 수정
@@ -335,6 +337,8 @@ $(function(){
 			 
 			// selectbox값으로 selected
 			$('.select_box').val('${one.type}').attr('selected','selected');
+			
+			listAttach('${path}', '${one.bno}');
 			
 		} else if (flag == 'answer') {
 			
@@ -422,7 +426,20 @@ $(function(){
  						}
  						
  					});
-	    		} else {       // 게시글 수정 
+	    		} else {       
+	    			// 게시글 수정
+	    			// 수정시 로컬에서 삭제할 기존 첨부파일 목록
+					// 수정 게시판에서 첨부파일 삭제를 누른후 수정게시글 작성을 취소할 경우
+					// 해당 파일들은 로컬에서 지우지 않고 디자인상만 삭제된것처럼 처리 해야함 
+	    			
+					var arr_size = deleteFileList.length; 
+	    			// 내가 삭제하려는 게시글 번호를 확인 
+	    			deleteFileList[arr_size] = $(this).attr('data-src');
+	    			$(this).parents('li').next('input').remove();
+	    			$(this).parents('li').remove();
+	    			
+	    			for(var i =0; i< deleteFileList.length; i++) 
+	    				console.log(i+','+deleteFileList[i]);
 	    			
 	    		}
 	    	});
@@ -488,11 +505,11 @@ $(function(){
 				 //hidden 태그 구성
 				 str +="<input type='hidden' name='files["+i+"]' value='" + $(this).val()+"'>";
 			 });
-			 //로컬 드라이브에 저장되어있는 해당 게시글
-			 //첨부파일 삭제
-			/*  if(deleteFileList.length > 0) {
+			 // 삭제 첨부파일 목록에 있는 첨부파일들  
+			 // Local에서 첨부파일 삭제 
+			  if(deleteFileList.length > 0) {
 				 $.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
-			 } */
+			 } 
 			 
 			 // 폼에 hidden태그들을 붙임
 			 $("#frm_baord").append(str);
