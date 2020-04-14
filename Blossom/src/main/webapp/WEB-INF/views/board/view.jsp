@@ -36,7 +36,7 @@ margin: 100px 0 40px;
 
 .title{
 	text-align: center;
-	width: 121px;
+	width: 72px;
 }
 .main{
 	text-align: center;
@@ -75,7 +75,7 @@ vertical-align: middle;
 
 .contet_sub{
 	text-align: center;
-	width: 105px;
+	width: 92px;
 }
 .contet_sub_sub {
    text-align: center;
@@ -444,12 +444,6 @@ padding: 6;
 		<fmt:formatDate value="${one.updatedate}" pattern="yyyy-MM-dd" var="regdate"/>
 		<div class="content_ist">
 			<div class="title size right font_we">
-			   writer
-			</div>
-			<div class="contet_sub size right">
-				${one.writer}
-			</div>
-			<div class="title size right font_we">
 			   날짜
 			</div>
 			<div class="contet_sub_sub size_02 right">
@@ -463,6 +457,12 @@ padding: 6;
 			   	 		</c:otherwise>
 			   	 	   	 	
 				</c:choose>
+			</div>
+			<div class="title size right font_we">
+			   writer
+			</div>
+			<div class="contet_sub size right">
+				${one.writer}
 			</div>
 			<div class="title size right font_we">
 			   coment
@@ -479,8 +479,14 @@ padding: 6;
 			<div class="title size right font_we">
 			   View
 			</div>
-			<div class="contet_sub size">
+			<div class="contet_sub size right">
 				${one.viewcnt}
+			</div>
+			<div class="title size right font_we">
+			   File
+			</div>
+			<div class="contet_sub size">
+				${one.filecnt}
 			</div>		
 			</div>
 										  			
@@ -526,6 +532,8 @@ padding: 6;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 var fileTemplate = Handlebars.compile($("#fileTemplate").html());
+//삭제할 첨부파일 목록
+var deleteFileList = new Array();
 
 $(function() {
 	//첨부파일 목록 불러오기
@@ -558,7 +566,26 @@ $(function() {
 		$('.modal_wrap').css('display','flex');	 
 	 });
 	 
+	 			  // 삭제 알림 모달창에서 확인버튼  Click -> 게시글 삭제
 	 $('#modal_msg_yes').click( function(){
+		 // 1. Ajax로 해당 게시글의 첨부파일을 Local에서 삭제!
+		 //uploadedList  내부의 .file 태그 각가 반복 
+		 $(".uploadedList .file").each(function(i){ // input태그에 file 클래스로 해서 첨부파일 담기게 했었다
+			 console.log(i+"," + $(this).val())
+			 deleteFileList[i] = $(this).val();
+		 });
+		 //console.log(deleteFileList);
+		 if(deleteFileList.length > 0) {
+			 $.post('${path}/upload/deleteFileList',
+					 {files: deleteFileList},
+					 function(){
+						 
+					 });
+		 }
+		 // 2. 서버단으로 가서 첨부파일 DB에서 삭제!
+		 // 3. 서버단으로 가서 게시글 삭제
+		 
+		 
 		 location.href='${path}/board/delete?bno=${one.bno}';
 	 });
 	 
