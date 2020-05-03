@@ -532,10 +532,14 @@ $(function(){
  	var pwFlag = false;
 
  	// 유효성체크 여부를 알려주는 배열
+ 	// checkArr 의 변수를 만드는데 배열로 만들어라  6개 값을 체크해야 하므로  값을 fill 채워라 false 로
  	var checkArr = new Array(5).fill(false);
  	// printCheckArr(checkArr);
  
  	// 유효성체크 모두 통과 or  불통 여부를 알려주는 변수 
+ 	// 빈칸이 채워져야 true 이므로 
+ 	// 기본적으로 false로 해놓고 통과할때마다 true로 변환
+ 	// 그리고 명시가 되어있지않으면 null 값이므로 false로 선언
 	var checkAll = false;	
 	
 	alert('user: ' + '${user}');
@@ -580,6 +584,11 @@ $(function(){
 	 
 function ckDesign(code, desc, line, msg){
 	  if(code == 0 || code == 10){ //통과o
+		   // line 이랑 msg는 변수같은 아이들 
+		   // 0이 첫번째 inputbox 의 에러메세지 ( 0 , 0)
+	       // 패스워드 검사 같은 경우 input 은 2개지만 에러 메세지는 하나
+	       // pw -> (1, 1) (input 박스 번호 , 에러 메세지 번호)
+	       // rpw -> (2,1) (input 박스 번호는 다름 , 에레메시지는 같으므로 에러 메세지 번호는 같음)
 			$('.email_input_local:eq('+line+')').css('border','1px solid #3885ca');
 			$('.join_err_msg:eq('+msg+')').css('visibility','visible')
 								   .text(desc)

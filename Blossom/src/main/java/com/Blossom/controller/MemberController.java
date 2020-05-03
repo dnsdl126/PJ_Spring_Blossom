@@ -76,7 +76,8 @@ public class MemberController {
 	public MemberDTO newMember() {
 		return new MemberDTO();
 	}
-
+    // ModelAttribute : memberDTO내의 변수들에 값이 담기도록 연결해줌 예를들어 private id 값이 비어있는데 여기 에 값이 들어가도록 연결 만 해준다 저장하는것이 아님 
+	// SessionAttribute : ModelAttribute에 담긴 값들이 사라지지 않도록 공용저장소에 저장 
 	
 	
 
@@ -123,9 +124,9 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	 public String join(@ModelAttribute("memberDTO") MemberDTO mDto, 
-			                            SessionStatus sessionStatus, 
-			                            HttpServletRequest request,
-			                            RedirectAttributes rttr)
+			                            SessionStatus sessionStatus, // constract 저장한 값을 받기 위해 sessionstatus를 사용 
+			                            HttpServletRequest request, // request에는 정보가 담김 
+			                            RedirectAttributes rttr) // session 에계속 저장하기는 서버에 부담이고 회원가입 완료후 단발적으로 정보를 가져와 띄우기 위해
 	                   
 	     //View 단에서  Controller 단으로 이동
 	   { log.info(">>MEMBER/JOIN PAGE Post 출력");
@@ -163,7 +164,7 @@ public class MemberController {
 		 //view로 보내기전 반드시 setComplet()를 실행하여
 		 //session에 담긴 값을 clear해줘야 한다 
 		
-		sessionStatus.setComplete();
+		sessionStatus.setComplete(); // 세션값을 초기화 메모리를 더이상 잡고있지 않기우해서 
 		
 		//회원가입 후 메시지 출력을 위한 값 
 		rttr.addFlashAttribute("id", mDto.getId()); // ~님

@@ -688,7 +688,7 @@
  	    		 if(uri == '') {
 	 	    		 location.reload(); // 새로고침 
  	    		 } else {
- 	    			 location.href= uri;
+ 	    			 location.href= uri; // uri는 내가 가려는 페이지 
  	    		 }
  	    	 } else if(data ==  2) {
  	    		 $('.login_err_msg').css('display', 'block').text('이메일 인증을 하셔야만 로그인이 가능합니다.') 	    		 
