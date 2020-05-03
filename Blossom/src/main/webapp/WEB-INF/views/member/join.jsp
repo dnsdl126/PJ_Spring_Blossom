@@ -375,7 +375,8 @@
 	   
 <section class="container user_sign_up">
 	<!-- <form id="frm_member" action="${path}/member/join" method="post"> -->
-	<form:form id= "frm_member" modelAttribute="memberDTO" autocomplete="on">	
+	<form:form id= "frm_member" modelAttribute="
+" autocomplete="on">	
 		<div class="user_sign_up_form_wrap">			
 			<div class=" sign_up_logo">
 						

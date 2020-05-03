@@ -31,6 +31,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// false : Interceptor가 돌려 보낸다 
 		
 		// Session 객체 생성
+		
 		HttpSession session = request.getSession();
 		
 		//이동하기 전 있었던 page URL
@@ -49,9 +50,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			// uri ==> 로그인 버튼 클릭시 uri 이동
 		 String qString = request.getQueryString();
 		// 이동 하려고 했던 page  URL		 
-		String uri = request.getRequestURI(); // 내가 가려고 하는 페이지 
-		String ctx = request.getContextPath(); // context - root
-		String nextUrl = uri.substring(ctx.length()); //
+		String uri = request.getRequestURI(); // /Blossom/board/update?bno=1
+		String ctx = request.getContextPath(); // context - root : /Blossom 
+		String nextUrl = uri.substring(ctx.length()); // /board/update?bno=1
 		String prevUrl = "";
 		String finalUrl = "http://localhost:8081/Blossom/";
 		
@@ -64,17 +65,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(finalUrl); 
 			// 비정상 접근시 바로 인덱스 페이지 로 이동
 			// session(로그인 정보)확인 안한 상태 
-			return false;
+			
+			return false;// 아래타지 말고 종료 
 			
 		 } else {
 			 
 			//게시글 등록, 수정(로그인이 필요한 view)단
 			// 내부에서 접근했지만 비정상 경로일때 
-			int indexQuery = referer.indexOf("?");
+			int indexQuery = referer.indexOf("?"); // ?가 몇번째에 있는 지 찾으세요 
 			
-			if(indexQuery == -1) { // 
+			if(indexQuery == -1) { // indexOf("?") 이 없으면 (찾는게 없으면 ) -1을 반환 
 				prevUrl = referer.substring(finalUrl.length()-1);
-					// http://localhost:8081/metop/ 28-1 = 27
+					// referer = http://localhost:8081/Blossom/board/update?bno=1 44 
+				    // finalUrl.length()-1 =  http://localhost:8081/Blossom 29
+				    // prevUrl =  /board/update?bno=1
 			 } else {
 					
 				prevUrl = referer.substring(finalUrl.length()-1, indexQuery);
@@ -88,10 +92,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				// 지금하려는 기능이 게시글 수정 or 삭제인것인지 
 				// referer 주소에 board/view가 있는지 
 				if(request.getParameter("title")==null) { 
-					// /update가 2가지 get, post 두가지 경우가 있음
-					// 상세계시글에서 view -> update로가는 경우
-					// 게시글 수정 후 update -> update 로 다시 돌아가는 경우
-					// update 에 수정하러 접속된 경우 작성자와 로그인 유저가 같다는 의미이므로
+					// update 페이지는 게시글 수정과 상세게시글 같이 사용 하고 잇으므로 
+					// prevurl Nex URL 이 같아 데드락이 걸릴 확률이 있다 
+					// ("title")==null) 인경우는 게시글을 새로 작성하는 것이므로 데드락에 걸리지 않도록 분류 한다 
+					
 					//view에서 접속시에만 확인 진행 
 					if(prevUrl.indexOf("board/view") == -1) {
 						// 상세 게시글에서 정상 접근 했는지를 확인 

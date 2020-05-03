@@ -56,7 +56,7 @@ public class MemberServiceImpl implements MemberService{
 			 // 세션에 로그인 유저 정보를 수정된 정보로 변경 
 			   
 			  session.removeAttribute("name");
-			  session.setAttribute("userid", mDto.getId()); 
+			  //session.setAttribute("userid", mDto.getId()); 
 			  session.setAttribute("name", mDto.getName());
 			
 		}
@@ -67,7 +67,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int pwCheck(String id, String pw) { // 서비스 단에서 id, pw 받음
-		String encPw = mDao.pwCheck(id);
+		String encPw = mDao.pwCheck(id); // mapper결과로  난수가 들어온다 
 		int result = 0;
 		if(passwordEncoder.matches(pw, encPw)) {
 			result = 1;

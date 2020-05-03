@@ -317,11 +317,11 @@ function pwCheck(pw) {
 	$.ajax({
 		type: 'POST',
 		url : 'pwcheck?pw='+pw,
-		async: false,
+		async: false, // async: false 동기방식 : 순차적으로 처리 한다
 	    success: function(data) {
 	    	console.log(data);
-	    	if(data == 1) { // 값이 정상
-	    		return_val = false; 
+	    	if(data == 1) { // 값이 정상 (pw가 일치한 상태 )
+	    		return_val = false; // fasle로 주는 이유 - 호출했던 checkNowpw : function(pw) 의 else if(pwCheck(pw)) 를 통과하지 않아야 하므로 false를 준다
 	    	}else if(data == 0) {
 	    		return_val = true; // 값이 비정상
 	    	}
