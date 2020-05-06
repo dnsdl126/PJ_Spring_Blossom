@@ -375,14 +375,14 @@ color:white;
 			<table border="1"  class="table_css" style=" border-collapse: collapse">
 			  <thead class="thead">			   
 					<tr style="">
-						<th scope="co1" style="width: 184px">no</th>	
-						<th scope="co1" style="width: 508px">subject</th>
-						<th scope="co1" style="width: 220px">writer</th>
-						<th scope="co1" style="width: 113px">date</th>
-						<th scope="co1" style="width: 87px">coment</th>
-						<th scope="co1" style="width: 87px">like</th>
+						<th scope="co1" style="width: 184px">No</th>	
+						<th scope="co1" style="width: 508px">Subject</th>
+						<th scope="co1" style="width: 220px">Writer</th>
+						<th scope="co1" style="width: 113px">Date</th>
+						<th scope="co1" style="width: 87px">Comment</th>
+						<th scope="co1" style="width: 87px">Like</th>
 						<th scope="co1" style="width: 87px">VIEW</th>
-						<th scope="co1" style="width: 124px">file</th>
+						<th scope="co1" style="width: 124px">File</th>
 					</tr>
 			   </thead>	
 			   <c:forEach items="${map.list}" var="list"> 

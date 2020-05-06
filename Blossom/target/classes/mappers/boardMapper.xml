@@ -34,6 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						ORDER BY b.bno DESC
 							) A 결과문을 A라는 테이블로 명시
 					) WHERE rnum BETWEEN #{map.start} AND #{map.end}
+		
+				
 				
 				 -->
 	</select>

@@ -290,7 +290,7 @@ visibility: hidden;
 		<div class="board_content_wrap02">
 		<!-- 첨부파일 -->
 			<div class="input_wrap form_group">
-				<div class = "board_div fileDrop">
+				<div class = "board_div fileDrop">file_agree_button
 					<p ><i class="fas fa-paperclip"></i>첨부파일을 드래그 해주세요</p>
 				</div>
 				<ul class="mailbox-attachments clearfix uploadedList"></ul>

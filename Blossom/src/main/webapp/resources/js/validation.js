@@ -321,7 +321,7 @@ function pwCheck(pw) {
 	    success: function(data) {
 	    	console.log(data);
 	    	if(data == 1) { // 값이 정상 (pw가 일치한 상태 )
-	    		return_val = false; // fasle로 주는 이유 - 호출했던 checkNowpw : function(pw) 의 else if(pwCheck(pw)) 를 통과하지 않아야 하므로 false를 준다
+	    		return_val = false; // fasle로 주는 이유 - 호출했던  : function(pw) 의 else if(pwCheck(pw)) 를 통과하지 않아야 하므로 false를 준다
 	    	}else if(data == 0) {
 	    		return_val = true; // 값이 비정상
 	    	}
