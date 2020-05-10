@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Blossom.persistence.TestDAO">
+	<select id="testlistall" resultType ="com.Blossom.domain.TestBoardDTO">
+	select * FROM tbl_test
+	</select>
+	
+	<insert id="twrite">
+	INSERT INTO tbl_test (tbno, title, twriter)
+    VALUES (seq_test.NEXTVAL, #{title}, #{twriter})
+	
+	</insert>
+	
+	<select id="update" resultType="TestBoardDTO">
+	select * FROM tbl_test
+	 where tbno = #{tbno}
+	
+	</select>
+	
+	<update id="tupdate">
+	UPDATE tbl_test
+	  SET title = #{title},
+	      twriter = #{twriter}
+	     where tbno = #{tbno} 
+	
+	</update>
+</mapper>

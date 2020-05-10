@@ -48,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 //로그
 @Controller
 //빈즈등록
-@SessionAttributes({"memberDTO"})
+@SessionAttributes({"memberDTO"}) //session의 속성을 부여하는데 이름이 memberDTO 이다 
 public class MemberController {
 	
 	@Autowired
@@ -72,7 +72,7 @@ public class MemberController {
 	 * 저장만 하면 찌꺼기 데이터가 남아있음 그래서 초기화 해줘야함
 	 * 안해주면 에러남
 	 */
-	@ModelAttribute("memberDTO")
+	@ModelAttribute("memberDTO") //필수 Spring Form 태그 사용 
 	public MemberDTO newMember() {
 		return new MemberDTO();
 	}

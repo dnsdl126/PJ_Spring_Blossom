@@ -10,6 +10,7 @@
 		 <typeAlias type="com.Blossom.domain.BoardDTO" alias="BoardDTO"></typeAlias>
 		 <typeAlias type="com.Blossom.domain.ReplyDTO" alias="ReplyDTO"></typeAlias>
 		 <typeAlias type="com.Blossom.domain.AttachDTO" alias="AttachDTO"></typeAlias>
+		 <typeAlias type="com.Blossom.domain.TestBoardDTO" alias="TestBoardDTO"></typeAlias>
 	</typeAliases>
 
 </configuration>

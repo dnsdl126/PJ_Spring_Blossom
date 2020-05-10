@@ -289,4 +289,8 @@ public class BoardController {
 			log.info(">>>>>>>>>>>> bno: " +bno);
 			return bService.getAttach(bno);
 		}
-}
+		
+		
+		
+		}
+
